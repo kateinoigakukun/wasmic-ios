@@ -1,0 +1,6 @@
+[submodule "third-party/wasm3"]
+	path = third-party/wasm3
+	url = https://github.com/wasm3/wasm3.git
+[submodule "third-party/ios-cmake"]
+	path = third-party/ios-cmake
+	url = https://github.com/leetal/ios-cmake.git
