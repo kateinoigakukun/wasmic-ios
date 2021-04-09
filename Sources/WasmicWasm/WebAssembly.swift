@@ -25,9 +25,11 @@ public struct WebAssembly {
         guard let env = m3_NewEnvironment() else {
             throw Error.unexpected("m3_NewEnvironment failed", nil)
         }
+        defer { m3_FreeEnvironment(env) }
         guard let runtime = m3_NewRuntime(env, 1024 * 8, nil) else {
             throw Error.unexpected("m3_NewRuntime failed", nil)
         }
+        defer { m3_FreeRuntime(runtime) }
 
         var module: IM3Module?
         if let result = m3_ParseModule(env, &module, wasmBytes, UInt32(wasmBytes.count)) {
