@@ -11,7 +11,7 @@ class WatDocument: TextDocument {
     init() {
         let tempDir = FileManager.default.temporaryDirectory
         let url = tempDir.appendingPathComponent("main.wat")
-        
+
         super.init(fileURL: url)
     }
 }

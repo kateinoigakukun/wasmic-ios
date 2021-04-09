@@ -25,13 +25,13 @@ protocol TextDocumentDelegate: AnyObject {
 
 /// - Tag: TextDocument
 class TextDocument: UIDocument {
-    
+
     public var text = "" {
         didSet {
             delegate?.textDocumentUpdateContent(self)
         }
     }
-        
+
     public weak var delegate: TextDocumentDelegate?
     public var loadProgress = Progress(totalUnitCount: 10)
 
@@ -39,15 +39,16 @@ class TextDocument: UIDocument {
     private var transfering: Bool = false
 
     override init(fileURL url: URL) {
-        
+
         docStateObserver = nil
         super.init(fileURL: url)
-        
+
         docStateObserver = NotificationCenter.default.addObserver(
             forName: UIDocument.stateChangedNotification,
             object: self,
-            queue: nil) { _ in
-                self.updateDocumentState()
+            queue: nil
+        ) { _ in
+            self.updateDocumentState()
         }
     }
 
@@ -56,20 +57,20 @@ class TextDocument: UIDocument {
             NotificationCenter.default.removeObserver(docObserver)
         }
     }
-    
+
     override func contents(forType typeName: String) throws -> Any {
-        
+
         guard let data = text.data(using: .utf8) else {
             throw TextDocumentError.unableToEncodeText
         }
 
         os_log("==> Text Data Saved", log: .default, type: .debug)
-        
+
         return data as Any
     }
-        
+
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
-        
+
         guard let data = contents as? Data else {
             // This would be a developer error.
             fatalError("*** \(contents) is not an instance of NSData. ***")
@@ -87,46 +88,48 @@ class TextDocument: UIDocument {
     }
 
     // MARK: - Private Methods
-    
+
     private func updateDocumentState() {
-        
+
         if documentState == .normal {
             os_log("=> Document entered normal state", log: .default, type: .debug)
             if let currentDelegate = delegate {
                 currentDelegate.textDocumentEnableEditing(self)
             }
         }
-        
+
         if documentState.contains(.closed) {
             os_log("=> Document has closed", log: .default, type: .debug)
             if let currentDelegate = delegate {
                 currentDelegate.textDocumentDisableEditing(self)
             }
         }
-        
+
         if documentState.contains(.editingDisabled) {
             os_log("=> Document's editing is disabled", log: .default, type: .debug)
             if let currentDelegate = delegate {
                 currentDelegate.textDocumentDisableEditing(self)
             }
         }
-        
+
         if documentState.contains(.inConflict) {
             os_log("=> A docuent conflict was detected", log: .default, type: .debug)
             resolveDocumentConflict()
         }
-        
+
         if documentState.contains(.savingError) {
             if let currentDelegate = delegate {
                 currentDelegate.textDocumentSaveFailed(self)
             }
         }
-        
+
         handleDocStateForTransfers()
     }
 
     override func handleError(_ error: Error, userInteractionPermitted: Bool) {
-        os_log("** Error from handleError: %@ ***", log: .default, type: .error, String(describing: error))
+        os_log(
+            "** Error from handleError: %@ ***", log: .default, type: .error,
+            String(describing: error))
         super.handleError(error, userInteractionPermitted: userInteractionPermitted)
     }
 
@@ -143,7 +146,7 @@ class TextDocument: UIDocument {
             // If we're not in the middle of a transfer, check to see if a transfer has started.
             if documentState.contains(.progressAvailable) {
                 os_log("=> A transfer is in progress", log: .default, type: .debug)
-                
+
                 if let currentDelegate = delegate {
                     currentDelegate.textDocumentTransferBegan(self)
                     transfering = true
@@ -151,15 +154,16 @@ class TextDocument: UIDocument {
             }
         }
     }
-    
+
     private func resolveDocumentConflict() {
-        
+
         // To accept the current version, remove the other versions,
         // and resolve all the unresolved versions.
         do {
             try NSFileVersion.removeOtherVersionsOfItem(at: fileURL)
-            
-            if let conflictingVersions = NSFileVersion.unresolvedConflictVersionsOfItem(at: fileURL) {
+
+            if let conflictingVersions = NSFileVersion.unresolvedConflictVersionsOfItem(at: fileURL)
+            {
                 for version in conflictingVersions {
                     version.isResolved = true
                 }
@@ -168,5 +172,5 @@ class TextDocument: UIDocument {
             os_log("*** Error: %@ ***", log: .default, type: .error, error.localizedDescription)
         }
     }
-    
+
 }

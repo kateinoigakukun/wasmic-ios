@@ -1,4 +1,3 @@
-
 //
 //  WasmDocumentViewController.swift
 //  Wasmic
@@ -38,7 +37,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     }()
 
     private var keyboardObserver: KeyboardLayoutObserver?
-    
+
     private let document: TextDocument
 
     init(document: TextDocument) {
@@ -46,7 +45,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         super.init(nibName: nil, bundle: nil)
         self.document.delegate = self
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,7 +53,8 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        keyboardObserver = KeyboardLayoutObserver(for: view, onUpdateHandler: adjustForKeyboard(keyboardInset:animator:))
+        keyboardObserver = KeyboardLayoutObserver(
+            for: view, onUpdateHandler: adjustForKeyboard(keyboardInset:animator:))
         view.backgroundColor = .white
         navigationItem.leftBarButtonItem = doneButton
         view.addSubview(textView)
@@ -63,7 +63,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             textView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             textView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
 
         view.addSubview(progressBar)
@@ -80,79 +80,86 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                
-        assert(!document.documentState.contains(.closed), "*** Open the document before displaying it. ***")
-        
-        assert(!document.documentState.contains(.inConflict), "*** Resolve conflicts before displaying the document. ***")
+
+        assert(
+            !document.documentState.contains(.closed),
+            "*** Open the document before displaying it. ***")
+
+        assert(
+            !document.documentState.contains(.inConflict),
+            "*** Resolve conflicts before displaying the document. ***")
 
         textView.text = document.text
-        
+
         // Set the view controller's title to match file document's title.
-        let fileAttributes = try? document.fileURL.resourceValues(forKeys: [URLResourceKey.localizedNameKey])
+        let fileAttributes = try? document.fileURL.resourceValues(forKeys: [
+            URLResourceKey.localizedNameKey
+        ])
         navigationItem.title = fileAttributes?.localizedName
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         document.close { (success) in
-            guard success else { fatalError( "*** Error closing document ***") }
-            
+            guard success else { fatalError("*** Error closing document ***") }
+
             os_log("==> Document saved and closed", log: .default, type: .debug)
         }
     }
-    
+
     // MARK: - Action Methods
-    
+
     @objc func returnToDocuments(_ sender: Any) {
         // Dismiss this view controller.
         dismiss(animated: true, completion: nil)
     }
-    
+
     // MARK: - UITextViewDelegate
 
     func textViewDidChange(_ textView: UITextView) {
         document.text = textView.text
         document.updateChangeCount(.done)
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
         document.text = textView.text
         document.updateChangeCount(.done)
     }
-    
+
     // MARK: - UITextDocumentDelegate Methods
-    
+
     func textDocumentEnableEditing(_ doc: TextDocument) {
         textView.isEditable = true
     }
-    
+
     func textDocumentDisableEditing(_ doc: TextDocument) {
         textView.isEditable = false
     }
-    
+
     func textDocumentUpdateContent(_ doc: TextDocument) {
         textView.text = doc.text
     }
-    
+
     func textDocumentTransferBegan(_ doc: TextDocument) {
         progressBar.isHidden = false
         progressBar.observedProgress = doc.progress
     }
-    
+
     func textDocumentTransferEnded(_ doc: TextDocument) {
         progressBar.isHidden = true
     }
-    
+
     func textDocumentSaveFailed(_ doc: TextDocument) {
         let alert = UIAlertController(
             title: NSLocalizedString("SaveErrorTitle", comment: ""),
             message: NSLocalizedString("SaveErrorTitleMessage", comment: ""),
             preferredStyle: .alert)
-        
-        let dismiss = UIAlertAction(title: NSLocalizedString("OKTitle", comment: ""), style: .default)
+
+        let dismiss = UIAlertAction(
+            title: NSLocalizedString("OKTitle", comment: ""), style: .default)
         alert.addAction(dismiss)
-        
+
         present(alert, animated: true, completion: nil)
     }
 
