@@ -19,9 +19,15 @@
 		F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E5E2620587500D6829A /* WasmExecutionView.swift */; };
 		F2499E712620A58F00D6829A /* WasmicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E702620A58F00D6829A /* WasmicTests.swift */; };
 		F2499E7F2620A83300D6829A /* WasmExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E7E2620A83300D6829A /* WasmExecutorTests.swift */; };
-		F2499EA02620B40900D6829A /* WasmicWasm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E9F2620B40900D6829A /* WasmicWasm.swift */; };
+		F2499EA02620B40900D6829A /* WebAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E9F2620B40900D6829A /* WebAssembly.swift */; };
 		F2499EAE2620B43100D6829A /* WasmicWasmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499EAD2620B43100D6829A /* WasmicWasmTests.swift */; };
 		F2499EB02620B43100D6829A /* libWasmicWasm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E9D2620B40900D6829A /* libWasmicWasm.a */; };
+		F2499EC72620B50500D6829A /* WatCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499EC62620B50500D6829A /* WatCompiler.swift */; };
+		F2499ED82620B59600D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
+		F2499ED92620B59600D6829A /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; };
+		F2499EDE2620B5CF00D6829A /* libWasmicWasm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E9D2620B40900D6829A /* libWasmicWasm.a */; };
+		F2499EEF2620B6C400D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
+		F2499EF02620B6C400D6829A /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -71,10 +77,11 @@
 		F2499E722620A58F00D6829A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2499E7E2620A83300D6829A /* WasmExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmExecutorTests.swift; sourceTree = "<group>"; };
 		F2499E9D2620B40900D6829A /* libWasmicWasm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWasmicWasm.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2499E9F2620B40900D6829A /* WasmicWasm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicWasm.swift; sourceTree = "<group>"; };
+		F2499E9F2620B40900D6829A /* WebAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAssembly.swift; sourceTree = "<group>"; };
 		F2499EAB2620B43100D6829A /* WasmicWasmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasmicWasmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2499EAD2620B43100D6829A /* WasmicWasmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicWasmTests.swift; sourceTree = "<group>"; };
 		F2499EAF2620B43100D6829A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2499EC62620B50500D6829A /* WatCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatCompiler.swift; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2499ED82620B59600D6829A /* wabt.xcframework in Frameworks */,
+				F2499ED92620B59600D6829A /* wasm3.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2499EEF2620B6C400D6829A /* wabt.xcframework in Frameworks */,
+				F2499EF02620B6C400D6829A /* wasm3.xcframework in Frameworks */,
 				F2499EB02620B43100D6829A /* libWasmicWasm.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2499EDE2620B5CF00D6829A /* libWasmicWasm.a in Frameworks */,
 				F2499E532620382E00D6829A /* wabt.xcframework in Frameworks */,
 				F2499D91261F466C00D6829A /* wasm3.xcframework in Frameworks */,
 			);
@@ -207,7 +219,8 @@
 		F2499E9E2620B40900D6829A /* WasmicWasm */ = {
 			isa = PBXGroup;
 			children = (
-				F2499E9F2620B40900D6829A /* WasmicWasm.swift */,
+				F2499E9F2620B40900D6829A /* WebAssembly.swift */,
+				F2499EC62620B50500D6829A /* WatCompiler.swift */,
 			);
 			path = WasmicWasm;
 			sourceTree = "<group>";
@@ -423,7 +436,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2499EA02620B40900D6829A /* WasmicWasm.swift in Sources */,
+				F2499EA02620B40900D6829A /* WebAssembly.swift in Sources */,
+				F2499EC72620B50500D6829A /* WatCompiler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +487,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				INFOPLIST_FILE = WasmicTests/Info.plist;
+				INFOPLIST_FILE = Tests/WasmicTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -495,7 +509,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				INFOPLIST_FILE = WasmicTests/Info.plist;
+				INFOPLIST_FILE = Tests/WasmicTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +531,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -532,7 +545,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -548,7 +560,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				INFOPLIST_FILE = WasmicWasmTests/Info.plist;
+				INFOPLIST_FILE = Tests/WasmicWasmTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,7 +580,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				INFOPLIST_FILE = WasmicWasmTests/Info.plist;
+				INFOPLIST_FILE = Tests/WasmicWasmTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
