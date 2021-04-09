@@ -126,7 +126,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     @objc func presentExecution(_ sender: Any) {
         let executor = WasmExecutor(
-            input: .wat(filename: document.fileURL.lastPathComponent, body: document.text))
+            input: .wat(fileName: document.fileURL.lastPathComponent, content: document.text))
         let view = WasmExecutionView(executor: executor)
         let vc = UIHostingController(rootView: view)
         present(vc, animated: true)

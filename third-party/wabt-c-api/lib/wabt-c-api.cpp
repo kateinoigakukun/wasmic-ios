@@ -19,11 +19,10 @@
 
 using namespace wabt;
 
-extern "C" bool wabt_c_api_compile_wat(const char *input_filename,
-                                       const uint8_t *wat_bytes,
-                                       const size_t wat_bytes_len,
-                                       const uint8_t **wasm_bytes,
-                                       size_t *wasm_bytes_len) {
+extern "C" bool wabt_c_api_compile_wat(
+    const char *input_filename, const char *wat_bytes,
+    const size_t wat_bytes_len, void *context,
+    void (*handler)(void *context, const uint8_t *bytes, size_t)) {
   std::unique_ptr<WastLexer> lexer =
       WastLexer::CreateBufferLexer(input_filename, wat_bytes, wat_bytes_len);
 
@@ -49,8 +48,7 @@ extern "C" bool wabt_c_api_compile_wat(const char *input_filename,
 
     if (Succeeded(result)) {
       const OutputBuffer &buffer = stream.output_buffer();
-      *wasm_bytes = buffer.data.data();
-      *wasm_bytes_len = buffer.size();
+      handler(context, buffer.data.data(), buffer.size());
     }
   }
   auto line_finder = lexer->MakeLineFinder();

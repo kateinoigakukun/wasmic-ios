@@ -20,22 +20,59 @@ struct WasmExecutionView: View {
     }
 }
 
+func compileWat(fileName: String, content: String, handler: @escaping ([UInt8]) -> Void) {
+    class Context {
+        let handler: ([UInt8]) -> Void
+        init(handler: @escaping ([UInt8]) -> Void) {
+            self.handler = handler
+        }
+    }
+
+    let ctx = Unmanaged.passRetained(Context(handler: handler)).toOpaque()
+    fileName.withCString { filenamePtr in
+        content.withCString { bodyPtr in
+            let bodyLength = strlen(bodyPtr)
+            wabt_c_api_compile_wat(
+                filenamePtr,
+                bodyPtr, bodyLength, ctx) { ctx, bytes, length in
+                let ctx = Unmanaged<Context>.fromOpaque(ctx!).takeRetainedValue()
+                let buffer = UnsafeBufferPointer(start: bytes, count: length)
+                let bytes = Array(buffer)
+                ctx.handler(bytes)
+            }
+        }
+    }
+}
+
 class WasmExecutor: ObservableObject {
     enum Input {
-        case wat(filename: String, body: String)
+        case wat(fileName: String, content: String)
+    }
+
+    enum WasmValue {
+        case i32(Int32)
+        case i64(Int64)
+        case f32(Float32)
+        case f64(Float64)
     }
 
     enum Error: Swift.Error {
         case unexpected(String, M3Result?)
     }
+
     enum State {
         case compiling
         case executing
         case failed(String)
-        case result(String)
+        case result([WasmValue])
     }
 
     let input: Input
+    private let pipelineQueue = DispatchQueue(
+        label: "dev.katei.Wasmic.executor-pipeline",
+        qos: .default
+    )
+
     @Published var state: State?
 
     init(input: WasmExecutor.Input) {
@@ -44,36 +81,35 @@ class WasmExecutor: ObservableObject {
     }
 
     func startPipeline() {
-        let bytes = produceWasmBytes()
-        do {
-            let result = try execute(wasmBytes: bytes)
-            self.state = .result(result)
-        } catch {
-            // FIXME
-            self.state = .failed(String(describing: error))
-        }
-    }
-
-    func produceWasmBytes() -> [UInt8] {
-        switch self.input {
-        case let .wat(filename, body):
-            var _wasmBytes: UnsafePointer<UInt8>?
-            var _wasmBytesLength: Int = 0
-            filename.withCString { filenamePtr in
-                body.withCString { bodyPtr in
-                    let bodyLength = strlen(bodyPtr)
-                    wabt_c_api_compile_wat(
-                        filenamePtr,
-                        bodyPtr, bodyLength,
-                        &_wasmBytes, &_wasmBytesLength)
+        pipelineQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.produceWasmBytes { bytes in
+                do {
+                    let input = "40"
+                    let result = try input.withCString {
+                        try self.execute(wasmBytes: bytes, args: [$0])
+                    }
+                    DispatchQueue.main.async {
+                        self.state = .result(result)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        // FIXME
+                        self.state = .failed(String(describing: error))
+                    }
                 }
             }
-            let wasmBytes = UnsafeBufferPointer(start: _wasmBytes, count: _wasmBytesLength)
-            return Array(wasmBytes)
         }
     }
 
-    func execute(wasmBytes: [UInt8]) throws -> String {
+    func produceWasmBytes(_ handler: @escaping ([UInt8]) -> Void) {
+        switch self.input {
+        case let .wat(fileName, content):
+            compileWat(fileName: fileName, content: content, handler: handler)
+        }
+    }
+
+    func execute(wasmBytes: [UInt8], args: [UnsafePointer<CChar>]) throws -> [WasmValue] {
         guard let env = m3_NewEnvironment() else {
             throw Error.unexpected("m3_NewEnvironment failed", nil)
         }
@@ -95,24 +131,64 @@ class WasmExecutor: ObservableObject {
             throw Error.unexpected("m3_FindFunction failed", result)
         }
 
-        let input = "40"
-        let execResult = input.withCString { inputPtr -> M3Result? in
-            var argv = [inputPtr, nil]
-            return argv.withUnsafeMutableBufferPointer { argv in
-                m3_CallArgv(fibFn, 1, argv.baseAddress)
-            }
+        var argv = args + [nil]
+        let execResult = argv.withUnsafeMutableBufferPointer { argv in
+            m3_CallArgv(fibFn, 1, argv.baseAddress)
         }
         if let result = execResult {
             throw Error.unexpected("m3_CallArgv failed", result)
         }
-        var value: UInt32 = 0
-        let returnResult = withUnsafeMutablePointer(to: &value) { value in
-            m3_GetResultsVL(fibFn, getVaList([value]))
+
+        let returnCount = m3_GetRetCount(fibFn)
+        guard returnCount > 0 else { return [] }
+
+        let returnsBuffer = [UInt64](repeating: 0, count: Int(returnCount))
+        let returnResult = returnsBuffer.withUnsafeBufferPointer { returnsBuffer -> M3Result? in
+            let ptr = returnsBuffer.baseAddress!
+            var returnsPtrs = (0..<Int(returnCount)).map {
+                Optional(UnsafeRawPointer(ptr.advanced(by: $0)))
+            }
+            return returnsPtrs.withUnsafeMutableBufferPointer { returnsPtrs in
+                m3_GetResults(fibFn, returnCount, returnsPtrs.baseAddress)
+            }
         }
 
         if let result = returnResult {
-            throw Error.unexpected("m3_GetResultsVL failed", result)
+            throw Error.unexpected("m3_GetResults failed", result)
         }
-        return value.description
+
+        let constructors = (0..<returnCount).lazy.map { i -> ((UInt64) throws -> WasmValue) in
+            let constructor: ((UInt64) -> (WasmValue, String))
+            let type = m3_GetRetType(fibFn, i)
+            switch type {
+            case c_m3Type_i32: constructor = {
+                (.i32(Int32(bitPattern: UInt32($0))), "i32")
+            }
+            case c_m3Type_i64: constructor = {
+                (.i64(Int64(bitPattern: $0)), "i64")
+            }
+            case c_m3Type_f32: constructor = {
+                (.f32(Float32(bitPattern: UInt32($0))), "f32")
+            }
+            case c_m3Type_f64: constructor = {
+                (.f64(Float64(bitPattern: $0)), "f64")
+            }
+            default:
+                return { _ in throw Error.unexpected("unsupported type: \(type)", nil) }
+            }
+            return {
+                let (value, _) = constructor($0)
+                return value
+            }
+        }
+        
+        return try returnsBuffer.withUnsafeBufferPointer { returnsBuffer -> [WasmValue] in
+            let ptr = returnsBuffer.baseAddress!
+            return try constructors.enumerated().map { offset, constructor in
+                let value = ptr.advanced(by: offset).pointee
+                return try constructor(value)
+            }
+            
+        }
     }
 }

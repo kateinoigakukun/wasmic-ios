@@ -52,8 +52,9 @@ build_wabt() {
         -D CMAKE_TOOLCHAIN_FILE="$third_party_dir/ios-cmake/ios.toolchain.cmake"
         -D DEPLOYMENT_TARGET="14.0"
         -D ENABLE_BITCODE=ON
+        -D CMAKE_BUILD_TYPE=Debug
     )
-    CMAKE_BUILD_ARGS=(--target wabt.framework --config Release)
+    CMAKE_BUILD_ARGS=(--target wabt.framework --config Debug)
 
     cmake "${CMAKE_ARGS[@]}" \
         -B "$third_party_dir/build/wabt-c-api-iphoneos-arm64" \
