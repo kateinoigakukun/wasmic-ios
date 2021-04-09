@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Wasmic.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F2499E6D2620A58F00D6829A"
+               BuildableName = "WasmicTests.xctest"
+               BlueprintName = "WasmicTests"
+               ReferencedContainer = "container:Wasmic.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
