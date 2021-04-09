@@ -15,6 +15,8 @@
 		F2499DEE261FDFBD00D6829A /* WasmDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DED261FDFBD00D6829A /* WasmDocumentViewController.swift */; };
 		F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */; };
 		F2499DFE2620293300D6829A /* WatDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DFD2620293300D6829A /* WatDocument.swift */; };
+		F2499E532620382E00D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
+		F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E5E2620587500D6829A /* WasmExecutionView.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -28,6 +30,8 @@
 		F2499DED261FDFBD00D6829A /* WasmDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmDocumentViewController.swift; sourceTree = "<group>"; };
 		F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutObserver.swift; sourceTree = "<group>"; };
 		F2499DFD2620293300D6829A /* WatDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatDocument.swift; sourceTree = "<group>"; };
+		F2499E0426202F9600D6829A /* wabt.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wabt.xcframework; path = "third-party/build/wabt.xcframework"; sourceTree = "<group>"; };
+		F2499E5E2620587500D6829A /* WasmExecutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmExecutionView.swift; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2499E532620382E00D6829A /* wabt.xcframework in Frameworks */,
 				F2499D91261F466C00D6829A /* wasm3.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +54,7 @@
 		F2499D8F261F466C00D6829A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2499E0426202F9600D6829A /* wabt.xcframework */,
 				F2499D90261F466C00D6829A /* wasm3.xcframework */,
 			);
 			name = Frameworks;
@@ -57,6 +63,7 @@
 		F2499DF62620261100D6829A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F2499E5D2620584E00D6829A /* Execution */,
 				F2499DF72620261A00D6829A /* Document */,
 			);
 			path = Scenes;
@@ -77,6 +84,14 @@
 				F2499DFD2620293300D6829A /* WatDocument.swift */,
 			);
 			path = DocumentTypes;
+			sourceTree = "<group>";
+		};
+		F2499E5D2620584E00D6829A /* Execution */ = {
+			isa = PBXGroup;
+			children = (
+				F2499E5E2620587500D6829A /* WasmExecutionView.swift */,
+			);
+			path = Execution;
 			sourceTree = "<group>";
 		};
 		F251997A261F26520037DA79 = {
@@ -192,6 +207,7 @@
 				F2499DE5261F5B9500D6829A /* DocumentBrowserViewController.swift in Sources */,
 				F2499D9F261F4BB400D6829A /* AppDelegate.swift in Sources */,
 				F2499DEE261FDFBD00D6829A /* WasmDocumentViewController.swift in Sources */,
+				F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */,
 				F2499DEB261F5BED00D6829A /* TextDocument.swift in Sources */,
 				F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */,
 				F25199AB261F26530037DA79 /* ContentView.swift in Sources */,

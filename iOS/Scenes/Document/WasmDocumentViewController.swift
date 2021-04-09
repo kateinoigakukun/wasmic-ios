@@ -7,6 +7,8 @@
 
 import UIKit
 import os.log
+import wasm3
+import SwiftUI
 
 /// - Tag: textDocumentViewController
 class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocumentDelegate {
@@ -35,6 +37,12 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             target: self, action: #selector(returnToDocuments(_:)))
         return button
     }()
+    private lazy var runButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .play,
+            target: self, action: #selector(presentExecution(_:)))
+        return button
+    }()
 
     private var keyboardObserver: KeyboardLayoutObserver?
 
@@ -55,8 +63,9 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
         keyboardObserver = KeyboardLayoutObserver(
             for: view, onUpdateHandler: adjustForKeyboard(keyboardInset:animator:))
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         navigationItem.leftBarButtonItem = doneButton
+        navigationItem.rightBarButtonItems = [runButton]
         view.addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -113,6 +122,14 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     @objc func returnToDocuments(_ sender: Any) {
         // Dismiss this view controller.
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc func presentExecution(_ sender: Any) {
+        let executor = WasmExecutor(
+            input: .wat(filename: document.fileURL.lastPathComponent, body: document.text))
+        let view = WasmExecutionView(executor: executor)
+        let vc = UIHostingController(rootView: view)
+        present(vc, animated: true)
     }
 
     // MARK: - UITextViewDelegate

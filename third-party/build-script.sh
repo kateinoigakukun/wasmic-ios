@@ -45,4 +45,33 @@ EOS
         -output "$third_party_dir/build/wasm3.xcframework"
 }
 
+build_wabt() {
+    CMAKE_ARGS=(
+        -G Ninja
+        -S "$third_party_dir/wabt-c-api"
+        -D CMAKE_TOOLCHAIN_FILE="$third_party_dir/ios-cmake/ios.toolchain.cmake"
+        -D DEPLOYMENT_TARGET="14.0"
+        -D ENABLE_BITCODE=ON
+    )
+    CMAKE_BUILD_ARGS=(--target wabt.framework --config Release)
+
+    cmake "${CMAKE_ARGS[@]}" \
+        -B "$third_party_dir/build/wabt-c-api-iphoneos-arm64" \
+        -D PLATFORM=OS64
+    cmake --build "$third_party_dir/build/wabt-c-api-iphoneos-arm64" "${CMAKE_BUILD_ARGS[@]}"
+
+    cmake "${CMAKE_ARGS[@]}" \
+        -B "$third_party_dir/build/wabt-c-api-iphonesimulator-x86_64" \
+        -D PLATFORM=SIMULATOR64
+    cmake --build "$third_party_dir/build/wabt-c-api-iphonesimulator-x86_64" "${CMAKE_BUILD_ARGS[@]}"
+
+    rm -rf "$third_party_dir/build/wabt.xcframework"
+
+    xcodebuild -create-xcframework \
+        -framework "$third_party_dir/build/wabt-c-api-iphoneos-arm64/wabt.framework" \
+        -framework "$third_party_dir/build/wabt-c-api-iphonesimulator-x86_64/wabt.framework" \
+        -output "$third_party_dir/build/wabt.xcframework"
+}
+
 build_wasm3
+build_wabt

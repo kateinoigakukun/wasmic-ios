@@ -1,0 +1,5 @@
+framework module wabt {
+    header "wabt-c-api.h"
+    link "c++"
+    export *
+}
