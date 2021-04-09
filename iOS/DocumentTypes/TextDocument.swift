@@ -15,16 +15,16 @@ enum TextDocumentError: Error {
 }
 
 protocol TextDocumentDelegate: AnyObject {
-    func textDocumentEnableEditing(_ doc: WatDocument)
-    func textDocumentDisableEditing(_ doc: WatDocument)
-    func textDocumentUpdateContent(_ doc: WatDocument)
-    func textDocumentTransferBegan(_ doc: WatDocument)
-    func textDocumentTransferEnded(_ doc: WatDocument)
-    func textDocumentSaveFailed(_ doc: WatDocument)
+    func textDocumentEnableEditing(_ doc: TextDocument)
+    func textDocumentDisableEditing(_ doc: TextDocument)
+    func textDocumentUpdateContent(_ doc: TextDocument)
+    func textDocumentTransferBegan(_ doc: TextDocument)
+    func textDocumentTransferEnded(_ doc: TextDocument)
+    func textDocumentSaveFailed(_ doc: TextDocument)
 }
 
-/// - Tag: WatDocument
-class WatDocument: UIDocument {
+/// - Tag: TextDocument
+class TextDocument: UIDocument {
     
     public var text = "" {
         didSet {
@@ -37,7 +37,7 @@ class WatDocument: UIDocument {
 
     private var docStateObserver: Any?
     private var transfering: Bool = false
-    
+
     override init(fileURL url: URL) {
         
         docStateObserver = nil
@@ -50,14 +50,7 @@ class WatDocument: UIDocument {
                 self.updateDocumentState()
         }
     }
-    
-    init() {
-        let tempDir = FileManager.default.temporaryDirectory
-        let url = tempDir.appendingPathComponent("main.wat")
-        
-        super.init(fileURL: url)
-    }
-    
+
     deinit {
         if let docObserver = docStateObserver {
             NotificationCenter.default.removeObserver(docObserver)
@@ -131,7 +124,12 @@ class WatDocument: UIDocument {
         
         handleDocStateForTransfers()
     }
-    
+
+    override func handleError(_ error: Error, userInteractionPermitted: Bool) {
+        os_log("** Error from handleError: %@ ***", log: .default, type: .error, String(describing: error))
+        super.handleError(error, userInteractionPermitted: userInteractionPermitted)
+    }
+
     private func handleDocStateForTransfers() {
         if transfering {
             // If we're in the middle of a transfer, check to see if the transfer has ended.

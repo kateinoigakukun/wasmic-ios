@@ -38,14 +38,17 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     }()
 
     private var keyboardObserver: KeyboardLayoutObserver?
-    private var keyboardAppearObserver: Any?
-    private var keyboardDisappearObserver: Any?
     
-    var document: WatDocument! {
-        didSet {
-            document.delegate = self
-            loadViewIfNeeded()
-        }
+    private let document: TextDocument
+
+    init(document: TextDocument) {
+        self.document = document
+        super.init(nibName: nil, bundle: nil)
+        self.document.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -120,28 +123,28 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     
     // MARK: - UITextDocumentDelegate Methods
     
-    func textDocumentEnableEditing(_ doc: WatDocument) {
+    func textDocumentEnableEditing(_ doc: TextDocument) {
         textView.isEditable = true
     }
     
-    func textDocumentDisableEditing(_ doc: WatDocument) {
+    func textDocumentDisableEditing(_ doc: TextDocument) {
         textView.isEditable = false
     }
     
-    func textDocumentUpdateContent(_ doc: WatDocument) {
+    func textDocumentUpdateContent(_ doc: TextDocument) {
         textView.text = doc.text
     }
     
-    func textDocumentTransferBegan(_ doc: WatDocument) {
+    func textDocumentTransferBegan(_ doc: TextDocument) {
         progressBar.isHidden = false
         progressBar.observedProgress = doc.progress
     }
     
-    func textDocumentTransferEnded(_ doc: WatDocument) {
+    func textDocumentTransferEnded(_ doc: TextDocument) {
         progressBar.isHidden = true
     }
     
-    func textDocumentSaveFailed(_ doc: WatDocument) {
+    func textDocumentSaveFailed(_ doc: TextDocument) {
         let alert = UIAlertController(
             title: NSLocalizedString("SaveErrorTitle", comment: ""),
             message: NSLocalizedString("SaveErrorTitleMessage", comment: ""),

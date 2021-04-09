@@ -107,25 +107,18 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     var transitionController: UIDocumentBrowserTransitionController?
     
     func presentDocument(at documentURL: URL) {
+        let doc = TextDocument(fileURL: documentURL)
 
-        let documentViewController = TextDocumentViewController()
+        let documentViewController = TextDocumentViewController(document: doc)
         let docNavController = UINavigationController(rootViewController: documentViewController)
-        
+
         // Load the document view.
         documentViewController.loadViewIfNeeded()
-        
-        // In order to get a proper animation when opening and closing documents, the DocumentViewController needs a custom view controller
-        // transition. The `UIDocumentBrowserViewController` provides a `transitionController`, which takes care of the zoom animation. Therefore, the
-        // `UIDocumentBrowserViewController` is registered as the `transitioningDelegate` of the `DocumentViewController`. Next, obtain the
-        // transitionController, and store it for later (see `animationController(forPresented:presenting:source:)` and
-        // `animationController(forDismissed:)`).
         docNavController.transitioningDelegate = self
-        
+
         // Get the transition controller.
         let transitionController = self.transitionController(forDocumentAt: documentURL)
         self.transitionController = transitionController
-        
-        let doc = WatDocument(fileURL: documentURL)
 
         transitionController.targetView = documentViewController.textView
   
@@ -136,16 +129,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         docNavController.modalPresentationStyle = .fullScreen
 
         // Set and open the document.
-        documentViewController.document = doc
-        documentViewController.document.open(completionHandler: { (success) in
-            // Make sure to implement handleError(_:userInteractionPermitted:) in your UIDocument subclass to handle errors appropriately.
-            if success {
-                // Remove the loading animation.
-                self.transitionController!.loadingProgress = nil
-                
-                os_log("==> Document Opened", log: .default, type: .debug)
-                self.present(docNavController, animated: true, completion: nil)
-            }
+        doc.open(completionHandler: { success in
+            // Errors are handled by TextDocument.handleError
+            guard success else { return }
+            // Remove the loading animation.
+            self.transitionController!.loadingProgress = nil
+
+            os_log("==> Document Opened", log: .default, type: .debug)
+            self.present(docNavController, animated: true, completion: nil)
         })
     }
     
@@ -156,16 +147,10 @@ extension DocumentBrowserViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController,
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        // Since the `UIDocumentBrowserViewController` has been set up to be the transitioning delegate of `DocumentViewController` instances (see
-        // implementation of `presentDocument(at:)`), it is being asked for a transition controller.
-        // Therefore, return the transition controller, that previously was obtained from the `UIDocumentBrowserViewController` when a
-        // `DocumentViewController` instance was presented.
         return transitionController
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        // The same zoom transition is needed when closing documents and returning to the `UIDocumentBrowserViewController`, which is why the the
-        // existing transition controller is returned here as well.
         return transitionController
     }
     
