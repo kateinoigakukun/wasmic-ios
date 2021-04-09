@@ -2,6 +2,21 @@
 
 set -eu
 
+CMAKE_BUILD_TYPE=Release
+
+while [ $# -ne 0 ]; do
+  case "$1" in
+    --debug)
+    CMAKE_BUILD_TYPE=Debug
+  ;;
+  *)
+    echo "Unrecognised argument \"$1\""
+    exit 1
+  ;;
+  esac
+  shift
+done
+
 third_party_dir="$(cd "$(dirname "$0")" && pwd)"
 
 build_wasm3() {
@@ -12,8 +27,9 @@ build_wasm3() {
         -D BUILD_NATIVE=OFF
         -D DEPLOYMENT_TARGET="14.0"
         -D ENABLE_BITCODE=ON
+        -D CMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"
     )
-    CMAKE_BUILD_ARGS=(--target m3 --config Release)
+    CMAKE_BUILD_ARGS=(--target m3 --config "$CMAKE_BUILD_TYPE")
 
     cmake "${CMAKE_ARGS[@]}" \
         -B "$third_party_dir/build/wasm3-iphoneos-arm64" \
@@ -52,9 +68,9 @@ build_wabt() {
         -D CMAKE_TOOLCHAIN_FILE="$third_party_dir/ios-cmake/ios.toolchain.cmake"
         -D DEPLOYMENT_TARGET="14.0"
         -D ENABLE_BITCODE=ON
-        -D CMAKE_BUILD_TYPE=Debug
+        -D CMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"
     )
-    CMAKE_BUILD_ARGS=(--target wabt.framework --config Debug)
+    CMAKE_BUILD_ARGS=(--target wabt.framework --config "$CMAKE_BUILD_TYPE")
 
     cmake "${CMAKE_ARGS[@]}" \
         -B "$third_party_dir/build/wabt-c-api-iphoneos-arm64" \
