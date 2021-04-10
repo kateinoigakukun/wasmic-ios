@@ -38,6 +38,7 @@
 		F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F5A2621696800D6829A /* WasmicBrand.swift */; };
 		F2499FA026218F4A00D6829A /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = F2499F9F26218F4A00D6829A /* Highlightr */; };
 		F2499FC52621A15E00D6829A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2499FC72621A15E00D6829A /* Localizable.strings */; };
+		F2499FF02621B9CE00D6829A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		F2499F5A2621696800D6829A /* WasmicBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicBrand.swift; sourceTree = "<group>"; };
 		F2499FC62621A15E00D6829A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2499FCC2621A17F00D6829A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,6 +310,7 @@
 				F2499DBE261F4ED400D6829A /* SceneDelegate.swift */,
 				F2499DE4261F5B9500D6829A /* DocumentBrowserViewController.swift */,
 				F2499F5A2621696800D6829A /* WasmicBrand.swift */,
+				F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */,
 				F2499FC72621A15E00D6829A /* Localizable.strings */,
 				F2499DF62620261100D6829A /* Scenes */,
 				F2499DFB2620291600D6829A /* DocumentTypes */,
@@ -517,6 +520,7 @@
 				F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */,
 				F25199AB261F26530037DA79 /* ContentView.swift in Sources */,
 				F2499DBF261F4ED400D6829A /* SceneDelegate.swift in Sources */,
+				F2499FF02621B9CE00D6829A /* Intents.intentdefinition in Sources */,
 				F2499DFE2620293300D6829A /* WatDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
