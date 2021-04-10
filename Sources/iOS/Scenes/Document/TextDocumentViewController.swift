@@ -9,12 +9,24 @@ import SwiftUI
 import UIKit
 import WasmicWasm
 import os.log
+import Highlightr
 
 /// - Tag: TextDocumentViewController
 class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocumentDelegate {
 
+    private lazy var textStorage: CodeAttributedString = {
+        let textStorage = CodeAttributedString()
+        textStorage.language = "Lisp"
+        return textStorage
+    }()
     private(set) lazy var textView: UITextView = {
-        let textView = UITextView()
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+
+        let textContainer = NSTextContainer(size: view.bounds.size)
+        layoutManager.addTextContainer(textContainer)
+
+        let textView = UITextView(frame: .zero, textContainer: textContainer)
         textView.isScrollEnabled = true
         textView.bounces = true
         textView.alwaysBounceVertical = true
@@ -25,6 +37,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         textView.font = UIFontMetrics(forTextStyle: .body)
             .scaledFont(for: Brand.codeFont)
         textView.adjustsFontForContentSizeCategory = true
+
         return textView
     }()
     private lazy var progressBar: UIProgressView = {
@@ -66,6 +79,8 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateEditorTheme()
+
         keyboardObserver = KeyboardLayoutObserver(
             for: view, onUpdateHandler: adjustForKeyboard(keyboardInset:animator:))
         view.backgroundColor = UIColor.systemBackground
@@ -86,7 +101,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         NSLayoutConstraint.activate([
             progressBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 4),
             view.rightAnchor.constraint(equalTo: progressBar.rightAnchor, constant: 4),
-            progressBar.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            progressBar.topAnchor.constraint(equalTo: view.topAnchor),
         ])
 
         textView.delegate = self
@@ -148,6 +163,11 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         }
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateEditorTheme()
+    }
+
     // MARK: - Action Methods
 
     @objc func returnToDocuments(_ sender: Any) {
@@ -166,12 +186,17 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     // MARK: - UITextViewDelegate
 
+    private var isHandlingTextViewDelegate = false
     func textViewDidChange(_ textView: UITextView) {
+        isHandlingTextViewDelegate = true
+        defer { isHandlingTextViewDelegate = false }
         document.text = textView.text
         document.updateChangeCount(.done)
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
+        isHandlingTextViewDelegate = true
+        defer { isHandlingTextViewDelegate = false }
         document.text = textView.text
         document.updateChangeCount(.done)
     }
@@ -187,6 +212,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     }
 
     func textDocumentUpdateContent(_ doc: TextDocument) {
+        guard !isHandlingTextViewDelegate else { return }
         textView.text = doc.text
     }
 
@@ -218,5 +244,16 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             self.textView.scrollIndicatorInsets = keyboardInset
         }
         animator.startAnimation()
+    }
+    
+    func updateEditorTheme() {
+        switch traitCollection.userInterfaceStyle {
+        case .light, .unspecified:
+            textStorage.highlightr.setTheme(to: "xcode")
+        case .dark:
+            textStorage.highlightr.setTheme(to: "atom-one-dark-reasonable")
+        @unknown default:
+            textStorage.highlightr.setTheme(to: "xcode")
+        }
     }
 }

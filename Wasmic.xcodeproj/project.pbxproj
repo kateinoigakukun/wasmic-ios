@@ -36,6 +36,7 @@
 		F2499F4126213BF500D6829A /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F4026213BF500D6829A /* Sections.swift */; };
 		F2499F4726213C2500D6829A /* LEB128.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F4626213C2500D6829A /* LEB128.swift */; };
 		F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F5A2621696800D6829A /* WasmicBrand.swift */; };
+		F2499FA026218F4A00D6829A /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = F2499F9F26218F4A00D6829A /* Highlightr */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -135,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2499FA026218F4A00D6829A /* Highlightr in Frameworks */,
 				F2499EDE2620B5CF00D6829A /* libWasmicWasm.a in Frameworks */,
 				F2499E532620382E00D6829A /* wabt.xcframework in Frameworks */,
 				F2499D91261F466C00D6829A /* wasm3.xcframework in Frameworks */,
@@ -381,6 +383,9 @@
 			dependencies = (
 			);
 			name = Wasmic;
+			packageProductDependencies = (
+				F2499F9F26218F4A00D6829A /* Highlightr */,
+			);
 			productName = "Wasmic (iOS)";
 			productReference = F2519987261F26530037DA79 /* Wasmic.app */;
 			productType = "com.apple.product-type.application";
@@ -420,6 +425,7 @@
 			);
 			mainGroup = F251997A261F26520037DA79;
 			packageReferences = (
+				F2499F9E26218F4A00D6829A /* XCRemoteSwiftPackageReference "Highlightr" */,
 			);
 			productRefGroup = F2519988261F26530037DA79 /* Products */;
 			projectDirPath = "";
@@ -850,6 +856,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F2499F9E26218F4A00D6829A /* XCRemoteSwiftPackageReference "Highlightr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raspu/Highlightr.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F2499F9F26218F4A00D6829A /* Highlightr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2499F9E26218F4A00D6829A /* XCRemoteSwiftPackageReference "Highlightr" */;
+			productName = Highlightr;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F251997B261F26520037DA79 /* Project object */;
 }
