@@ -47,7 +47,7 @@ public struct InputByteStream {
     }
 
     public mutating func read(_ length: Int) -> ArraySlice<UInt8> {
-        let result = bytes[offset ..< offset + length]
+        let result = bytes[offset..<offset + length]
         offset += length
         return result
     }
@@ -70,7 +70,7 @@ public struct InputByteStream {
 
     mutating func readString() -> String {
         let length = Int(readVarUInt32())
-        let bytes = self.bytes[offset ..< offset + length]
+        let bytes = self.bytes[offset..<offset + length]
         let name = String(decoding: bytes, as: Unicode.ASCII.self)
         offset += length
         return name
@@ -89,7 +89,7 @@ public struct InputByteStream {
     mutating func readResultTypes() throws -> [ValueType] {
         let count = readVarUInt32()
         var resultTypes: [ValueType] = []
-        for _ in 0 ..< count {
+        for _ in 0..<count {
             let rawType = readUInt8()
             guard let type = ValueType(rawValue: rawType) else {
                 throw Error.invalidValueType(rawType)
@@ -105,7 +105,7 @@ public struct InputByteStream {
         let start = offset
         let length = Int(readVarUInt32())
         offset += length
-        try consumer?(bytes[start ..< offset])
+        try consumer?(bytes[start..<offset])
     }
 
 }

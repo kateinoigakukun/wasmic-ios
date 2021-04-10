@@ -1,6 +1,5 @@
 func decodeULEB128<T>(_ bytes: ArraySlice<UInt8>, _: T.Type) -> (value: T, offset: Int)
-    where T: UnsignedInteger, T: FixedWidthInteger
-{
+where T: UnsignedInteger, T: FixedWidthInteger {
     var index: Int = bytes.startIndex
     var value: T = 0
     var shift: UInt = 0
@@ -15,8 +14,7 @@ func decodeULEB128<T>(_ bytes: ArraySlice<UInt8>, _: T.Type) -> (value: T, offse
 }
 
 func decodeSLEB128<T>(_ bytes: ArraySlice<UInt8>, _: T.Type) -> (value: T, offset: Int)
-    where T: SignedInteger, T: FixedWidthInteger
-{
+where T: SignedInteger, T: FixedWidthInteger {
     var index: Int = bytes.startIndex
     var value: T = 0
     var shift: UInt = 0
@@ -34,8 +32,7 @@ func decodeSLEB128<T>(_ bytes: ArraySlice<UInt8>, _: T.Type) -> (value: T, offse
 }
 
 func encodeULEB128<T>(_ value: T, padTo: Int? = nil) -> [UInt8]
-    where T: UnsignedInteger, T: FixedWidthInteger
-{
+where T: UnsignedInteger, T: FixedWidthInteger {
     var value = value
     var length = 0
     var results: [UInt8] = []

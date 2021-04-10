@@ -5,8 +5,8 @@
 //  Created by kateinoigakukun on 2021/04/10.
 //
 
-import WasmicWasm
 import Foundation
+import WasmicWasm
 
 final class TextDocumentEngine {
     private let pipelineQueue = DispatchQueue(
@@ -30,7 +30,8 @@ final class TextDocumentEngine {
             }
 
             WebAssembly.compileWat(
-                fileName: fileName, content: watContent) { result in
+                fileName: fileName, content: watContent
+            ) { result in
                 DispatchQueue.main.async {
                     self.outputHandler?(.isCompiling(false))
                     switch result {

@@ -42,7 +42,6 @@ enum ConstOpcode: UInt8 {
     case f64Const = 0x44
 }
 
-
 public struct FuncSignature: Equatable, Hashable {
     public let params: [ValueType]
     public let results: [ValueType]
@@ -56,8 +55,6 @@ public struct FuncSignature: Equatable, Hashable {
 enum NameSectionSubsection: UInt8 {
     case function = 1
 }
-
-
 
 class Export {
     let kind: ExternalKind

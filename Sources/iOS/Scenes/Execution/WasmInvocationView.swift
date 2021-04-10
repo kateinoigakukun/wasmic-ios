@@ -20,9 +20,10 @@ struct WasmInvocationView: View {
         self.bytes = bytes
         self._exports = State(initialValue: exports)
         self._selected = State(initialValue: selected)
-        self._parameters = State(initialValue: Array(repeating: "", count: selected.signature.params.count))
+        self._parameters = State(
+            initialValue: Array(repeating: "", count: selected.signature.params.count))
     }
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -32,7 +33,8 @@ struct WasmInvocationView: View {
                             get: { selected },
                             set: { newSelection in
                                 self.selected = newSelection
-                                self.parameters = Array(repeating: "", count: newSelection.signature.params.count)
+                                self.parameters = Array(
+                                    repeating: "", count: newSelection.signature.params.count)
                             }
                         ),
                         label: Text("Function"),
@@ -58,17 +60,25 @@ struct WasmInvocationView: View {
                     }
                     Section {
                         Button("Run") { isExecuting = true }
-                        .disabled(parameters.contains(where: \.isEmpty))
+                            .disabled(parameters.contains(where: \.isEmpty))
                     }
                 }
             }
-            .sheet(isPresented: $isExecuting, content: { () -> WasmExecutionView in
-                let executor = WasmExecutor(function: selected.name, parameters: parameters, bytes: bytes)
-                return WasmExecutionView(executor: executor)
-            })
-            .navigationBarItems(trailing: Button("Done", action: {
-                presentationMode.wrappedValue.dismiss()
-            }))
+            .sheet(
+                isPresented: $isExecuting,
+                content: { () -> WasmExecutionView in
+                    let executor = WasmExecutor(
+                        function: selected.name, parameters: parameters, bytes: bytes)
+                    return WasmExecutionView(executor: executor)
+                }
+            )
+            .navigationBarItems(
+                trailing: Button(
+                    "Done",
+                    action: {
+                        presentationMode.wrappedValue.dismiss()
+                    })
+            )
             .navigationTitle("Invocation")
         }
     }
@@ -81,15 +91,16 @@ struct WasmInvocationView_Previews: PreviewProvider {
         0x66, 0x69, 0x62, 0x00, 0x00, 0x0a, 0x1f, 0x01, 0x1d, 0x00, 0x20, 0x00,
         0x41, 0x02, 0x49, 0x04, 0x40, 0x20, 0x00, 0x0f, 0x0b, 0x20, 0x00, 0x41,
         0x02, 0x6b, 0x10, 0x00, 0x20, 0x00, 0x41, 0x01, 0x6b, 0x10, 0x00, 0x6a,
-        0x0f, 0x0b
+        0x0f, 0x0b,
     ]
     static let exports = [
-        WebAssembly.Export(name: "foo", signature: FuncSignature(params: [.i32, .f32], results: [])),
+        WebAssembly.Export(
+            name: "foo", signature: FuncSignature(params: [.i32, .f32], results: [])),
         WebAssembly.Export(name: "bar", signature: FuncSignature(params: [.i32], results: [])),
-        WebAssembly.Export(name: "fizz", signature: FuncSignature(params: [.i64, .i32, .i32], results: [])),
+        WebAssembly.Export(
+            name: "fizz", signature: FuncSignature(params: [.i64, .i32, .i32], results: [])),
     ]
     static var previews: some View {
         WasmInvocationView(bytes: fibWasm, exports: exports, selected: exports.first!)
     }
 }
-

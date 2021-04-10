@@ -6,6 +6,7 @@
 //
 
 import XCTest
+
 @testable import WasmicWasm
 
 class WasmExecutorTests: XCTestCase {
@@ -15,7 +16,7 @@ class WasmExecutorTests: XCTestCase {
         0x66, 0x69, 0x62, 0x00, 0x00, 0x0a, 0x1f, 0x01, 0x1d, 0x00, 0x20, 0x00,
         0x41, 0x02, 0x49, 0x04, 0x40, 0x20, 0x00, 0x0f, 0x0b, 0x20, 0x00, 0x41,
         0x02, 0x6b, 0x10, 0x00, 0x20, 0x00, 0x41, 0x01, 0x6b, 0x10, 0x00, 0x6a,
-        0x0f, 0x0b
+        0x0f, 0x0b,
     ]
     func testExecute() throws {
         let input = "20"
@@ -28,26 +29,35 @@ class WasmExecutorTests: XCTestCase {
 
     func testCompileWat() throws {
         let wat = """
-        (module
-          (func (export "add") (param i32 i32) (result i32)
-            local.get 0
-            local.get 1
-            i32.add))
-        """
+            (module
+              (func (export "add") (param i32 i32) (result i32)
+                local.get 0
+                local.get 1
+                i32.add))
+            """
         WebAssembly.compileWat(fileName: "main.wat", content: wat) { result in
-            guard case let .success(bytes) = result else { XCTFail(); return }
+            guard case let .success(bytes) = result else {
+                XCTFail()
+                return
+            }
             XCTAssertTrue(bytes.starts(with: [0x00, 0x61, 0x73, 0x6d]))
         }
     }
 
     func testCompileError() throws {
         let wat = """
-        (module invalid)
-        """
+            (module invalid)
+            """
         WebAssembly.compileWat(fileName: "main.wat", content: wat) { result in
-            guard case let .failure(errors) = result else { XCTFail(); return }
+            guard case let .failure(errors) = result else {
+                XCTFail()
+                return
+            }
             XCTAssertEqual(errors.errors.count, 1)
-            guard let error = errors.errors.first else { XCTFail(); return }
+            guard let error = errors.errors.first else {
+                XCTFail()
+                return
+            }
             XCTAssertEqual(error.level, .error)
             XCTAssertEqual(error.location.fileName, "main.wat")
             XCTAssertEqual(error.location.line, 1)

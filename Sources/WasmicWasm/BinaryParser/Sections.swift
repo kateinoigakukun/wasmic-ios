@@ -12,7 +12,7 @@ public struct TypeSection {
 
     public init(from input: inout InputByteStream) throws {
         let count = input.readVarUInt32()
-        for _ in 0 ..< count {
+        for _ in 0..<count {
             let header = input.readUInt8()
             assert(header == 0x60)
             let params = try input.readResultTypes()
@@ -62,11 +62,11 @@ struct NameSection {
             let subsectionType = input.readUInt8()
             let subsectionSize = Int(input.readVarUInt32())
             let subsectionEnd = input.offset + subsectionSize
-            
+
             switch NameSectionSubsection(rawValue: subsectionType) {
             case .function:
                 let namesCount = input.readVarUInt32()
-                for _ in 0 ..< namesCount {
+                for _ in 0..<namesCount {
                     let funcIdx = Int(input.readVarUInt32())
                     let funcName = input.readString()
                     functionNames.append((funcIdx, funcName))

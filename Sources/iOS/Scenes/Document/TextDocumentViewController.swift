@@ -5,10 +5,10 @@
 //  Created by kateinoigakukun on 2021/04/09.
 //
 
-import UIKit
-import os.log
 import SwiftUI
+import UIKit
 import WasmicWasm
+import os.log
 
 /// - Tag: TextDocumentViewController
 class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocumentDelegate {

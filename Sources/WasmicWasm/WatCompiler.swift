@@ -38,9 +38,10 @@ extension WebAssembly {
         public let message: String
 
         internal static func copying(cError: wabt_c_api_error) -> CompilationError {
-            CompilationError(level: Level(cErrorLevel: cError.level),
-                             location: TextLocation.copying(cLoc: cError.loc),
-                             message: String(cString: cError.message))
+            CompilationError(
+                level: Level(cErrorLevel: cError.level),
+                location: TextLocation.copying(cLoc: cError.loc),
+                message: String(cString: cError.message))
         }
     }
 
@@ -48,8 +49,10 @@ extension WebAssembly {
         public let errors: [CompilationError]
     }
 
-    public static func compileWat(fileName: String, content: String,
-                                  handler: @escaping (Result<[UInt8], CompilationErrors>) -> Void) {
+    public static func compileWat(
+        fileName: String, content: String,
+        handler: @escaping (Result<[UInt8], CompilationErrors>) -> Void
+    ) {
         class Context {
             let handler: (Result<[UInt8], CompilationErrors>) -> Void
             init(handler: @escaping (Result<[UInt8], CompilationErrors>) -> Void) {
