@@ -27,6 +27,8 @@ class WasmExecutor: ObservableObject {
         case result([WebAssembly.Value])
     }
 
+    let function: String
+    let parameters: [String]
     let bytes: [UInt8]
     private let pipelineQueue = DispatchQueue(
         label: "dev.katei.Wasmic.executor-pipeline",
@@ -35,7 +37,13 @@ class WasmExecutor: ObservableObject {
 
     @Published var state: State?
 
-    init(bytes: [UInt8]) {
+    init(
+        function: String,
+        parameters: [String],
+        bytes: [UInt8]
+    ) {
+        self.function = function
+        self.parameters = parameters
         self.bytes = bytes
         self.state = nil
     }
@@ -44,10 +52,10 @@ class WasmExecutor: ObservableObject {
         pipelineQueue.async { [weak self] in
             guard let self = self else { return }
             do {
-                let input = "40"
-                let result = try input.withCString {
-                    try WebAssembly.execute(wasmBytes: self.bytes, function: "fib", args: [$0])
-                }
+                let args = self.parameters.map { $0.copyCString() }
+                defer { args.forEach { $0.deallocate() } }
+                let result =
+                    try WebAssembly.execute(wasmBytes: self.bytes, function: self.function, args: args)
                 DispatchQueue.main.async {
                     self.state = .result(result)
                 }
@@ -58,5 +66,15 @@ class WasmExecutor: ObservableObject {
                 }
             }
         }
+    }
+}
+
+fileprivate extension String {
+    func copyCString() -> UnsafePointer<CChar> {
+        let cString = utf8CString
+        let cStringCopy = UnsafeMutableBufferPointer<CChar>
+            .allocate(capacity: cString.count)
+        _ = cStringCopy.initialize(from: cString)
+        return UnsafePointer(cStringCopy.baseAddress!)
     }
 }

@@ -43,9 +43,14 @@ enum ConstOpcode: UInt8 {
 }
 
 
-public struct FuncSignature: Equatable {
+public struct FuncSignature: Equatable, Hashable {
     public let params: [ValueType]
     public let results: [ValueType]
+
+    public init(params: [ValueType], results: [ValueType]) {
+        self.params = params
+        self.results = results
+    }
 }
 
 enum NameSectionSubsection: UInt8 {

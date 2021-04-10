@@ -8,6 +8,7 @@
 import UIKit
 import os.log
 import SwiftUI
+import WasmicWasm
 
 /// - Tag: TextDocumentViewController
 class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocumentDelegate {
@@ -88,7 +89,8 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
         textView.delegate = self
 
-        engine.outputHandler = { [runButton] output in
+        engine.outputHandler = { [weak self, runButton] output in
+            guard let self = self else { return }
             switch output {
             case .isCompiling(true):
                 let indicator = UIActivityIndicatorView(style: .medium)
@@ -98,6 +100,10 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             case .isCompiling(false):
                 runButton.customView = nil
                 runButton.isEnabled = true
+            case .presentInvocationSelector(let bytes, let exports, let first):
+                let view = WasmInvocationView(bytes: bytes, exports: exports, selected: first)
+                let vc = UIHostingController(rootView: view)
+                self.present(vc, animated: true)
             case .handleError(let errors):
                 // TODO: Display inline errors
                 print(errors)
@@ -144,13 +150,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     @objc func presentExecution(_ sender: Any) {
         let fileName = document.fileURL.lastPathComponent
-        engine.compile(fileName: fileName, watContent: document.text) { [weak self] bytes in
-            guard let self = self else { return }
-            let executor = WasmExecutor(bytes: bytes)
-            let view = WasmExecutionView(executor: executor)
-            let vc = UIHostingController(rootView: view)
-            self.present(vc, animated: true)
-        }
+        engine.compile(fileName: fileName, watContent: document.text)
     }
 
     // MARK: - UITextViewDelegate

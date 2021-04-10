@@ -29,7 +29,7 @@
 		F2499EEF2620B6C400D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
 		F2499EF02620B6C400D6829A /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; };
 		F2499F062621304B00D6829A /* TextDocumentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F052621304B00D6829A /* TextDocumentEngine.swift */; };
-		F2499F0C262137A600D6829A /* FunctionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F0B262137A600D6829A /* FunctionSelector.swift */; };
+		F2499F0C262137A600D6829A /* WasmInvocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F0B262137A600D6829A /* WasmInvocationView.swift */; };
 		F2499F1726213A8000D6829A /* InterfaceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F1126213A7B00D6829A /* InterfaceParser.swift */; };
 		F2499F3126213BA400D6829A /* BinaryFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F3026213BA400D6829A /* BinaryFormat.swift */; };
 		F2499F3B26213BD500D6829A /* InputByteStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F3A26213BD500D6829A /* InputByteStream.swift */; };
@@ -90,7 +90,7 @@
 		F2499EAF2620B43100D6829A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2499EC62620B50500D6829A /* WatCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatCompiler.swift; sourceTree = "<group>"; };
 		F2499F052621304B00D6829A /* TextDocumentEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDocumentEngine.swift; sourceTree = "<group>"; };
-		F2499F0B262137A600D6829A /* FunctionSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionSelector.swift; sourceTree = "<group>"; };
+		F2499F0B262137A600D6829A /* WasmInvocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmInvocationView.swift; sourceTree = "<group>"; };
 		F2499F1126213A7B00D6829A /* InterfaceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceParser.swift; sourceTree = "<group>"; };
 		F2499F3026213BA400D6829A /* BinaryFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFormat.swift; sourceTree = "<group>"; };
 		F2499F3A26213BD500D6829A /* InputByteStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputByteStream.swift; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				F2499E5E2620587500D6829A /* WasmExecutionView.swift */,
-				F2499F0B262137A600D6829A /* FunctionSelector.swift */,
+				F2499F0B262137A600D6829A /* WasmInvocationView.swift */,
 			);
 			path = Execution;
 			sourceTree = "<group>";
@@ -491,7 +491,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2499F0C262137A600D6829A /* FunctionSelector.swift in Sources */,
+				F2499F0C262137A600D6829A /* WasmInvocationView.swift in Sources */,
 				F2499DE5261F5B9500D6829A /* DocumentBrowserViewController.swift in Sources */,
 				F2499D9F261F4BB400D6829A /* AppDelegate.swift in Sources */,
 				F2499DEE261FDFBD00D6829A /* TextDocumentViewController.swift in Sources */,

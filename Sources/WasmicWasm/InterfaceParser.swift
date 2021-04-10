@@ -7,9 +7,14 @@
 
 extension WebAssembly {
 
-    public struct Export {
+    public struct Export: Equatable, Hashable {
         public let name: String
         public let signature: FuncSignature
+
+        public init(name: String, signature: FuncSignature) {
+            self.name = name
+            self.signature = signature
+        }
     }
     public enum ParsingError: Swift.Error {
         case invalidIndex(Int, String)
