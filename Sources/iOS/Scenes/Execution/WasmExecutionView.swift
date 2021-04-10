@@ -41,9 +41,19 @@ class WasmExecutionViewController: UIViewController {
     }()
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
-            barButtonSystemItem: .close,
+            barButtonSystemItem: .cancel,
             target: self, action: #selector(dismissPresentation))
         return button
+    }()
+    private lazy var actionButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self, action: #selector(showActionSheet))
+        return button
+    }()
+    private lazy var execctingView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        return indicator
     }()
     let dismissAction: () -> Void
     var cancellables: [AnyCancellable] = []
@@ -64,7 +74,9 @@ class WasmExecutionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Execution"
         navigationItem.leftBarButtonItem = doneButton
+        navigationItem.rightBarButtonItem = actionButton
         executor.objectWillChange.sink { [weak self] in
             self?.view.setNeedsLayout()
         }
@@ -73,6 +85,16 @@ class WasmExecutionViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        let isExecuting = executor.state == .executing
+        if isExecuting != execctingView.isAnimating {
+            if isExecuting {
+                actionButton.customView = execctingView
+                execctingView.startAnimating()
+            } else {
+                actionButton.customView = nil
+                execctingView.stopAnimating()
+            }
+        }
         textView.text = executor.output
     }
 
@@ -83,10 +105,16 @@ class WasmExecutionViewController: UIViewController {
     @objc private func dismissPresentation() {
         self.dismissAction()
     }
+    @objc private func showActionSheet() {
+        let activityViewController = UIActivityViewController(activityItems: [
+            executor.output
+        ], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
+    }
 }
 
 class WasmExecutor: ObservableObject {
-    enum State {
+    enum State: Equatable {
         case executing
         case failed(String)
         case result([WebAssembly.Value])
@@ -100,11 +128,11 @@ class WasmExecutor: ObservableObject {
         qos: .default
     )
 
-    var state: State? {
+    @Published var state: State? {
         didSet {
             switch state {
             case .executing:
-                output += "Executing..."
+                break
             case .failed(let error):
                 output += "Execution Failed: \(error)"
             case .result(let results):
@@ -131,6 +159,9 @@ class WasmExecutor: ObservableObject {
         guard state == nil else { return }
         pipelineQueue.async { [weak self] in
             guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.state = .executing
+            }
             do {
                 let args = self.arguments.map { $0.copyCString() }
                 defer { args.forEach { $0.deallocate() } }
