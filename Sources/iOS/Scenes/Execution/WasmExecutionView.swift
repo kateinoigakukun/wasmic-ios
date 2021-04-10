@@ -20,10 +20,6 @@ struct WasmExecutionView: View {
 }
 
 class WasmExecutor: ObservableObject {
-    enum Input {
-        case wat(fileName: String, content: String)
-    }
-
     enum State {
         case compiling
         case executing
@@ -31,7 +27,7 @@ class WasmExecutor: ObservableObject {
         case result([WebAssembly.Value])
     }
 
-    let input: Input
+    let bytes: [UInt8]
     private let pipelineQueue = DispatchQueue(
         label: "dev.katei.Wasmic.executor-pipeline",
         qos: .default
@@ -39,37 +35,28 @@ class WasmExecutor: ObservableObject {
 
     @Published var state: State?
 
-    init(input: WasmExecutor.Input) {
-        self.input = input
+    init(bytes: [UInt8]) {
+        self.bytes = bytes
         self.state = nil
     }
 
     func startPipeline() {
         pipelineQueue.async { [weak self] in
             guard let self = self else { return }
-            self.produceWasmBytes { bytes in
-                do {
-                    let input = "40"
-                    let result = try input.withCString {
-                        try WebAssembly.execute(wasmBytes: bytes, function: "fib", args: [$0])
-                    }
-                    DispatchQueue.main.async {
-                        self.state = .result(result)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        // FIXME
-                        self.state = .failed(String(describing: error))
-                    }
+            do {
+                let input = "40"
+                let result = try input.withCString {
+                    try WebAssembly.execute(wasmBytes: self.bytes, function: "fib", args: [$0])
+                }
+                DispatchQueue.main.async {
+                    self.state = .result(result)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    // FIXME
+                    self.state = .failed(String(describing: error))
                 }
             }
-        }
-    }
-
-    func produceWasmBytes(_ handler: @escaping ([UInt8]) -> Void) {
-        switch self.input {
-        case let .wat(fileName, content):
-            WebAssembly.compileWat(fileName: fileName, content: content, handler: handler)
         }
     }
 }

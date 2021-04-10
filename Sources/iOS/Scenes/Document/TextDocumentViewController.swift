@@ -1,5 +1,5 @@
 //
-//  WasmDocumentViewController.swift
+//  TextDocumentViewController.swift
 //  Wasmic
 //
 //  Created by kateinoigakukun on 2021/04/09.
@@ -7,10 +7,9 @@
 
 import UIKit
 import os.log
-import wasm3
 import SwiftUI
 
-/// - Tag: textDocumentViewController
+/// - Tag: TextDocumentViewController
 class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocumentDelegate {
 
     private(set) lazy var textView: UITextView = {
@@ -48,8 +47,11 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     private let document: TextDocument
 
+    private let engine: TextDocumentEngine
+
     init(document: TextDocument) {
         self.document = document
+        self.engine = TextDocumentEngine()
         super.init(nibName: nil, bundle: nil)
         self.document.delegate = self
     }
@@ -85,6 +87,22 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         ])
 
         textView.delegate = self
+
+        engine.outputHandler = { [runButton] output in
+            switch output {
+            case .isCompiling(true):
+                let indicator = UIActivityIndicatorView(style: .medium)
+                runButton.customView = indicator
+                indicator.startAnimating()
+                runButton.isEnabled = false
+            case .isCompiling(false):
+                runButton.customView = nil
+                runButton.isEnabled = true
+            case .handleError(let errors):
+                // TODO: Display inline errors
+                print(errors)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -125,11 +143,14 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     }
 
     @objc func presentExecution(_ sender: Any) {
-        let executor = WasmExecutor(
-            input: .wat(fileName: document.fileURL.lastPathComponent, content: document.text))
-        let view = WasmExecutionView(executor: executor)
-        let vc = UIHostingController(rootView: view)
-        present(vc, animated: true)
+        let fileName = document.fileURL.lastPathComponent
+        engine.compile(fileName: fileName, watContent: document.text) { [weak self] bytes in
+            guard let self = self else { return }
+            let executor = WasmExecutor(bytes: bytes)
+            let view = WasmExecutionView(executor: executor)
+            let vc = UIHostingController(rootView: view)
+            self.present(vc, animated: true)
+        }
     }
 
     // MARK: - UITextViewDelegate
