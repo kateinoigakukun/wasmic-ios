@@ -99,5 +99,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 </dict>
 </plist>
