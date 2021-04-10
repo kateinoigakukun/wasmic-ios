@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F2499D91261F466C00D6829A /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; };
 		F2499D9F261F4BB400D6829A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499D9E261F4BB400D6829A /* AppDelegate.swift */; };
 		F2499DBF261F4ED400D6829A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DBE261F4ED400D6829A /* SceneDelegate.swift */; };
 		F2499DE5261F5B9500D6829A /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DE4261F5B9500D6829A /* DocumentBrowserViewController.swift */; };
@@ -15,7 +14,6 @@
 		F2499DEE261FDFBD00D6829A /* TextDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DED261FDFBD00D6829A /* TextDocumentViewController.swift */; };
 		F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */; };
 		F2499DFE2620293300D6829A /* WatDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499DFD2620293300D6829A /* WatDocument.swift */; };
-		F2499E532620382E00D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
 		F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E5E2620587500D6829A /* WasmExecutionView.swift */; };
 		F2499E712620A58F00D6829A /* WasmicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E702620A58F00D6829A /* WasmicTests.swift */; };
 		F2499E7F2620A83300D6829A /* WasmExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499E7E2620A83300D6829A /* WasmExecutorTests.swift */; };
@@ -48,6 +46,7 @@
 		F249A10C2621CA3C00D6829A /* libWasmicWasm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E9D2620B40900D6829A /* libWasmicWasm.a */; };
 		F249A13C2621CB2600D6829A /* WasmicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; };
 		F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A1472621CB9900D6829A /* WasmicKit.swift */; };
+		F249A18D2621CE3500D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -218,6 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F249A18D2621CE3500D6829A /* wabt.xcframework in Frameworks */,
 				F249A10C2621CA3C00D6829A /* libWasmicWasm.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,8 +228,6 @@
 			files = (
 				F249A0C02621C90600D6829A /* WasmicKit.framework in Frameworks */,
 				F2499FA026218F4A00D6829A /* Highlightr in Frameworks */,
-				F2499E532620382E00D6829A /* wabt.xcframework in Frameworks */,
-				F2499D91261F466C00D6829A /* wasm3.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
