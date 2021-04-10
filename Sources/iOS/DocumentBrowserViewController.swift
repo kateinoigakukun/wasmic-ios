@@ -87,9 +87,9 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         error: Error?
     ) {
         let prefixDescription = NSLocalizedString("ErrorImportDescription", comment: "")
-        var description = ""
-        if error?.localizedDescription != nil {
-            description = error!.localizedDescription
+        let description: String
+        if let error = error {
+            description = error.localizedDescription
         } else {
             description = NSLocalizedString("ErrorImportNoDescription", comment: "")
         }
