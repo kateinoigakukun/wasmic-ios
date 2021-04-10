@@ -104,6 +104,7 @@
 		F2499FC62621A15E00D6829A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2499FCC2621A17F00D6829A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		F249A05F2621C3B200D6829A /* WasmicDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicDebug.entitlements; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +306,7 @@
 		F2519989261F26530037DA79 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F249A05F2621C3B200D6829A /* WasmicDebug.entitlements */,
 				F251998A261F26530037DA79 /* Info.plist */,
 				F2499D9E261F4BB400D6829A /* AppDelegate.swift */,
 				F2499DBE261F4ED400D6829A /* SceneDelegate.swift */,
@@ -789,6 +791,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WasmicDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				ENABLE_PREVIEWS = YES;
