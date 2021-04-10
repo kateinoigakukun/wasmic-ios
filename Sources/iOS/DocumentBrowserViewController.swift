@@ -86,21 +86,21 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         _ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL,
         error: Error?
     ) {
-        let prefixDescription = NSLocalizedString("ErrorImportDescription", comment: "")
+        let prefixDescription = NSLocalizedString("alert.ok.import-error.description", comment: "")
         let description: String
         if let error = error {
             description = error.localizedDescription
         } else {
-            description = NSLocalizedString("ErrorImportNoDescription", comment: "")
+            description = NSLocalizedString("alert.ok.import-error.no-description", comment: "")
         }
         let message = String(format: "%@ %@", prefixDescription, description)
 
         let alert = UIAlertController(
-            title: NSLocalizedString("ErrorImportTitle", comment: ""),
+            title: NSLocalizedString("alert.import-error.title", comment: ""),
             message: message,
             preferredStyle: .alert)
         let action = UIAlertAction(
-            title: NSLocalizedString("OKTitle", comment: ""),
+            title: NSLocalizedString("alert.ok", comment: ""),
             style: .cancel,
             handler: nil)
         alert.addAction(action)

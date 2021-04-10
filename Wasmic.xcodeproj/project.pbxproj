@@ -37,6 +37,7 @@
 		F2499F4726213C2500D6829A /* LEB128.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F4626213C2500D6829A /* LEB128.swift */; };
 		F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F5A2621696800D6829A /* WasmicBrand.swift */; };
 		F2499FA026218F4A00D6829A /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = F2499F9F26218F4A00D6829A /* Highlightr */; };
+		F2499FC52621A15E00D6829A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2499FC72621A15E00D6829A /* Localizable.strings */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,8 @@
 		F2499F4026213BF500D6829A /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		F2499F4626213C2500D6829A /* LEB128.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEB128.swift; sourceTree = "<group>"; };
 		F2499F5A2621696800D6829A /* WasmicBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicBrand.swift; sourceTree = "<group>"; };
+		F2499FC62621A15E00D6829A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F2499FCC2621A17F00D6829A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +308,7 @@
 				F2499DBE261F4ED400D6829A /* SceneDelegate.swift */,
 				F2499DE4261F5B9500D6829A /* DocumentBrowserViewController.swift */,
 				F2499F5A2621696800D6829A /* WasmicBrand.swift */,
+				F2499FC72621A15E00D6829A /* Localizable.strings */,
 				F2499DF62620261100D6829A /* Scenes */,
 				F2499DFB2620291600D6829A /* DocumentTypes */,
 				F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */,
@@ -422,6 +426,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = F251997A261F26520037DA79;
 			packageReferences = (
@@ -459,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25199AD261F26530037DA79 /* Assets.xcassets in Resources */,
+				F2499FC52621A15E00D6829A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +535,18 @@
 			targetProxy = F2499EB12620B43100D6829A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F2499FC72621A15E00D6829A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2499FC62621A15E00D6829A /* en */,
+				F2499FCC2621A17F00D6829A /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F2499E762620A58F00D6829A /* Debug */ = {
@@ -650,6 +668,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -710,6 +729,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -774,7 +794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.Wasmic;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.wasmic;
 				PRODUCT_NAME = Wasmic;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -798,7 +818,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.Wasmic;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.wasmic;
 				PRODUCT_NAME = Wasmic;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;

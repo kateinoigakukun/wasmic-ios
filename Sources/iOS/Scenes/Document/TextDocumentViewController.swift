@@ -227,12 +227,12 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     func textDocumentSaveFailed(_ doc: TextDocument) {
         let alert = UIAlertController(
-            title: NSLocalizedString("SaveErrorTitle", comment: ""),
-            message: NSLocalizedString("SaveErrorTitleMessage", comment: ""),
+            title: NSLocalizedString("save-error.title", comment: ""),
+            message: NSLocalizedString("save-error.message", comment: ""),
             preferredStyle: .alert)
 
         let dismiss = UIAlertAction(
-            title: NSLocalizedString("OKTitle", comment: ""), style: .default)
+            title: NSLocalizedString("alert.ok", comment: ""), style: .default)
         alert.addAction(dismiss)
 
         present(alert, animated: true, completion: nil)

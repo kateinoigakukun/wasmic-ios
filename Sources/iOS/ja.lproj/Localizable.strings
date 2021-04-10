@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Wasmic
+
+  Created by kateinoigakukun on 2021/04/10.
+  
+*/
+
+"alert.ok" = "OK";
+"alert.import-error.title" = "ドキュメントをインポートできませんでした";
+"alert.ok.import-error.description" = "ドキュメントのインポート中にエラーが発生しました";
+"alert.ok.import-error.no-description" = "";
+
+"save-error.title" = "保存エラー";
+"save-error.message" = "ドキュメントを保存が失敗しました";
