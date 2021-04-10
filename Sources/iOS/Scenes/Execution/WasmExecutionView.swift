@@ -93,7 +93,7 @@ class WasmExecutor: ObservableObject {
     }
 
     let function: String
-    let parameters: [String]
+    let arguments: [String]
     let bytes: [UInt8]
     private let pipelineQueue = DispatchQueue(
         label: "dev.katei.Wasmic.executor-pipeline",
@@ -118,11 +118,11 @@ class WasmExecutor: ObservableObject {
 
     init(
         function: String,
-        parameters: [String],
+        arguments: [String],
         bytes: [UInt8]
     ) {
         self.function = function
-        self.parameters = parameters
+        self.arguments = arguments
         self.bytes = bytes
         self.state = nil
     }
@@ -132,7 +132,7 @@ class WasmExecutor: ObservableObject {
         pipelineQueue.async { [weak self] in
             guard let self = self else { return }
             do {
-                let args = self.parameters.map { $0.copyCString() }
+                let args = self.arguments.map { $0.copyCString() }
                 defer { args.forEach { $0.deallocate() } }
                 let result =
                     try WebAssembly.execute(

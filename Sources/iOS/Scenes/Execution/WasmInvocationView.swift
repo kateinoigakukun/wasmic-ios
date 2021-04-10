@@ -21,7 +21,7 @@ class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
 struct WasmInvocationView: View {
     @State var exports: [WebAssembly.Export]
     @State var selected: WebAssembly.Export
-    @State var parameters: [String] = []
+    @State var arguments: [String] = []
     @State var isExecuting: Bool = false
     @Environment(\.presentationMode) var presentationMode
     let bytes: [UInt8]
@@ -30,7 +30,7 @@ struct WasmInvocationView: View {
         self.bytes = bytes
         self._exports = State(initialValue: exports)
         self._selected = State(initialValue: selected)
-        self._parameters = State(
+        self._arguments = State(
             initialValue: Array(repeating: "", count: selected.signature.params.count))
     }
 
@@ -42,7 +42,7 @@ struct WasmInvocationView: View {
                         get: { selected },
                         set: { newSelection in
                             self.selected = newSelection
-                            self.parameters = Array(
+                            self.arguments = Array(
                                 repeating: "", count: newSelection.signature.params.count)
                         }
                     ),
@@ -54,14 +54,14 @@ struct WasmInvocationView: View {
                     }
                 )
             }
-            if selected.signature.params.count == parameters.count {
+            if selected.signature.params.count == arguments.count {
                 Section {
-                    ForEach(0..<parameters.count, id: \.self) { idx in
+                    ForEach(0..<arguments.count, id: \.self) { idx in
                         let param = selected.signature.params[idx]
                         HStack {
                             TextField(
-                                "Parameter #\(idx) (\(String(describing: param)))",
-                                text: $parameters[idx]
+                                "Argument #\(idx) (\(String(describing: param)))",
+                                text: $arguments[idx]
                             )
                             .keyboardType(.numberPad)
                         }
@@ -69,7 +69,7 @@ struct WasmInvocationView: View {
                 }
                 Section {
                     Button("Run") { isExecuting = true }
-                        .disabled(parameters.contains(where: \.isEmpty))
+                        .disabled(arguments.contains(where: \.isEmpty))
                 }
             }
         }
@@ -77,7 +77,7 @@ struct WasmInvocationView: View {
             isPresented: $isExecuting,
             content: { () -> AnyView in
                 let executor = WasmExecutor(
-                    function: selected.name, parameters: parameters, bytes: bytes)
+                    function: selected.name, arguments: arguments, bytes: bytes)
                 return AnyView(
                     WasmExecutionView(executor: executor)
                         .background(Color.black)
