@@ -34,8 +34,26 @@ class WasmExecutorTests: XCTestCase {
             local.get 1
             i32.add))
         """
-        WebAssembly.compileWat(fileName: "main.wat", content: wat) { bytes in
+        WebAssembly.compileWat(fileName: "main.wat", content: wat) { result in
+            guard case let .success(bytes) = result else { XCTFail(); return }
             XCTAssertTrue(bytes.starts(with: [0x00, 0x61, 0x73, 0x6d]))
+        }
+    }
+
+    func testCompileError() throws {
+        let wat = """
+        (module invalid)
+        """
+        WebAssembly.compileWat(fileName: "main.wat", content: wat) { result in
+            guard case let .failure(errors) = result else { XCTFail(); return }
+            XCTAssertEqual(errors.errors.count, 1)
+            guard let error = errors.errors.first else { XCTFail(); return }
+            XCTAssertEqual(error.level, .error)
+            XCTAssertEqual(error.location.fileName, "main.wat")
+            XCTAssertEqual(error.location.line, 1)
+            XCTAssertEqual(error.location.firstColumn, 9)
+            XCTAssertEqual(error.location.lastColumn, 16)
+            XCTAssertEqual(error.message, "unexpected token \"invalid\", expected a module field.")
         }
     }
 }

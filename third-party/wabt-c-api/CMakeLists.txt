@@ -30,7 +30,8 @@ ExternalProject_Get_property(wabt BINARY_DIR)
 target_include_directories(wabt-c-api
     PRIVATE
         ${SOURCE_DIR}
-        ${BINARY_DIR})
+        ${BINARY_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_dependencies(wabt-c-api wabt)
 
 find_program(LLVM_AR NAMES llvm-ar)
