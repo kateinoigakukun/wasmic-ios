@@ -16,7 +16,8 @@ final class TextDocumentEngine {
 
     enum Output {
         case isCompiling(Bool)
-        case handleError([WebAssembly.CompilationError])
+        case handleCompilationError([WebAssembly.CompilationError])
+        case handleBinaryParsingError(Error)
         case presentInvocationSelector([UInt8], [WebAssembly.Export], WebAssembly.Export)
     }
 
@@ -36,19 +37,21 @@ final class TextDocumentEngine {
                     self.outputHandler?(.isCompiling(false))
                     switch result {
                     case .success(let bytes):
-                        self.outputHandler?(.handleError([]))
+                        self.outputHandler?(.handleCompilationError([]))
                         let exports: [WebAssembly.Export]
                         do {
                             exports = try WebAssembly.getExported(wasmBytes: bytes)
                         } catch {
-                            print(error)
+                            self.outputHandler?(.handleBinaryParsingError(error))
                             exports = []
                         }
                         if let first = exports.first {
                             self.outputHandler?(.presentInvocationSelector(bytes, exports, first))
+                        } else {
+                            // TODO: Report no-exported function error
                         }
                     case .failure(let errors):
-                        self.outputHandler?(.handleError(errors.errors))
+                        self.outputHandler?(.handleCompilationError(errors.errors))
                     }
                 }
             }

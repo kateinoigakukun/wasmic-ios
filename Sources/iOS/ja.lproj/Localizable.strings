@@ -6,6 +6,7 @@
   
 */
 
+"error.title" = "エラー";
 "alert.ok" = "OK";
 "alert.import-error.title" = "ドキュメントをインポートできませんでした";
 "alert.ok.import-error.description" = "ドキュメントのインポート中にエラーが発生しました";
@@ -13,3 +14,9 @@
 
 "save-error.title" = "保存エラー";
 "save-error.message" = "ドキュメントを保存が失敗しました";
+
+"binary-error.title" = "不正なバイナリ";
+
+"open-error.title" = "ファイルが開けません";
+
+"no-export-error.message" = "エクスポートされている関数がありません";

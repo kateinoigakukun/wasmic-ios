@@ -12,9 +12,16 @@ class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
     init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export) {
         super.init(rootView: WasmInvocationView(bytes: bytes, exports: exports, selected: selected))
         self.title = "Invocation"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close, target: self,
+            action: #selector(self.dismissPresenting))
     }
     @objc required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc func dismissPresenting(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
 

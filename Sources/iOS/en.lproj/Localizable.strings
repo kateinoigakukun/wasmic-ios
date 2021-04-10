@@ -6,6 +6,7 @@
   
 */
 
+"error.title" = "Error";
 "alert.ok" = "OK";
 "alert.import-error.title" = "Unable to Import Document";
 "alert.ok.import-error.description" = "An error occurred while trying to import a document:";
@@ -13,3 +14,9 @@
 
 "save-error.title" = "Save Error";
 "save-error.message" = "An attempt to save the document failed";
+
+"binary-error.title" = "Invalid Binary";
+
+"open-error.title" = "Open Error";
+
+"no-export-error.message" = "No exported function";

@@ -63,8 +63,6 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
 
     private let engine: TextDocumentEngine
 
-    private var presentingInvocator: UIViewController?
-
     init(document: TextDocument) {
         self.document = document
         self.engine = TextDocumentEngine()
@@ -121,14 +119,22 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
                 let vc = WasmInvocationViewController(
                     bytes: bytes, exports: exports, selected: first)
                 let nav = UINavigationController(rootViewController: vc)
-                self.presentingInvocator = nav
-                vc.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                    barButtonSystemItem: .close, target: self,
-                    action: #selector(self.dismissPresenting))
                 self.present(nav, animated: true)
-            case .handleError(let errors):
+            case .handleCompilationError(let errors):
                 // TODO: Display inline errors
                 print(errors)
+            case .handleBinaryParsingError(let error):
+                // TODO: User-friendly error message
+                let alert = UIAlertController(
+                    title: NSLocalizedString("binary-error.title", comment: ""),
+                    message: error.localizedDescription,
+                    preferredStyle: .alert)
+
+                let dismiss = UIAlertAction(
+                    title: NSLocalizedString("alert.ok", comment: ""), style: .default)
+                alert.addAction(dismiss)
+
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -179,10 +185,6 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         engine.compile(fileName: fileName, watContent: document.text)
     }
 
-    @objc func dismissPresenting(_ sender: Any) {
-        presentingInvocator?.dismiss(animated: true, completion: nil)
-        presentingInvocator = nil
-    }
 
     // MARK: - UITextViewDelegate
 

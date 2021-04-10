@@ -7,6 +7,7 @@
 
 import UIKit
 import os.log
+import WasmicWasm
 
 /// - Tag: DocumentBrowserViewController
 class DocumentBrowserViewController: UIDocumentBrowserViewController,
@@ -79,7 +80,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
             sourceURL.path,
             destinationURL.path)
 
-        presentDocument(at: destinationURL)
+        presentTextDocument(at: destinationURL)
     }
 
     func documentBrowser(
@@ -93,27 +94,22 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         } else {
             description = NSLocalizedString("alert.ok.import-error.no-description", comment: "")
         }
-        let message = String(format: "%@ %@", prefixDescription, description)
-
-        let alert = UIAlertController(
-            title: NSLocalizedString("alert.import-error.title", comment: ""),
-            message: message,
-            preferredStyle: .alert)
-        let action = UIAlertAction(
-            title: NSLocalizedString("alert.ok", comment: ""),
-            style: .cancel,
-            handler: nil)
-        alert.addAction(action)
-
-        controller.present(alert, animated: true, completion: nil)
+        reportError(title: NSLocalizedString("alert.import-error.title", comment: ""),
+                    message: String(format: "%@ %@", prefixDescription, description))
     }
 
     // UIDocumentBrowserViewController is telling us to open a selected a document.
     func documentBrowser(
         _ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]
     ) {
-        if let url = documentURLs.first {
-            presentDocument(at: url)
+        guard let url = documentURLs.first else { return }
+        switch url.pathExtension {
+        case "wat":
+            presentTextDocument(at: url)
+        case "wasm":
+            presentInvocation(for: url)
+        default:
+            break
         }
     }
 
@@ -121,7 +117,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
 
     var transitionController: UIDocumentBrowserTransitionController?
 
-    func presentDocument(at documentURL: URL) {
+    func presentTextDocument(at documentURL: URL) {
         let doc = TextDocument(fileURL: documentURL)
 
         let documentViewController = TextDocumentViewController(document: doc)
@@ -155,6 +151,36 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         })
     }
 
+    func presentInvocation(for documentURL: URL) {
+        do {
+            let bytes = Array(try Data(contentsOf: documentURL))
+            let exports = try WebAssembly.getExported(wasmBytes: bytes)
+            if let first = exports.first {
+                let vc = WasmInvocationViewController(
+                    bytes: bytes, exports: exports, selected: first)
+                let nav = UINavigationController(rootViewController: vc)
+                self.present(nav, animated: true)
+            } else {
+                reportError(title: NSLocalizedString("error.title", comment: ""),
+                            message: NSLocalizedString("no-export-error.message", comment: ""))
+            }
+        } catch {
+            reportError(title: NSLocalizedString("open-error.title", comment: ""),
+                        message: error.localizedDescription)
+        }
+    }
+
+    private func reportError(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title, message: message,
+            preferredStyle: .alert)
+
+        let dismiss = UIAlertAction(
+            title: NSLocalizedString("alert.ok", comment: ""), style: .default)
+        alert.addAction(dismiss)
+
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension DocumentBrowserViewController: UIViewControllerTransitioningDelegate {
