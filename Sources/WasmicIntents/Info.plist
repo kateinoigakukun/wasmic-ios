@@ -28,9 +28,7 @@
 			<array/>
 			<key>IntentsSupported</key>
 			<array>
-				<string>INSendMessageIntent</string>
-				<string>INSearchForMessagesIntent</string>
-				<string>INSetMessageAttributeIntent</string>
+				<string>RunWasmFile</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
