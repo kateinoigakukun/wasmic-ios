@@ -22,8 +22,8 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         if #available(iOS 13.0, *) {
             textView.usesStandardTextScaling = true
         }
-        let font = UIFont(name: "Menlo-Regular", size: 14)!
-        textView.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font)
+        textView.font = UIFontMetrics(forTextStyle: .body)
+            .scaledFont(for: Brand.codeFont)
         textView.adjustsFontForContentSizeCategory = true
         return textView
     }()
@@ -49,6 +49,8 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     private let document: TextDocument
 
     private let engine: TextDocumentEngine
+
+    private var presentingInvocator: UIViewController?
 
     init(document: TextDocument) {
         self.document = document
@@ -101,9 +103,14 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
                 runButton.customView = nil
                 runButton.isEnabled = true
             case .presentInvocationSelector(let bytes, let exports, let first):
-                let view = WasmInvocationView(bytes: bytes, exports: exports, selected: first)
-                let vc = UIHostingController(rootView: view)
-                self.present(vc, animated: true)
+                let vc = WasmInvocationViewController(
+                    bytes: bytes, exports: exports, selected: first)
+                let nav = UINavigationController(rootViewController: vc)
+                self.presentingInvocator = nav
+                vc.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                    barButtonSystemItem: .close, target: self,
+                    action: #selector(self.dismissPresenting))
+                self.present(nav, animated: true)
             case .handleError(let errors):
                 // TODO: Display inline errors
                 print(errors)
@@ -144,13 +151,17 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     // MARK: - Action Methods
 
     @objc func returnToDocuments(_ sender: Any) {
-        // Dismiss this view controller.
         dismiss(animated: true, completion: nil)
     }
 
     @objc func presentExecution(_ sender: Any) {
         let fileName = document.fileURL.lastPathComponent
         engine.compile(fileName: fileName, watContent: document.text)
+    }
+
+    @objc func dismissPresenting(_ sender: Any) {
+        presentingInvocator?.dismiss(animated: true, completion: nil)
+        presentingInvocator = nil
     }
 
     // MARK: - UITextViewDelegate

@@ -8,6 +8,16 @@
 import SwiftUI
 import WasmicWasm
 
+class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
+    init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export) {
+        super.init(rootView: WasmInvocationView(bytes: bytes, exports: exports, selected: selected))
+        self.title = "Invocation"
+    }
+    @objc required dynamic init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 struct WasmInvocationView: View {
     @State var exports: [WebAssembly.Export]
     @State var selected: WebAssembly.Export
@@ -25,62 +35,55 @@ struct WasmInvocationView: View {
     }
 
     var body: some View {
-        NavigationView {
-            Form {
+        Form {
+            Section {
+                Picker(
+                    selection: Binding(
+                        get: { selected },
+                        set: { newSelection in
+                            self.selected = newSelection
+                            self.parameters = Array(
+                                repeating: "", count: newSelection.signature.params.count)
+                        }
+                    ),
+                    label: Text("Function"),
+                    content: {
+                        ForEach(exports, id: \.self) { export in
+                            Text(export.name)
+                        }
+                    }
+                )
+            }
+            if selected.signature.params.count == parameters.count {
                 Section {
-                    Picker(
-                        selection: Binding(
-                            get: { selected },
-                            set: { newSelection in
-                                self.selected = newSelection
-                                self.parameters = Array(
-                                    repeating: "", count: newSelection.signature.params.count)
-                            }
-                        ),
-                        label: Text("Function"),
-                        content: {
-                            ForEach(exports, id: \.self) { export in
-                                Text(export.name)
-                            }
+                    ForEach(0..<parameters.count, id: \.self) { idx in
+                        let param = selected.signature.params[idx]
+                        HStack {
+                            TextField(
+                                "Parameter #\(idx) (\(String(describing: param)))",
+                                text: $parameters[idx]
+                            )
+                            .keyboardType(.numberPad)
                         }
-                    )
+                    }
                 }
-                if selected.signature.params.count == parameters.count {
-                    Section {
-                        ForEach(0..<parameters.count, id: \.self) { idx in
-                            let param = selected.signature.params[idx]
-                            HStack {
-                                TextField(
-                                    "Parameter #\(idx) (\(String(describing: param)))",
-                                    text: $parameters[idx]
-                                )
-                                .keyboardType(.numberPad)
-                            }
-                        }
-                    }
-                    Section {
-                        Button("Run") { isExecuting = true }
-                            .disabled(parameters.contains(where: \.isEmpty))
-                    }
+                Section {
+                    Button("Run") { isExecuting = true }
+                        .disabled(parameters.contains(where: \.isEmpty))
                 }
             }
-            .sheet(
-                isPresented: $isExecuting,
-                content: { () -> WasmExecutionView in
-                    let executor = WasmExecutor(
-                        function: selected.name, parameters: parameters, bytes: bytes)
-                    return WasmExecutionView(executor: executor)
-                }
-            )
-            .navigationBarItems(
-                trailing: Button(
-                    "Done",
-                    action: {
-                        presentationMode.wrappedValue.dismiss()
-                    })
-            )
-            .navigationTitle("Invocation")
         }
+        .sheet(
+            isPresented: $isExecuting,
+            content: { () -> AnyView in
+                let executor = WasmExecutor(
+                    function: selected.name, parameters: parameters, bytes: bytes)
+                return AnyView(
+                    WasmExecutionView(executor: executor)
+                        .background(Color.black)
+                        .edgesIgnoringSafeArea([.bottom, .leading, .trailing]))
+            }
+        )
     }
 }
 

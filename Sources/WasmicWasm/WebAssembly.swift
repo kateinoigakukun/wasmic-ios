@@ -112,3 +112,14 @@ public struct WebAssembly {
         }
     }
 }
+
+extension WebAssembly.Value: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .i32(let v): return "i32(\(v))"
+        case .i64(let v): return "i64(\(v))"
+        case .f32(let v): return "f32(\(v))"
+        case .f64(let v): return "f64(\(v))"
+        }
+    }
+}

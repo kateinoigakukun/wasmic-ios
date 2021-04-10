@@ -35,6 +35,7 @@
 		F2499F3B26213BD500D6829A /* InputByteStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F3A26213BD500D6829A /* InputByteStream.swift */; };
 		F2499F4126213BF500D6829A /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F4026213BF500D6829A /* Sections.swift */; };
 		F2499F4726213C2500D6829A /* LEB128.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F4626213C2500D6829A /* LEB128.swift */; };
+		F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F5A2621696800D6829A /* WasmicBrand.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		F2499F3A26213BD500D6829A /* InputByteStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputByteStream.swift; sourceTree = "<group>"; };
 		F2499F4026213BF500D6829A /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		F2499F4626213C2500D6829A /* LEB128.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEB128.swift; sourceTree = "<group>"; };
+		F2499F5A2621696800D6829A /* WasmicBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicBrand.swift; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +302,7 @@
 				F2499D9E261F4BB400D6829A /* AppDelegate.swift */,
 				F2499DBE261F4ED400D6829A /* SceneDelegate.swift */,
 				F2499DE4261F5B9500D6829A /* DocumentBrowserViewController.swift */,
+				F2499F5A2621696800D6829A /* WasmicBrand.swift */,
 				F2499DF62620261100D6829A /* Scenes */,
 				F2499DFB2620291600D6829A /* DocumentTypes */,
 				F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */,
@@ -498,6 +501,7 @@
 				F2499F062621304B00D6829A /* TextDocumentEngine.swift in Sources */,
 				F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */,
 				F2499DEB261F5BED00D6829A /* TextDocument.swift in Sources */,
+				F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */,
 				F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */,
 				F25199AB261F26530037DA79 /* ContentView.swift in Sources */,
 				F2499DBF261F4ED400D6829A /* SceneDelegate.swift in Sources */,

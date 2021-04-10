@@ -5,23 +5,88 @@
 //  Created by kateinoigakukun on 2021/04/09.
 //
 
+import Combine
 import SwiftUI
 import WasmicWasm
 
-struct WasmExecutionView: View {
-    @StateObject var executor: WasmExecutor
+struct WasmExecutionView: UIViewControllerRepresentable {
+    typealias UIViewControllerType = UINavigationController
+    let executor: WasmExecutor
+    @Environment(\.presentationMode) var presentationMode
 
-    var body: some View {
-        Text(String(describing: executor.state))
-            .onAppear {
-                executor.startPipeline()
-            }
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        let vc = WasmExecutionViewController(executor: executor) {
+            presentationMode.wrappedValue.dismiss()
+        }
+        let nav = UINavigationController(rootViewController: vc)
+        return nav
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}
+
+class WasmExecutionViewController: UIViewController {
+    let executor: WasmExecutor
+    lazy var textView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .black
+        textView.isScrollEnabled = true
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.font = UIFontMetrics(forTextStyle: .body)
+            .scaledFont(for: Brand.codeFont)
+        textView.adjustsFontForContentSizeCategory = true
+        textView.textColor = .white
+        return textView
+    }()
+    private lazy var doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: self, action: #selector(dismissPresentation))
+        return button
+    }()
+    let dismissAction: () -> Void
+    var cancellables: [AnyCancellable] = []
+
+    init(executor: WasmExecutor, dismissAction: @escaping () -> Void) {
+        self.executor = executor
+        self.dismissAction = dismissAction
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        view = textView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.leftBarButtonItem = doneButton
+        executor.objectWillChange.sink { [weak self] in
+            self?.view.setNeedsLayout()
+        }
+        .store(in: &cancellables)
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        textView.text = executor.output
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        executor.startPipeline()
+    }
+
+    @objc private func dismissPresentation() {
+        self.dismissAction()
     }
 }
 
 class WasmExecutor: ObservableObject {
     enum State {
-        case compiling
         case executing
         case failed(String)
         case result([WebAssembly.Value])
@@ -35,7 +100,21 @@ class WasmExecutor: ObservableObject {
         qos: .default
     )
 
-    @Published var state: State?
+    var state: State? {
+        didSet {
+            switch state {
+            case .executing:
+                output += "Executing..."
+            case .failed(let error):
+                output += "Execution Failed: \(error)"
+            case .result(let results):
+                output += "Execution Results: \(results)"
+            case .none:
+                break
+            }
+        }
+    }
+    @Published var output: String = ""
 
     init(
         function: String,
@@ -49,6 +128,7 @@ class WasmExecutor: ObservableObject {
     }
 
     func startPipeline() {
+        guard state == nil else { return }
         pipelineQueue.async { [weak self] in
             guard let self = self else { return }
             do {
