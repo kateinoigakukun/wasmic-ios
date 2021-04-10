@@ -39,6 +39,9 @@
 		F2499FA026218F4A00D6829A /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = F2499F9F26218F4A00D6829A /* Highlightr */; };
 		F2499FC52621A15E00D6829A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2499FC72621A15E00D6829A /* Localizable.strings */; };
 		F2499FF02621B9CE00D6829A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
+		F249A06A2621C42900D6829A /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0692621C42900D6829A /* Intents.framework */; };
+		F249A06D2621C42900D6829A /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A06C2621C42900D6829A /* IntentHandler.swift */; };
+		F249A0712621C42900D6829A /* WasmicIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F249A0682621C42900D6829A /* WasmicIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -58,6 +61,13 @@
 			remoteGlobalIDString = F2499E9C2620B40900D6829A;
 			remoteInfo = WasmicWasm;
 		};
+		F249A06F2621C42900D6829A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F251997B261F26520037DA79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F249A0672621C42900D6829A;
+			remoteInfo = WasmicIntents;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,6 +78,17 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F249A0752621C42900D6829A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F249A0712621C42900D6829A /* WasmicIntents.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -105,6 +126,10 @@
 		F2499FCC2621A17F00D6829A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		F249A05F2621C3B200D6829A /* WasmicDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicDebug.entitlements; sourceTree = "<group>"; };
+		F249A0682621C42900D6829A /* WasmicIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WasmicIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F249A0692621C42900D6829A /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		F249A06C2621C42900D6829A /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		F249A06E2621C42900D6829A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +163,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F249A0652621C42900D6829A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F249A06A2621C42900D6829A /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2519984261F26530037DA79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,6 +190,7 @@
 			children = (
 				F2499E0426202F9600D6829A /* wabt.xcframework */,
 				F2499D90261F466C00D6829A /* wasm3.xcframework */,
+				F249A0692621C42900D6829A /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -228,6 +262,7 @@
 			children = (
 				F2499E9E2620B40900D6829A /* WasmicWasm */,
 				F251997F261F26520037DA79 /* Shared */,
+				F249A06B2621C42900D6829A /* WasmicIntents */,
 				F2519989261F26530037DA79 /* iOS */,
 			);
 			path = Sources;
@@ -273,6 +308,15 @@
 			path = BinaryParser;
 			sourceTree = "<group>";
 		};
+		F249A06B2621C42900D6829A /* WasmicIntents */ = {
+			isa = PBXGroup;
+			children = (
+				F249A06C2621C42900D6829A /* IntentHandler.swift */,
+				F249A06E2621C42900D6829A /* Info.plist */,
+			);
+			path = WasmicIntents;
+			sourceTree = "<group>";
+		};
 		F251997A261F26520037DA79 = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +343,7 @@
 				F2499E6E2620A58F00D6829A /* WasmicTests.xctest */,
 				F2499E9D2620B40900D6829A /* libWasmicWasm.a */,
 				F2499EAB2620B43100D6829A /* WasmicWasmTests.xctest */,
+				F249A0682621C42900D6829A /* WasmicIntents.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -379,6 +424,23 @@
 			productReference = F2499EAB2620B43100D6829A /* WasmicWasmTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F249A0672621C42900D6829A /* WasmicIntents */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F249A0722621C42900D6829A /* Build configuration list for PBXNativeTarget "WasmicIntents" */;
+			buildPhases = (
+				F249A0642621C42900D6829A /* Sources */,
+				F249A0652621C42900D6829A /* Frameworks */,
+				F249A0662621C42900D6829A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WasmicIntents;
+			productName = WasmicIntents;
+			productReference = F249A0682621C42900D6829A /* WasmicIntents.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F2519986261F26530037DA79 /* Wasmic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F25199B1261F26530037DA79 /* Build configuration list for PBXNativeTarget "Wasmic" */;
@@ -386,10 +448,12 @@
 				F2519983261F26530037DA79 /* Sources */,
 				F2519984261F26530037DA79 /* Frameworks */,
 				F2519985261F26530037DA79 /* Resources */,
+				F249A0752621C42900D6829A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F249A0702621C42900D6829A /* PBXTargetDependency */,
 			);
 			name = Wasmic;
 			packageProductDependencies = (
@@ -416,6 +480,9 @@
 						CreatedOnToolsVersion = 12.3;
 					};
 					F2499EAA2620B43100D6829A = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					F249A0672621C42900D6829A = {
 						CreatedOnToolsVersion = 12.3;
 					};
 					F2519986261F26530037DA79 = {
@@ -445,6 +512,7 @@
 				F2499E6D2620A58F00D6829A /* WasmicTests */,
 				F2499E9C2620B40900D6829A /* WasmicWasm */,
 				F2499EAA2620B43100D6829A /* WasmicWasmTests */,
+				F249A0672621C42900D6829A /* WasmicIntents */,
 			);
 		};
 /* End PBXProject section */
@@ -458,6 +526,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F2499EA92620B43100D6829A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F249A0662621C42900D6829A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,6 +582,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F249A0642621C42900D6829A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F249A06D2621C42900D6829A /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2519983261F26530037DA79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -539,6 +622,11 @@
 			isa = PBXTargetDependency;
 			target = F2499E9C2620B40900D6829A /* WasmicWasm */;
 			targetProxy = F2499EB12620B43100D6829A /* PBXContainerItemProxy */;
+		};
+		F249A0702621C42900D6829A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F249A0672621C42900D6829A /* WasmicIntents */;
+			targetProxy = F249A06F2621C42900D6829A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -670,6 +758,49 @@
 			};
 			name = Release;
 		};
+		F249A0732621C42900D6829A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K677BRB35L;
+				INFOPLIST_FILE = Sources/WasmicIntents/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.wasmic.WasmicIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F249A0742621C42900D6829A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K677BRB35L;
+				INFOPLIST_FILE = Sources/WasmicIntents/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.wasmic.WasmicIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		F25199AF261F26530037DA79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -788,6 +919,7 @@
 		F25199B2261F26530037DA79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -813,6 +945,7 @@
 		F25199B3261F26530037DA79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -860,6 +993,15 @@
 			buildConfigurations = (
 				F2499EB42620B43100D6829A /* Debug */,
 				F2499EB52620B43100D6829A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F249A0722621C42900D6829A /* Build configuration list for PBXNativeTarget "WasmicIntents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F249A0732621C42900D6829A /* Debug */,
+				F249A0742621C42900D6829A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
