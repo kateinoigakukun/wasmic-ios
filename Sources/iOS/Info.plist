@@ -20,7 +20,7 @@
 			<key>CFBundleTypeName</key>
 			<string>WebAssembly Binary Format</string>
 			<key>LSHandlerRank</key>
-			<string>Default</string>
+			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>dev.katei.wasmic.wasm</string>
@@ -113,7 +113,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.executable</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>WebAssembly Binary Format</string>
