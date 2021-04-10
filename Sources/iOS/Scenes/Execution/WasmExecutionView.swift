@@ -41,7 +41,7 @@ class WasmExecutionViewController: UIViewController {
     }()
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
+            barButtonSystemItem: .done,
             target: self, action: #selector(dismissPresentation))
         return button
     }()
