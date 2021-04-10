@@ -16,6 +16,16 @@
 				<string>dev.katei.wasmic.wat</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>WebAssembly Binary Format</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>dev.katei.wasmic.wasm</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -93,6 +103,31 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>wat</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/text</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.executable</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>WebAssembly Binary Format</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>dev.katei.wasmic.wasm</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://webassembly.github.io/spec/core/binary/index.html</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>wasm</string>
 				</array>
 				<key>public.mime-type</key>
 				<array>
