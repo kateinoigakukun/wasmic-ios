@@ -36,7 +36,7 @@ public struct PrimaryButton<Content: View>: View {
     }
 
     var background: some View {
-        RoundedRectangle(cornerRadius: 8, style: .circular)
+        RoundedRectangle(cornerRadius: 14, style: .circular)
             .fill(color)
     }
 }

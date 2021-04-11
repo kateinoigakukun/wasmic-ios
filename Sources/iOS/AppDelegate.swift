@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             name: "MainConfiguration", sessionRole: connectingSceneSession.role)
     }
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print(#function, url)
         return true
     }
 }

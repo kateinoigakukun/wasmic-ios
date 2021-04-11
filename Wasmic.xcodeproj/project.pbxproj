@@ -55,6 +55,10 @@
 		F249A2EC2622A07A00D6829A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2EA2622A07A00D6829A /* PrimaryButton.swift */; };
 		F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F249A2F72622A6CF00D6829A /* Assets.xcassets */; };
 		F249A2F92622A6CF00D6829A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F249A2F72622A6CF00D6829A /* Assets.xcassets */; };
+		F249A3002622AE2600D6829A /* WelcomeNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2FF2622AE2600D6829A /* WelcomeNote.swift */; };
+		F249A3012622AE2600D6829A /* WelcomeNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2FF2622AE2600D6829A /* WelcomeNote.swift */; };
+		F249A3082622B44500D6829A /* PersistentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3072622B44500D6829A /* PersistentState.swift */; };
+		F249A3092622B44500D6829A /* PersistentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3072622B44500D6829A /* PersistentState.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -184,6 +188,8 @@
 		F249A2DC26229C4100D6829A /* ShortcutsNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsNote.swift; sourceTree = "<group>"; };
 		F249A2EA2622A07A00D6829A /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		F249A2F72622A6CF00D6829A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F249A2FF2622AE2600D6829A /* WelcomeNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNote.swift; sourceTree = "<group>"; };
+		F249A3072622B44500D6829A /* PersistentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentState.swift; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				F249A2DC26229C4100D6829A /* ShortcutsNote.swift */,
+				F249A2FF2622AE2600D6829A /* WelcomeNote.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -459,6 +466,7 @@
 				F2499D9E261F4BB400D6829A /* AppDelegate.swift */,
 				F2499DBE261F4ED400D6829A /* SceneDelegate.swift */,
 				F2499F5A2621696800D6829A /* WasmicBrand.swift */,
+				F249A3072622B44500D6829A /* PersistentState.swift */,
 				F2499FC72621A15E00D6829A /* Localizable.strings */,
 				F2499DF62620261100D6829A /* Scenes */,
 				F2499DFB2620291600D6829A /* DocumentTypes */,
@@ -749,6 +757,8 @@
 				F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */,
 				F249A2EC2622A07A00D6829A /* PrimaryButton.swift in Sources */,
 				F249A0DF2621C93000D6829A /* Intents.intentdefinition in Sources */,
+				F249A3092622B44500D6829A /* PersistentState.swift in Sources */,
+				F249A3012622AE2600D6829A /* WelcomeNote.swift in Sources */,
 				F249A2DE26229C4100D6829A /* ShortcutsNote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -759,11 +769,13 @@
 			files = (
 				F2499F0C262137A600D6829A /* WasmInvocationView.swift in Sources */,
 				F2499DE5261F5B9500D6829A /* DocumentBrowserViewController.swift in Sources */,
+				F249A3082622B44500D6829A /* PersistentState.swift in Sources */,
 				F2499D9F261F4BB400D6829A /* AppDelegate.swift in Sources */,
 				F249A2DD26229C4100D6829A /* ShortcutsNote.swift in Sources */,
 				F249A2EB2622A07A00D6829A /* PrimaryButton.swift in Sources */,
 				F2499DEE261FDFBD00D6829A /* TextDocumentViewController.swift in Sources */,
 				F2499F062621304B00D6829A /* TextDocumentEngine.swift in Sources */,
+				F249A3002622AE2600D6829A /* WelcomeNote.swift in Sources */,
 				F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */,
 				F2499DEB261F5BED00D6829A /* TextDocument.swift in Sources */,
 				F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */,

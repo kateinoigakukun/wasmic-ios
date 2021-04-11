@@ -12,7 +12,7 @@ import os.log
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let rootViewController = DocumentBrowserViewController()
+    let rootViewController = DocumentBrowserViewController(persistentState: PersistentState())
 
     func scene(
         _ scene: UIScene, willConnectTo session: UISceneSession,

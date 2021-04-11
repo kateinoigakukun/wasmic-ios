@@ -15,6 +15,7 @@ import Intents
 class DocumentBrowserViewController: UIDocumentBrowserViewController,
     UIDocumentBrowserViewControllerDelegate
 {
+    private var persistentState: PersistentState!
     private let shortcutsStorage = ShortcutsStorage()
     private lazy var useInShortcutsAction: UIDocumentBrowserAction = {
         let action = UIDocumentBrowserAction(identifier: "dev.katei.wasmic.use-in-shortcuts",
@@ -39,6 +40,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         return action
     }()
 
+    convenience init(persistentState: PersistentState) {
+        self.init()
+        self.persistentState = persistentState
+    }
+
     /// - Tag: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +55,16 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         customActions = [
             useInShortcutsAction
         ]
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !persistentState.isWelcomeDone {
+            let vc = WelcomeNoteViewController(completion: { [persistentState] in
+                persistentState?.isWelcomeDone = true
+            })
+            present(vc, animated: true)
+        }
     }
 
     // MARK: - UIDocumentBrowserViewControllerDelegate
