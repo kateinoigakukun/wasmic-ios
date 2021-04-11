@@ -213,7 +213,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
                     donateInteraction(documentURL: inStorageURL, export: first)
                 }
                 let vc = WasmInvocationViewController(
-                    bytes: bytes, exports: exports.functions, selected: first, isWASI: exports.isWASI)
+                    bytes: bytes, exports: exports.functions, selected: first,
+                    isWASI: exports.isWASI)
                 let nav = UINavigationController(rootViewController: vc)
                 self.present(nav, animated: true)
             } else {

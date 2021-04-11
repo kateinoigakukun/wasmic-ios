@@ -9,8 +9,11 @@ import SwiftUI
 import WasmicWasm
 
 class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
-    init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export, isWASI: Bool) {
-        super.init(rootView: WasmInvocationView(bytes: bytes, exports: exports, selected: selected, isWASI: isWASI))
+    init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export, isWASI: Bool)
+    {
+        super.init(
+            rootView: WasmInvocationView(
+                bytes: bytes, exports: exports, selected: selected, isWASI: isWASI))
         self.title = "Invocation"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self,
@@ -36,8 +39,10 @@ struct WasmInvocationView: View {
     let bytes: [UInt8]
     let isWASI: Bool
 
-    init(bytes: [UInt8], exports: [WebAssembly.Export],
-         selected: WebAssembly.Export, isWASI: Bool) {
+    init(
+        bytes: [UInt8], exports: [WebAssembly.Export],
+        selected: WebAssembly.Export, isWASI: Bool
+    ) {
         self.bytes = bytes
         self._exports = State(initialValue: exports)
         self._selected = State(initialValue: selected)
@@ -184,6 +189,7 @@ struct WasmInvocationView_Previews: PreviewProvider {
             name: "fizz", signature: FuncSignature(params: [.i64, .i32, .i32], results: [])),
     ]
     static var previews: some View {
-        WasmInvocationView(bytes: fibWasm, exports: exports, selected: exports.first!, isWASI: false)
+        WasmInvocationView(
+            bytes: fibWasm, exports: exports, selected: exports.first!, isWASI: false)
     }
 }

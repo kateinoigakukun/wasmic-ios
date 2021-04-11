@@ -18,7 +18,8 @@ final class TextDocumentEngine {
         case isCompiling(Bool)
         case handleCompilationError([WebAssembly.CompilationError])
         case handleBinaryParsingError(Error)
-        case presentInvocationSelector([UInt8], [WebAssembly.Export], WebAssembly.Export, isWASI: Bool)
+        case presentInvocationSelector(
+            [UInt8], [WebAssembly.Export], WebAssembly.Export, isWASI: Bool)
     }
 
     var outputHandler: ((Output) -> Void)?

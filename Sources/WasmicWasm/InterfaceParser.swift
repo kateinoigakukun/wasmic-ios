@@ -20,7 +20,8 @@ extension WebAssembly {
         case invalidIndex(Int, String)
     }
 
-    public static func getExported(wasmBytes: [UInt8]) throws -> (functions: [Export], isWASI: Bool) {
+    public static func getExported(wasmBytes: [UInt8]) throws -> (functions: [Export], isWASI: Bool)
+    {
         var input = InputByteStream(bytes: wasmBytes)
         var result = [SectionInfo]()
         var typeSection = TypeSection()
@@ -51,10 +52,12 @@ extension WebAssembly {
         var isWASI: Bool = false
         for export in exportSection.exports {
             guard export.kind == .func else { continue }
-            guard export.index < importSection.funcImportCount + functionSection.typeIndices.count else {
+            guard export.index < importSection.funcImportCount + functionSection.typeIndices.count
+            else {
                 throw ParsingError.invalidIndex(export.index, "export")
             }
-            let typeIndex = functionSection.typeIndices[importSection.funcImportCount + export.index]
+            let typeIndex = functionSection.typeIndices[
+                importSection.funcImportCount + export.index]
             guard typeIndex < typeSection.signatures.count else {
                 throw ParsingError.invalidIndex(typeIndex, "type")
             }
