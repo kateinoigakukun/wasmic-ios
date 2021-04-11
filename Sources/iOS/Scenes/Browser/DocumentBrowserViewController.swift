@@ -22,7 +22,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
                                 availability: [.menu, .navigationBar]) { urls in
             do {
                 for url in urls {
-                    try self.shortcutsStorage.importDocument(url)
+                    let inStorageURL = try self.shortcutsStorage.importDocument(url)
+                    self.donateInteraction(documentURL: inStorageURL, export: nil)
                 }
             } catch {
                 self.reportError(title: NSLocalizedString("error.title", comment: ""),
@@ -183,7 +184,9 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
             let bytes = Array(try Data(contentsOf: documentURL))
             let exports = try WebAssembly.getExported(wasmBytes: bytes)
             if let first = exports.first {
-                donateInteraction(documentURL: documentURL, export: first)
+                if let inStorageURL = try? self.shortcutsStorage.importDocument(documentURL) {
+                    donateInteraction(documentURL: inStorageURL, export: first)
+                }
                 let vc = WasmInvocationViewController(
                     bytes: bytes, exports: exports, selected: first)
                 let nav = UINavigationController(rootViewController: vc)
@@ -210,11 +213,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         self.present(alert, animated: true, completion: nil)
     }
 
-    private func donateInteraction(documentURL: URL, export: WebAssembly.Export) {
+    private func donateInteraction(documentURL: URL, export: WebAssembly.Export?) {
         let intent = RunWasmFileIntent()
         intent.file = INFile(fileURL: documentURL, filename: documentURL.lastPathComponent,
                              typeIdentifier: "dev.katei.wasmic.wasm")
-        intent.functionName = export.name
+        intent.functionName = export?.name ?? ""
         intent.arguments = [0]
         let interaction = INInteraction(intent: intent, response: nil)
         interaction.donate { error in

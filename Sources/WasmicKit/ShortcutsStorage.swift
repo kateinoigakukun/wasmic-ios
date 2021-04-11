@@ -23,13 +23,14 @@ public class ShortcutsStorage {
             try fileManager.createDirectory(at: shortcutsURL, withIntermediateDirectories: true, attributes: nil)
         }
     }
-    public func importDocument(_ url: URL) throws {
+    public func importDocument(_ url: URL) throws -> URL {
         try prepareDirectory()
         let targetURL = shortcutsURL.appendingPathComponent(url.lastPathComponent)
         if fileManager.fileExists(atPath: targetURL.path) {
             try fileManager.removeItem(at: targetURL)
         }
         try fileManager.copyItem(at: url, to: targetURL)
+        return targetURL
     }
 
     public func documents() -> [URL] {

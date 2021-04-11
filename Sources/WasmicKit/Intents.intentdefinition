@@ -27,6 +27,8 @@
 			<string>ciEkwz</string>
 			<key>INIntentInput</key>
 			<string>arguments</string>
+			<key>INIntentKeyParameter</key>
+			<string>file</string>
 			<key>INIntentLastParameterTag</key>
 			<integer>23</integer>
 			<key>INIntentManagedParameterCombinations</key>
