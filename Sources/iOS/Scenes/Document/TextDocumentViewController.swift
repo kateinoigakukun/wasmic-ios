@@ -31,6 +31,8 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         textView.bounces = true
         textView.alwaysBounceVertical = true
         textView.keyboardDismissMode = .interactive
+        textView.autocorrectionType = .no
+        textView.autocapitalizationType = .none
         if #available(iOS 13.0, *) {
             textView.usesStandardTextScaling = true
         }
