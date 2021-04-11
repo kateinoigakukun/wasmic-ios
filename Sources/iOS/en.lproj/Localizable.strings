@@ -9,6 +9,7 @@
 "error.title" = "Error";
 "alert.ok" = "OK";
 "alert.import-error.title" = "Unable to Import Document";
+"alert.reveal-error.message" = "The app was unable to reveal a document";
 "alert.ok.import-error.description" = "An error occurred while trying to import a document:";
 "alert.ok.import-error.no-description" = "No Description";
 

@@ -7,10 +7,12 @@
 
 import SwiftUI
 import UIKit
+import os.log
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let rootViewController = DocumentBrowserViewController()
 
     func scene(
         _ scene: UIScene, willConnectTo session: UISceneSession,
@@ -18,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let rootViewController = DocumentBrowserViewController()
             window.rootViewController = rootViewController
             self.window = window
             window.makeKeyAndVisible()
@@ -53,4 +54,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        for urlContext in URLContexts {
+            guard urlContext.url.isFileURL else { continue }
+            rootViewController.revealDocument(at: urlContext.url, importIfNeeded: true) { (url, error) in
+                if let error = error {
+                    os_log("Failed to reveal document at URL %@, error: '%@'",
+                           log: OSLog.default, type: .error,
+                           urlContext.url as CVarArg, error as CVarArg)
+                    let alertController = UIAlertController(
+                        title: NSLocalizedString("alert.import-error.title", comment: ""),
+                        message: NSLocalizedString("alert.reveal-error.message", comment: ""),
+                        preferredStyle: .alert)
+                    self.rootViewController.present(alertController, animated: true, completion: nil)
+                    return
+                }
+            }
+        }
+    }
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        print(#function, userActivity)
+    }
 }

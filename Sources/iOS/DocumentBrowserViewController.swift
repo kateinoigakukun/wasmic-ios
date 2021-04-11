@@ -82,7 +82,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
             sourceURL.path,
             destinationURL.path)
 
-        presentTextDocument(at: destinationURL)
+        presentDocument(at: destinationURL)
     }
 
     func documentBrowser(
@@ -105,6 +105,12 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         _ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]
     ) {
         guard let url = documentURLs.first else { return }
+        presentDocument(at: url)
+    }
+
+    // MARK: - Document Presentation
+
+    func presentDocument(at url: URL) {
         switch url.pathExtension {
         case "wat":
             presentTextDocument(at: url)
@@ -114,8 +120,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
             break
         }
     }
-
-    // MARK: - Document Presentation
 
     var transitionController: UIDocumentBrowserTransitionController?
 

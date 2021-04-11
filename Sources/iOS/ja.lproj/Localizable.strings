@@ -9,6 +9,7 @@
 "error.title" = "エラー";
 "alert.ok" = "OK";
 "alert.import-error.title" = "ドキュメントをインポートできませんでした";
+"alert.reveal-error.message" = "ドキュメントを開けませんでした";
 "alert.ok.import-error.description" = "ドキュメントのインポート中にエラーが発生しました";
 "alert.ok.import-error.no-description" = "";
 
