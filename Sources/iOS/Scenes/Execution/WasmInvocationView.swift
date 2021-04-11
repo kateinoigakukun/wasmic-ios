@@ -15,7 +15,7 @@ class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
             bytes: bytes, exports: exports, selected: selected, isWASI: isWASI)
         super.init(rootView: rootView)
         self.title = "Invocation"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self,
             action: #selector(self.dismissPresenting))
     }

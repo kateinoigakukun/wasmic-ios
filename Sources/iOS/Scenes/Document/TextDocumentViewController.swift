@@ -58,6 +58,12 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             target: self, action: #selector(presentExecution(_:)))
         return button
     }()
+    private lazy var moreButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis.circle"), style: .plain,
+            target: self, action: #selector(presentHelp(_:)))
+        return button
+    }()
 
     private var keyboardObserver: KeyboardLayoutObserver?
 
@@ -85,7 +91,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             for: view, onUpdateHandler: adjustForKeyboard(keyboardInset:animator:))
         view.backgroundColor = UIColor.systemBackground
         navigationItem.leftBarButtonItem = doneButton
-        navigationItem.rightBarButtonItems = [runButton]
+        navigationItem.rightBarButtonItems = [moreButton, runButton]
         view.addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -197,6 +203,12 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     @objc func presentExecution(_ sender: Any) {
         let fileName = document.fileURL.lastPathComponent
         engine.compile(fileName: fileName, watContent: document.text)
+    }
+
+    @objc func presentHelp(_ sender: Any) {
+        let vc = HelpNoteViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
     }
 
     // MARK: - UITextViewDelegate

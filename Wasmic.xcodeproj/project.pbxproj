@@ -64,6 +64,7 @@
 		F249A36F2622DD4500D6829A /* libCWasmicWASI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A3312622DC1F00D6829A /* libCWasmicWASI.a */; };
 		F249A39D2622E57300D6829A /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = F249A38E2622E4A700D6829A /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		F249A39E2622E57300D6829A /* wasi_api.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A3442622DC5200D6829A /* wasi_api.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3D52622FD0900D6829A /* HelpNote.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -209,6 +210,7 @@
 		F249A3442622DC5200D6829A /* wasi_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wasi_api.h; sourceTree = "<group>"; };
 		F249A3452622DC5200D6829A /* wasi_api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wasi_api.c; sourceTree = "<group>"; };
 		F249A38E2622E4A700D6829A /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		F249A3D52622FD0900D6829A /* HelpNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpNote.swift; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,6 +445,7 @@
 			children = (
 				F249A2DC26229C4100D6829A /* ShortcutsNote.swift */,
 				F249A2FF2622AE2600D6829A /* WelcomeNote.swift */,
+				F249A3D52622FD0900D6829A /* HelpNote.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -870,6 +873,7 @@
 				F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */,
 				F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */,
 				F25199AB261F26530037DA79 /* ContentView.swift in Sources */,
+				F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */,
 				F2499DBF261F4ED400D6829A /* SceneDelegate.swift in Sources */,
 				F2499DFE2620293300D6829A /* WatDocument.swift in Sources */,
 			);
