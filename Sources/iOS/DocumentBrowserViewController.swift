@@ -162,6 +162,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
             let bytes = Array(try Data(contentsOf: documentURL))
             let exports = try WebAssembly.getExported(wasmBytes: bytes)
             if let first = exports.first {
+                donateInteraction(documentURL: documentURL, export: first)
                 let vc = WasmInvocationViewController(
                     bytes: bytes, exports: exports, selected: first)
                 let nav = UINavigationController(rootViewController: vc)
@@ -186,6 +187,21 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         alert.addAction(dismiss)
 
         self.present(alert, animated: true, completion: nil)
+    }
+
+    private func donateInteraction(documentURL: URL, export: WebAssembly.Export) {
+        let intent = RunWasmFileIntent()
+        intent.file = INFile(fileURL: documentURL, filename: documentURL.lastPathComponent,
+                             typeIdentifier: "dev.katei.wasmic.wasm")
+        intent.functionName = export.name
+        intent.arguments = [0]
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.donate { error in
+            guard let error = error else { return }
+            os_log("Failed to donate interaction for document at URL %@, error: '%@'",
+                   log: OSLog.default, type: .error,
+                   documentURL as CVarArg, error as CVarArg)
+        }
     }
 }
 
