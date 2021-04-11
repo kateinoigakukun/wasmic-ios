@@ -190,6 +190,7 @@
 		F249A2F72622A6CF00D6829A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F249A2FF2622AE2600D6829A /* WelcomeNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNote.swift; sourceTree = "<group>"; };
 		F249A3072622B44500D6829A /* PersistentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentState.swift; sourceTree = "<group>"; };
+		F249A3102622B7C100D6829A /* WasmicIntentsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicIntentsDebug.entitlements; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,6 +386,7 @@
 				F249A06C2621C42900D6829A /* IntentHandler.swift */,
 				F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */,
 				F249A06E2621C42900D6829A /* Info.plist */,
+				F249A3102622B7C100D6829A /* WasmicIntentsDebug.entitlements */,
 			);
 			path = WasmicIntents;
 			sourceTree = "<group>";
@@ -952,6 +954,7 @@
 		F249A0732621C42900D6829A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Sources/WasmicIntents/WasmicIntentsDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				INFOPLIST_FILE = Sources/WasmicIntents/Info.plist;
