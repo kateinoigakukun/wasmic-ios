@@ -100,7 +100,7 @@ struct WasmInvocationView: View {
             }
 
             PrimaryButton(action: { isExecuting = true }) {
-                Text("Run")
+                Text("invocation.run")
             }
             .disabled(
                 runAsWASI
