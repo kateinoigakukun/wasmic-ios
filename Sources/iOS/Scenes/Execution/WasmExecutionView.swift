@@ -119,11 +119,13 @@ class WasmExecutor: ObservableObject {
         case executing
         case failed(String)
         case result([WebAssembly.Value])
+        case wasiExit(Int)
     }
 
     let function: String
     let arguments: [String]
     let bytes: [UInt8]
+    let runAsWASI: Bool
     private let pipelineQueue = DispatchQueue(
         label: "dev.katei.Wasmic.executor-pipeline",
         qos: .default
@@ -138,21 +140,26 @@ class WasmExecutor: ObservableObject {
                 output += "Execution Failed: \(error)"
             case .result(let results):
                 output += "Execution Results: \(results)"
+            case .wasiExit(let code):
+                output += "Exit with \(code)"
             case .none:
                 break
             }
         }
     }
+
     @Published var output: String = ""
 
     init(
         function: String,
         arguments: [String],
-        bytes: [UInt8]
+        bytes: [UInt8],
+        runAsWASI: Bool
     ) {
         self.function = function
         self.arguments = arguments
         self.bytes = bytes
+        self.runAsWASI = runAsWASI
         self.state = nil
     }
 
@@ -164,11 +171,18 @@ class WasmExecutor: ObservableObject {
                 self.state = .executing
             }
             do {
-                let result =
-                    try WebAssembly.execute(
-                        wasmBytes: self.bytes, function: self.function, args: self.arguments)
+                let newState: State
+                if self.runAsWASI {
+                    let exitCode = try WebAssembly.startWasiApp(wasmBytes: self.bytes, args: [])
+                    newState = .wasiExit(exitCode)
+                } else {
+                    let result =
+                        try WebAssembly.execute(
+                            wasmBytes: self.bytes, function: self.function, args: self.arguments)
+                    newState = .result(result)
+                }
                 DispatchQueue.main.async {
-                    self.state = .result(result)
+                    self.state = newState
                 }
             } catch {
                 DispatchQueue.main.async {

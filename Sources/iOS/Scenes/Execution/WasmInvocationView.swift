@@ -28,10 +28,11 @@ class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
 struct WasmInvocationView: View {
     @State var exports: [WebAssembly.Export]
     @State var selected: WebAssembly.Export
-    @State var arguments: [String] = []
+    @State var wasmArguments: [String] = []
+    @State var wasiArguments: [String] = []
     @State var isExecuting: Bool = false
     @State var runAsWASI: Bool
-    @Environment(\.presentationMode) var presentationMode
+
     let bytes: [UInt8]
     let isWASI: Bool
 
@@ -40,10 +41,36 @@ struct WasmInvocationView: View {
         self.bytes = bytes
         self._exports = State(initialValue: exports)
         self._selected = State(initialValue: selected)
-        self._arguments = State(
+        self._wasmArguments = State(
             initialValue: Array(repeating: "", count: selected.signature.params.count))
         self._runAsWASI = State(initialValue: isWASI)
         self.isWASI = isWASI
+    }
+
+    struct _TextField: View {
+        let titleKey: String
+        let items: Binding<[String]>
+        let index: Int
+
+        var body: some View {
+            TextField(
+                titleKey,
+                text: Binding(
+                    get: {
+                        if items.wrappedValue.indices.contains(index) {
+                            return items.wrappedValue[index]
+                        } else {
+                            return ""
+                        }
+                    },
+                    set: { newValue in
+                        if items.wrappedValue.indices.contains(index) {
+                            items.wrappedValue[index] = newValue
+                        }
+                    }
+                )
+            )
+        }
     }
 
     var body: some View {
@@ -53,56 +80,90 @@ struct WasmInvocationView: View {
                     Toggle(isOn: $runAsWASI) { Text("WASI Application") }
                 }
                 if !runAsWASI {
-                    Picker(
-                        selection: Binding(
-                            get: { selected },
-                            set: { newSelection in
-                                self.selected = newSelection
-                                self.arguments = Array(
-                                    repeating: "", count: newSelection.signature.params.count)
-                            }
-                        ),
-                        label: Text("Function"),
-                        content: {
-                            ForEach(exports, id: \.self) { export in
-                                Text(export.name)
-                            }
-                        }
-                    )
+                    functionSelector
                 }
             }
-            if selected.signature.params.count == arguments.count {
-                if !arguments.isEmpty {
-                    Section {
-                        ForEach(0..<arguments.count, id: \.self) { idx in
-                            let param = selected.signature.params[idx]
-                            HStack {
-                                TextField(
-                                    "Argument #\(idx) (\(String(describing: param)))",
-                                    text: $arguments[idx]
-                                )
-                                .keyboardType(.numberPad)
-                            }
-                        }
-                    }
-                }
-                Section {
-                    Button("Run") { isExecuting = true }
-                        .disabled(arguments.contains(where: \.isEmpty))
-                }
+
+            if runAsWASI {
+                wasiLevelArguments
+            } else {
+                wasmLevelArguments
+            }
+            Section {
+                Button("Run") { isExecuting = true }
+                    .disabled(wasmArguments.contains(where: \.isEmpty))
             }
         }
         .sheet(
             isPresented: $isExecuting,
             content: { () -> AnyView in
                 let executor = WasmExecutor(
-                    function: selected.name, arguments: arguments, bytes: bytes)
+                    function: selected.name, arguments: wasmArguments,
+                    bytes: bytes, runAsWASI: runAsWASI)
                 return AnyView(
                     WasmExecutionView(executor: executor)
                         .background(Color.black)
                         .edgesIgnoringSafeArea([.bottom, .leading, .trailing]))
             }
         )
+    }
+
+    var functionSelector: some View {
+        Picker(
+            selection: Binding(
+                get: { selected },
+                set: { newSelection in
+                    self.selected = newSelection
+                    self.wasmArguments = Array(
+                        repeating: "", count: newSelection.signature.params.count)
+                }
+            ),
+            label: Text("Function"),
+            content: {
+                ForEach(exports, id: \.self) { export in
+                    Text(export.name)
+                }
+            }
+        )
+    }
+
+    @ViewBuilder
+    var wasmLevelArguments: some View {
+        if selected.signature.params.count == wasmArguments.count, !wasmArguments.isEmpty {
+            Section {
+                ForEach(wasmArguments.indices, id: \.self) { idx in
+                    let param = selected.signature.params[idx]
+                    TextField(
+                        "Argument #\(idx) (\(String(describing: param)))",
+                        text: $wasmArguments[idx]
+                    )
+                    .keyboardType(.numberPad)
+                }
+            }
+        }
+    }
+
+    var wasiLevelArguments: some View {
+        Section {
+            List {
+                ForEach(wasiArguments.indices, id: \.self) { idx in
+                    _TextField(
+                        titleKey: "Argument #\(idx)",
+                        items: $wasiArguments,
+                        index: idx
+                    )
+                }
+                .onDelete(perform: { indexSet in
+                    wasiArguments.remove(atOffsets: indexSet)
+                })
+            }
+            Button(action: { wasiArguments.append("") }) {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Add new argument")
+                }
+            }
+        }
     }
 }
 
