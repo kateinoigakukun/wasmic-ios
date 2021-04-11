@@ -18,6 +18,7 @@ final class TextDocumentEngine {
         case isCompiling(Bool)
         case handleCompilationError([WebAssembly.CompilationError])
         case handleBinaryParsingError(Error)
+        case handleNoExportError
         case presentInvocationSelector(
             [UInt8], [WebAssembly.Export], WebAssembly.Export, isWASI: Bool)
     }
@@ -46,7 +47,7 @@ final class TextDocumentEngine {
                                     .presentInvocationSelector(
                                         bytes, exports.functions, first, isWASI: exports.isWASI))
                             } else {
-                                // TODO: Report no-exported function error
+                                self.outputHandler?(.handleNoExportError)
                             }
                         } catch {
                             self.outputHandler?(.handleBinaryParsingError(error))

@@ -123,8 +123,20 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
                 let nav = UINavigationController(rootViewController: vc)
                 self.present(nav, animated: true)
             case .handleCompilationError(let errors):
-                // TODO: Display inline errors
-                print(errors)
+                guard !errors.isEmpty else { return }
+                self.reportCompilationErrors(errors: errors)
+            case .handleNoExportError:
+                // TODO: User-friendly error message
+                let alert = UIAlertController(
+                    title: NSLocalizedString("error.title", comment: ""),
+                    message: NSLocalizedString("no-export-error.message", comment: ""),
+                    preferredStyle: .alert)
+
+                let dismiss = UIAlertAction(
+                    title: NSLocalizedString("alert.ok", comment: ""), style: .default)
+                alert.addAction(dismiss)
+
+                self.present(alert, animated: true, completion: nil)
             case .handleBinaryParsingError(let error):
                 // TODO: User-friendly error message
                 let alert = UIAlertController(
@@ -258,5 +270,26 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         @unknown default:
             textStorage.highlightr.setTheme(to: "xcode")
         }
+    }
+
+    func reportCompilationErrors(errors: [WebAssembly.CompilationError]) {
+        // TODO: Report inline
+        let message = errors.map(\.description).joined(separator: "\n")
+        let alert = UIAlertController(
+            title: NSLocalizedString("compile-error.title", comment: ""),
+            message: message,
+            preferredStyle: .alert)
+
+        let dismiss = UIAlertAction(
+            title: NSLocalizedString("alert.ok", comment: ""), style: .default)
+        alert.addAction(dismiss)
+
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+extension WebAssembly.CompilationError: CustomStringConvertible {
+    public var description: String {
+        "\(level.rawValue): \(message) at \(location.line):\(location.firstColumn)"
     }
 }

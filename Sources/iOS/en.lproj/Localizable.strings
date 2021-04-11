@@ -23,3 +23,5 @@
 "no-export-error.message" = "No exported function";
 
 "use-in-shortcuts.title" = "Shortcuts";
+
+"compile-error.title" = "Compile Error";

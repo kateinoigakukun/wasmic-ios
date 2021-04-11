@@ -23,3 +23,5 @@
 "no-export-error.message" = "エクスポートされている関数がありません";
 
 "use-in-shortcuts.title" = "ショートカット";
+
+"compile-error.title" = "コンパイルエラー";

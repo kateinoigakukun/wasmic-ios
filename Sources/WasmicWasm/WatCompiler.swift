@@ -23,7 +23,7 @@ extension WebAssembly {
         }
     }
     public struct CompilationError: Swift.Error, Equatable {
-        public enum Level: Equatable {
+        public enum Level: String, Equatable {
             case warning, error
 
             internal init(cErrorLevel: wabt_c_api_error_level) {
