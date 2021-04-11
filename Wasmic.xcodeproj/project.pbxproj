@@ -64,6 +64,7 @@
 		F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3D52622FD0900D6829A /* HelpNote.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
+		F2DF8A032623337B00860D0D /* wasm3.xcframework in Headers */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F249A0B82621C90600D6829A;
 			remoteInfo = WasmicKit;
+		};
+		F2DF89F5262332C600860D0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F251997B261F26520037DA79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F249A3302622DC1F00D6829A;
+			remoteInfo = CWasmicWASI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -543,6 +551,7 @@
 			files = (
 				F249A39D2622E57300D6829A /* module.modulemap in Headers */,
 				F249A39E2622E57300D6829A /* wasi_api.h in Headers */,
+				F2DF8A032623337B00860D0D /* wasm3.xcframework in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +587,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F2DF89F6262332C600860D0D /* PBXTargetDependency */,
 			);
 			name = WasmicWasm;
 			packageProductDependencies = (
@@ -906,6 +916,11 @@
 			target = F249A0B82621C90600D6829A /* WasmicKit */;
 			targetProxy = F249A1352621CB1D00D6829A /* PBXContainerItemProxy */;
 		};
+		F2DF89F6262332C600860D0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F249A3302622DC1F00D6829A /* CWasmicWASI */;
+			targetProxy = F2DF89F5262332C600860D0D /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -977,6 +992,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/CWasmicWASI";
 			};
 			name = Debug;
 		};
@@ -991,6 +1007,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/CWasmicWASI";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

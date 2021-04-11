@@ -5,7 +5,7 @@
 //  Created by kateinoigakukun on 2021/04/10.
 //
 
-import CWasmicWASI
+@_implementationOnly import CWasmicWASI
 @_implementationOnly import wabt
 @_implementationOnly import wasm3
 
