@@ -16,7 +16,7 @@ public struct PrimaryButton<Content: View>: View {
     public init(
         action: @escaping () -> Void,
         label: @escaping () -> Content,
-        color: Color = Color(.systemIndigo)
+        color: Color = Color(Brand.primaryColor)
     ) {
         self.action = action
         self.createLabel = label

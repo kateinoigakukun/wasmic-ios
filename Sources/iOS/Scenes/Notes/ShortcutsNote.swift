@@ -28,7 +28,7 @@ struct ShortcutsNote: View {
                 .padding([.top, .bottom], 30)
             Image(systemName: "bolt.fill")
                 .resizable()
-                .foregroundColor(.blue)
+                .foregroundColor(Color(Brand.primaryColor))
                 .aspectRatio(nil, contentMode: .fit)
                 .frame(width: 40)
                 .scaledToFill()

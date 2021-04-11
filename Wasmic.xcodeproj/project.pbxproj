@@ -50,13 +50,10 @@
 		F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F249A2CB2622969400D6829A /* ShortcutsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2CA2622969400D6829A /* ShortcutsStorage.swift */; };
 		F249A2DD26229C4100D6829A /* ShortcutsNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2DC26229C4100D6829A /* ShortcutsNote.swift */; };
-		F249A2DE26229C4100D6829A /* ShortcutsNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2DC26229C4100D6829A /* ShortcutsNote.swift */; };
 		F249A2EB2622A07A00D6829A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2EA2622A07A00D6829A /* PrimaryButton.swift */; };
-		F249A2EC2622A07A00D6829A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2EA2622A07A00D6829A /* PrimaryButton.swift */; };
 		F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F249A2F72622A6CF00D6829A /* Assets.xcassets */; };
 		F249A2F92622A6CF00D6829A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F249A2F72622A6CF00D6829A /* Assets.xcassets */; };
 		F249A3002622AE2600D6829A /* WelcomeNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2FF2622AE2600D6829A /* WelcomeNote.swift */; };
-		F249A3012622AE2600D6829A /* WelcomeNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2FF2622AE2600D6829A /* WelcomeNote.swift */; };
 		F249A3082622B44500D6829A /* PersistentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3072622B44500D6829A /* PersistentState.swift */; };
 		F249A3092622B44500D6829A /* PersistentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3072622B44500D6829A /* PersistentState.swift */; };
 		F249A3462622DC5200D6829A /* wasi_api.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A3442622DC5200D6829A /* wasi_api.h */; };
@@ -839,11 +836,8 @@
 			files = (
 				F249A2CB2622969400D6829A /* ShortcutsStorage.swift in Sources */,
 				F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */,
-				F249A2EC2622A07A00D6829A /* PrimaryButton.swift in Sources */,
 				F249A0DF2621C93000D6829A /* Intents.intentdefinition in Sources */,
 				F249A3092622B44500D6829A /* PersistentState.swift in Sources */,
-				F249A3012622AE2600D6829A /* WelcomeNote.swift in Sources */,
-				F249A2DE26229C4100D6829A /* ShortcutsNote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

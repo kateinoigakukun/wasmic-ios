@@ -74,8 +74,7 @@ struct WelcomeNote: View {
                 Group {
                     icon
                         .resizable()
-                        .foregroundColor(Color(.systemIndigo))
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color(Brand.primaryColor))
                         .aspectRatio(nil, contentMode: .fit)
                         .frame(width: 36)
                 }
