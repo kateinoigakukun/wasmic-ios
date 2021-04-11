@@ -33,33 +33,30 @@ struct WelcomeNote: View {
         ScrollView {
             VStack {
                 Spacer().frame(minHeight: 0, idealHeight: 54)
-                Text("Welcome to Wasmic")
+                Text("welcome.title")
                     .font(.title)
                     .bold()
                     .padding([.top, .bottom], 24)
 
                 Row(
                     icon: Image(systemName: "globe"),
-                    title: Text("Run and Learn WebAssembly"),
-                    caption: Text(
-                        "WebAssembly is a portable executable format in a safe way. You can learn how to write it within this app."
-                    ))
+                    title: Text("welcome.run-and-learn.title"),
+                    caption: Text("welcome.run-and-learn.caption"))
 
                 Row(
                     icon: Image(systemName: "bolt.fill"),
-                    title: Text("Automate things"),
-                    caption: Text("Wasmic provides Shortcuts actions to run your WebAssembly file.")
-                )
+                    title: Text("welcome.automate-things.title"),
+                    caption: Text("welcome.automate-things.caption"))
 
                 Row(
                     icon: Image(systemName: "gearshape.2"),
-                    title: Text("WASI Compatible"),
-                    caption: Text("You can run WASI application in this app securely."))
+                    title: Text("welcome.wasi-compatible.title"),
+                    caption: Text("welcome.wasi-compatible.caption"))
 
                 PrimaryButton(
                     action: { self.dismiss?() },
                     label: {
-                        Text("Continue")
+                        Text("welcome.continue")
                     }
                 )
                 .padding()

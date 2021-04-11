@@ -10,7 +10,7 @@ import SwiftUI
 final class HelpNoteViewController: UIHostingController<HelpNote> {
     init() {
         super.init(rootView: HelpNote())
-        self.title = "Help"
+        self.title = NSLocalizedString("help.title", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self,
             action: #selector(self.dismissPresenting))

@@ -25,3 +25,29 @@
 "use-in-shortcuts.title" = "Shortcuts";
 
 "compile-error.title" = "Compile Error";
+
+"welcome.title" = "Welcome to Wasmic";
+"welcome.run-and-learn.title" = "Run and Learn WebAssembly";
+"welcome.run-and-learn.caption" = "WebAssembly is a portable executable format in a safe way. You can learn how to write it within this app.";
+"welcome.automate-things.title" = "Automate things";
+"welcome.automate-things.caption" = "Wasmic provides Shortcuts actions to run your WebAssembly file.";
+"welcome.wasi-compatible.title" = "WASI Compatible";
+"welcome.wasi-compatible.caption" = "You can run WASI application in this app securely.";
+"welcome.continue" = "Continue";
+
+"shortcuts-note.title" = "Run Wasm in Shortcuts";
+"shortcuts-note.headline" = "Wasmic provides Shortcuts actions to run your WebAssembly file.";
+"shortcuts-note.subheadline" = "You can automate things you do regularly on your iPhone and iPad using WebAssembly.";
+"shortcuts-note.footnote" = "Note that you need to re-register .wasm file by 'Shortcuts' action when you updated the wasm file";
+"shortcuts-note.open-shortcuts" = "Open Shortcuts";
+
+"help.title" = "Help";
+
+"execution.title" = "Execution";
+
+"invocation.title" = "Invocation";
+"invocation.wasi-app" = "WASI Application";
+"invocation.function.title" = "Function";
+"invocation.arguments.title" = "Arguments";
+"invocation.arguments.add" = "Add new argument";
+"invocation.run" = "Run";

@@ -14,7 +14,7 @@ class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
         let rootView = WasmInvocationView(
             bytes: bytes, exports: exports, selected: selected, isWASI: isWASI)
         super.init(rootView: rootView)
-        self.title = "Invocation"
+        self.title = NSLocalizedString("invocation.title", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self,
             action: #selector(self.dismissPresenting))
@@ -83,14 +83,14 @@ struct WasmInvocationView: View {
             Form {
                 Section {
                     if isWASI {
-                        Toggle(isOn: $runAsWASI) { Text("WASI Application") }
+                        Toggle(isOn: $runAsWASI) { Text("invocation.wasi-app") }
                     }
                     if !runAsWASI {
                         functionSelector
                     }
                 }
 
-                Section.init(header: Text("Arguments")) {
+                Section.init(header: Text("invocation.arguments.title")) {
                     if runAsWASI {
                         wasiLevelArguments
                     } else {
@@ -133,7 +133,7 @@ struct WasmInvocationView: View {
                         repeating: "", count: newSelection.signature.params.count)
                 }
             ),
-            label: Text("Function"),
+            label: Text("invocation.function.title"),
             content: {
                 ForEach(exports, id: \.self) { export in
                     Text(export.name)
@@ -173,7 +173,7 @@ struct WasmInvocationView: View {
         Button(action: { wasiArguments.append("") }) {
             HStack {
                 Image(systemName: "plus.circle.fill")
-                Text("Add new argument")
+                Text("invocation.arguments.add")
             }
         }
     }

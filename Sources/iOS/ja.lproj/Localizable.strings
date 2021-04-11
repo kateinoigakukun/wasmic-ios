@@ -25,3 +25,29 @@
 "use-in-shortcuts.title" = "ショートカット";
 
 "compile-error.title" = "コンパイルエラー";
+
+"welcome.title" = "ようこそ 'Wasmic'へ";
+"welcome.run-and-learn.title" = "WebAssemblyを動かして学ぶ";
+"welcome.run-and-learn.caption" = "ポータブルな実行形式のWebAssemblyを書いて学びましょう。";
+"welcome.automate-things.title" = "作業を自動化";
+"welcome.automate-things.caption" = "WasmicはShortcutsと連携してWebAssemblyを実行できます。";
+"welcome.wasi-compatible.title" = "WASI対応";
+"welcome.wasi-compatible.caption" = "WASI Appを安全に実行できます。";
+"welcome.continue" = "続ける";
+
+"shortcuts-note.title" = "ShortcutsでWasmを実行する";
+"shortcuts-note.headline" = "WasmicはShortcutsと連携してWebAssemblyを実行できます。";
+"shortcuts-note.subheadline" = "iPhone、iPadでよく行う作業をWebAssemblyで自動化できます。";
+"shortcuts-note.footnote" = ".wasmファイルを更新後は'Shortcuts'に再登録する必要があります。";
+"shortcuts-note.open-shortcuts" = "Shortcutsを開く";
+
+"help.title" = "ヘルプ";
+
+"execution.title" = "実行";
+
+"invocation.title" = "呼び出し";
+"invocation.wasi-app" = "WASIアプリ";
+"invocation.function.title" = "関数";
+"invocation.arguments.title" = "引数";
+"invocation.arguments.add" = "新しい引数を追加";
+"invocation.run" = "実行";

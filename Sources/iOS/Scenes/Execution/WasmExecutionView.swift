@@ -74,7 +74,7 @@ class WasmExecutionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Execution"
+        title = NSLocalizedString("execution.title", comment: "")
         navigationItem.leftBarButtonItem = doneButton
         navigationItem.rightBarButtonItem = actionButton
         executor.objectWillChange.sink { [weak self] in
