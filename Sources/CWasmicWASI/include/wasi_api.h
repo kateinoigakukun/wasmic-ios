@@ -12,7 +12,8 @@
 
 typedef struct {
     m3_wasi_context_t parent;
-    ssize_t (*writev)(int, const struct iovec *, int);
+    void *user_context;
+    ssize_t (*writev)(void *user_context, int, const struct iovec *, int);
 } wasmic_wasi_context_t;
 
 wasmic_wasi_context_t* wasmic_GetWasiContext(void);

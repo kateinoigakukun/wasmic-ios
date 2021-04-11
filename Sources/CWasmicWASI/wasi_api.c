@@ -442,7 +442,7 @@ m3ApiRawFunction(m3_wasi_unstable_fd_write)
 
     wasmic_wasi_context_t* context = (wasmic_wasi_context_t*)(_ctx->userdata);
 
-    ssize_t ret = context->writev(fd, iovs, iovs_len);
+    ssize_t ret = context->writev(context->user_context, fd, iovs, iovs_len);
     if (ret < 0) { m3ApiReturn(errno_to_wasi(errno)); }
     m3ApiWriteMem32(nwritten, ret);
     m3ApiReturn(__WASI_ERRNO_SUCCESS);
@@ -629,7 +629,7 @@ _       (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "fd_read",    
 _       (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "fd_seek",              "i(iIi*)", &m3_wasi_unstable_fd_seek)));
 //_     (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "fd_sync",              "i(i)",    )));
 //_     (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "fd_tell",              "i(i*)",   )));
-_       (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "fd_write",             "i(i*i*)", &m3_wasi_unstable_fd_write)));
+_       (SuppressLookupFailure (m3_LinkRawFunctionEx (module, wasi, "fd_write",             "i(i*i*)", &m3_wasi_unstable_fd_write, wasi_context)));
 
 //_     (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "path_create_directory",    "i(i*i)",       )));
 //_     (SuppressLookupFailure (m3_LinkRawFunction (module, wasi, "path_filestat_get",        "i(ii*i*)",     &m3_wasi_unstable_path_filestat_get)));

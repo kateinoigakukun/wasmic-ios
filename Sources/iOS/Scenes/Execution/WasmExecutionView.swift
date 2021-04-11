@@ -173,7 +173,19 @@ class WasmExecutor: ObservableObject {
             do {
                 let newState: State
                 if self.runAsWASI {
-                    let exitCode = try WebAssembly.startWasiApp(wasmBytes: self.bytes, args: [])
+                    let exitCode = try WebAssembly.startWasiApp(
+                        wasmBytes: self.bytes, args: [],
+                        stdout: { output in
+                            DispatchQueue.main.async {
+                                self.output += output
+                            }
+                        },
+                        stderr: { output in
+                            DispatchQueue.main.async {
+                                self.output += output
+                            }
+                        }
+                    )
                     newState = .wasiExit(exitCode)
                 } else {
                     let result =

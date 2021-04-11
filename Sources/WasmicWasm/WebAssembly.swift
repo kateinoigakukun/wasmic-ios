@@ -5,9 +5,9 @@
 //  Created by kateinoigakukun on 2021/04/10.
 //
 
+import CWasmicWASI
 @_implementationOnly import wabt
 @_implementationOnly import wasm3
-import CWasmicWASI
 
 public struct WebAssembly {
 
@@ -31,7 +31,11 @@ public struct WebAssembly {
         case f64(Float64)
     }
 
-    public static func startWasiApp(wasmBytes: [UInt8], args: [String]) throws -> Int {
+    public static func startWasiApp(
+        wasmBytes: [UInt8], args: [String],
+        stdout: (String) -> Void,
+        stderr: (String) -> Void
+    ) throws -> Int {
         guard let env = m3_NewEnvironment() else {
             throw Error.unexpected("m3_NewEnvironment failed", nil)
         }
@@ -53,7 +57,7 @@ public struct WebAssembly {
         if let result = m3_LinkWASI(module) {
             throw Error.unexpected("m3_LinkWASI failed", result)
         }
-        guard let context = m3_GetWasiContext() else {
+        guard let context = wasmic_GetWasiContext() else {
             throw Error.unexpected("m3_GetWasiContext failed", nil)
         }
 
@@ -62,15 +66,72 @@ public struct WebAssembly {
             throw Error.unexpected("m3_FindFunction failed", result)
         }
 
-        context.pointee.argc = u32(args.count)
-        let args = args.map { $0.copyCString() }
-        defer { args.forEach { $0.deallocate() } }
-        let argv = args + [nil]
-        argv.withUnsafeBufferPointer { argv in
-            context.pointee.argv = argv.baseAddress!
-            m3_CallArgv(wasmFn, 0, nil)
+        return withoutActuallyEscaping(stdout) { stdout -> Int in
+            withoutActuallyEscaping(stderr) { stderr -> Int in
+                var userContext = WASIUserContext(stdout: stdout, stderr: stderr)
+                context.pointee.writev = {
+                    (
+                        userCtxRawPtr: UnsafeMutableRawPointer?, fd: Int32,
+                        iovs: UnsafePointer<iovec>?, iovs_len: Int32
+                    ) -> Int in
+                    guard
+                        let userCtxPtr = userCtxRawPtr?.assumingMemoryBound(
+                            to: WASIUserContext.self)
+                    else {
+                        return -1
+                    }
+                    return userCtxPtr.pointee.writev(fd: fd, iovs: iovs, iovs_len: iovs_len)
+                }
+
+                context.pointee.parent.argc = u32(args.count)
+                let args = args.map { $0.copyCString() }
+                defer { args.forEach { $0.deallocate() } }
+                let argv = args + [nil]
+                argv.withUnsafeBufferPointer { argv in
+                    context.pointee.parent.argv = argv.baseAddress!
+                    withUnsafeMutablePointer(to: &userContext) { userContextPtr in
+                        context.pointee.user_context = UnsafeMutableRawPointer(userContextPtr)
+                        m3_CallArgv(wasmFn, 0, nil)
+                    }
+                }
+                return Int(context.pointee.parent.exit_code)
+            }
         }
-        return Int(context.pointee.exit_code)
+    }
+
+    private struct WASIUserContext {
+        let stdout: (String) -> Void
+        let stderr: (String) -> Void
+
+        func write(fd: Int32, iov: iovec) -> Int {
+            let output = String(
+                decodingCString: iov.iov_base.assumingMemoryBound(to: UInt8.self),
+                as: UTF8.self)
+            switch fd {
+            case 1: stdout(output)
+            case 2: stderr(output)
+            default: break
+            }
+            return iov.iov_len
+        }
+
+        func writev(fd: Int32, iovs: UnsafePointer<iovec>?, iovs_len: Int32) -> Int {
+            switch fd {
+            case 1, 2:
+                var written = 0
+                let iovs = UnsafeBufferPointer(start: iovs, count: Int(iovs_len))
+                for iov in iovs {
+                    var localWritten = 0
+                    while localWritten < iov.iov_len {
+                        localWritten += write(fd: fd, iov: iov)
+                    }
+                    written += localWritten
+                }
+                return written
+            default:
+                return Darwin.writev(fd, iovs, iovs_len)
+            }
+        }
     }
 
     public static func execute(wasmBytes: [UInt8], function: String, args: [String])
