@@ -208,6 +208,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
     @objc func presentHelp(_ sender: Any) {
         let vc = HelpNoteViewController()
         let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.prefersLargeTitles = true
         self.present(nav, animated: true)
     }
 
