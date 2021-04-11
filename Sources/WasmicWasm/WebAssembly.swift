@@ -7,6 +7,7 @@
 
 @_implementationOnly import wabt
 @_implementationOnly import wasm3
+import CWasmicWASI
 
 public struct WebAssembly {
 

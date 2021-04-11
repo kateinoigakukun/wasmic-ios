@@ -62,6 +62,8 @@
 		F249A3462622DC5200D6829A /* wasi_api.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A3442622DC5200D6829A /* wasi_api.h */; };
 		F249A35B2622DC5800D6829A /* wasi_api.c in Sources */ = {isa = PBXBuildFile; fileRef = F249A3452622DC5200D6829A /* wasi_api.c */; };
 		F249A36F2622DD4500D6829A /* libCWasmicWASI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A3312622DC1F00D6829A /* libCWasmicWASI.a */; };
+		F249A39D2622E57300D6829A /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = F249A38E2622E4A700D6829A /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
+		F249A39E2622E57300D6829A /* wasi_api.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A3442622DC5200D6829A /* wasi_api.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -206,6 +208,7 @@
 		F249A3312622DC1F00D6829A /* libCWasmicWASI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCWasmicWASI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F249A3442622DC5200D6829A /* wasi_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wasi_api.h; sourceTree = "<group>"; };
 		F249A3452622DC5200D6829A /* wasi_api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wasi_api.c; sourceTree = "<group>"; };
+		F249A38E2622E4A700D6829A /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -455,10 +458,19 @@
 		F249A3322622DC2000D6829A /* CWasmicWASI */ = {
 			isa = PBXGroup;
 			children = (
-				F249A3442622DC5200D6829A /* wasi_api.h */,
+				F249A3952622E4FB00D6829A /* include */,
 				F249A3452622DC5200D6829A /* wasi_api.c */,
 			);
 			path = CWasmicWASI;
+			sourceTree = "<group>";
+		};
+		F249A3952622E4FB00D6829A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				F249A38E2622E4A700D6829A /* module.modulemap */,
+				F249A3442622DC5200D6829A /* wasi_api.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		F251997A261F26520037DA79 = {
@@ -522,6 +534,15 @@
 			files = (
 				F249A0BD2621C90600D6829A /* WasmicKit.h in Headers */,
 				F249A3462622DC5200D6829A /* wasi_api.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F249A39C2622E56600D6829A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F249A39D2622E57300D6829A /* module.modulemap in Headers */,
+				F249A39E2622E57300D6829A /* wasi_api.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +645,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F249A3352622DC2000D6829A /* Build configuration list for PBXNativeTarget "CWasmicWASI" */;
 			buildPhases = (
+				F249A39C2622E56600D6829A /* Headers */,
 				F249A32D2622DC1F00D6829A /* Sources */,
 				F249A32E2622DC1F00D6829A /* Frameworks */,
 				F249A32F2622DC1F00D6829A /* CopyFiles */,
@@ -1132,10 +1154,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -1147,10 +1171,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${TARGET_BUILD_DIR}/$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
