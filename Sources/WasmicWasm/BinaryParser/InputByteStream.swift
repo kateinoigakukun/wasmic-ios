@@ -108,4 +108,35 @@ public struct InputByteStream {
         try consumer?(bytes[start..<offset])
     }
 
+    /// https://webassembly.github.io/spec/core/binary/types.html#table-types
+    mutating func consumeTable(consumer: Consumer? = nil) rethrows {
+        let start = offset
+        _ = readUInt8() // element type
+        let hasMax = readUInt8() != 0
+        _ = readVarUInt32() // initial
+        if hasMax {
+            _ = readVarUInt32() // max
+        }
+        try consumer?(bytes[start ..< offset])
+    }
+
+    /// https://webassembly.github.io/spec/core/binary/types.html#memory-types
+    mutating func consumeMemory(consumer: Consumer? = nil) rethrows {
+        let start = offset
+        let flags = readUInt8()
+        let hasMax = (flags & LIMITS_HAS_MAX_FLAG) != 0
+        _ = readVarUInt32() // initial
+        if hasMax {
+            _ = readVarUInt32() // max
+        }
+        try consumer?(bytes[start ..< offset])
+    }
+
+    /// https://webassembly.github.io/spec/core/binary/types.html#global-types
+    mutating func consumeGlobalHeader(consumer: Consumer? = nil) rethrows {
+        let start = offset
+        _ = readUInt8() // value type
+        _ = readUInt8() // mutable
+        try consumer?(bytes[start ..< offset])
+    }
 }

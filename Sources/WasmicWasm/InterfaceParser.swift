@@ -25,6 +25,7 @@ extension WebAssembly {
         var typeSection = TypeSection()
         var functionSection = FunctionSection()
         var exportSection = ExportSection()
+        var importSection = ImportSection()
 
         input.readHeader()
 
@@ -34,6 +35,8 @@ extension WebAssembly {
             switch section.type {
             case .type:
                 typeSection = try TypeSection(from: &input)
+            case .import:
+                importSection = try ImportSection(from: &input)
             case .function:
                 functionSection = try FunctionSection(from: &input)
                 break
@@ -45,10 +48,11 @@ extension WebAssembly {
         }
         var exports: [Export] = []
         for export in exportSection.exports {
-            guard export.index < functionSection.typeIndices.count else {
+            guard export.kind == .func else { continue }
+            guard export.index < importSection.funcImportCount + functionSection.typeIndices.count else {
                 throw ParsingError.invalidIndex(export.index, "export")
             }
-            let typeIndex = functionSection.typeIndices[export.index]
+            let typeIndex = functionSection.typeIndices[importSection.funcImportCount + export.index]
             guard typeIndex < typeSection.signatures.count else {
                 throw ParsingError.invalidIndex(typeIndex, "type")
             }

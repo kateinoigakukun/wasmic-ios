@@ -42,6 +42,37 @@ struct ExportSection {
     }
 }
 
+typealias ImportFuncReplacement = (index: Int, toTypeIndex: Int)
+
+struct ImportSection {
+    let funcImportCount: Int
+    init() { self.funcImportCount = 0 }
+    init(from input: inout InputByteStream) throws {
+        let importCount = Int(input.readVarUInt32())
+        var funcImportCount: Int = 0
+        for _ in 0..<importCount {
+            _ = input.readString()
+            _ = input.readString()
+            let rawKind = input.readUInt8()
+            let kind = ExternalKind(rawValue: rawKind)
+            switch kind {
+            case .func:
+                _ = input.readVarUInt32()
+                funcImportCount += 1
+            case .table:
+                input.consumeTable()
+            case .memory:
+                input.consumeMemory()
+            case .global:
+                input.consumeGlobalHeader()
+            default:
+                throw InputByteStream.Error.invalidValueType(rawKind)
+            }
+        }
+        self.funcImportCount = funcImportCount
+    }
+}
+
 struct FunctionSection {
     var typeIndices: [Int] = []
     init() {}
