@@ -8,6 +8,8 @@
 import UIKit
 import os.log
 import WasmicWasm
+import WasmicKit
+import Intents
 
 /// - Tag: DocumentBrowserViewController
 class DocumentBrowserViewController: UIDocumentBrowserViewController,

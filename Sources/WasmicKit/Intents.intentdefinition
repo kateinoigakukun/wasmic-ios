@@ -27,13 +27,11 @@
 			<string>ciEkwz</string>
 			<key>INIntentInput</key>
 			<string>arguments</string>
-			<key>INIntentKeyParameter</key>
-			<string>functionName</string>
 			<key>INIntentLastParameterTag</key>
 			<integer>23</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
-				<key>fileName,functionName,arguments</key>
+				<key>functionName,arguments</key>
 				<dict>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
@@ -49,25 +47,25 @@
 			<string>RunWasmFile</string>
 			<key>INIntentParameterCombinations</key>
 			<dict>
-				<key>fileName,functionName,arguments</key>
+				<key>functionName,arguments</key>
 				<dict>
 					<key>INIntentParameterCombinationIsLinked</key>
+					<true/>
+					<key>INIntentParameterCombinationIsPrimary</key>
 					<true/>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
 					<string>Run WebAssembly ${functionName} with ${arguments}</string>
 					<key>INIntentParameterCombinationTitleID</key>
-					<string>rRcGLD</string>
+					<string>OO6RGe</string>
 				</dict>
 			</dict>
 			<key>INIntentParameters</key>
 			<array>
 				<dict>
-					<key>INIntentParameterConfigurable</key>
-					<true/>
 					<key>INIntentParameterDisplayName</key>
-					<string>File Name</string>
+					<string>File</string>
 					<key>INIntentParameterDisplayNameID</key>
 					<string>yLAMGc</string>
 					<key>INIntentParameterDisplayPriority</key>
@@ -85,26 +83,7 @@
 						<string>Custom</string>
 					</dict>
 					<key>INIntentParameterName</key>
-					<string>fileName</string>
-					<key>INIntentParameterPromptDialogs</key>
-					<array>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Configuration</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Which file would you like to run?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>EDoPhD</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Primary</string>
-						</dict>
-					</array>
+					<string>file</string>
 					<key>INIntentParameterTag</key>
 					<integer>22</integer>
 					<key>INIntentParameterType</key>

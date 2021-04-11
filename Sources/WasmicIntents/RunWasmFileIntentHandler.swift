@@ -11,7 +11,7 @@ import WasmicKit
 
 final class RunWasmFileIntentHandler: NSObject, RunWasmFileIntentHandling {
     func handle(intent: RunWasmFileIntent, completion: @escaping (RunWasmFileIntentResponse) -> Void) {
-        guard let fileName = intent.fileName,
+        guard let file = intent.file,
               let functionName = intent.functionName else {
             completion(RunWasmFileIntentResponse(code: .failure, userActivity: nil))
             return
@@ -20,7 +20,7 @@ final class RunWasmFileIntentHandler: NSObject, RunWasmFileIntentHandling {
 
         do {
             let results = try WebAssembly.execute(
-                wasmBytes: Array(fileName.data),
+                wasmBytes: Array(file.data),
                 function: functionName,
                 args: arguments.map(\.description))
             let response = RunWasmFileIntentResponse()
