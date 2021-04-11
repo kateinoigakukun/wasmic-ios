@@ -57,7 +57,7 @@
 #  define HAS_IOVEC
 #endif
 
-static m3_wasi_context_t* wasi_context;
+static wasmic_wasi_context_t* wasi_context;
 
 typedef struct wasi_iovec_t
 {
@@ -440,7 +440,9 @@ m3ApiRawFunction(m3_wasi_unstable_fd_write)
     struct iovec iovs[iovs_len];
     copy_iov_to_host(_mem, iovs, wasi_iovs, iovs_len);
 
-    ssize_t ret = writev(fd, iovs, iovs_len);
+    wasmic_wasi_context_t* context = (wasmic_wasi_context_t*)(_ctx->userdata);
+
+    ssize_t ret = context->writev(fd, iovs, iovs_len);
     if (ret < 0) { m3ApiReturn(errno_to_wasi(errno)); }
     m3ApiWriteMem32(nwritten, ret);
     m3ApiReturn(__WASI_ERRNO_SUCCESS);
@@ -570,9 +572,13 @@ M3Result SuppressLookupFailure(M3Result i_result)
 
 m3_wasi_context_t* m3_GetWasiContext()
 {
-    return wasi_context;
+    return (m3_wasi_context_t *)wasi_context;
 }
 
+wasmic_wasi_context_t* wasmic_GetWasiContext(void)
+{
+    return wasi_context;
+}
 
 M3Result  m3_LinkWASI  (IM3Module module)
 {
@@ -584,10 +590,10 @@ M3Result  m3_LinkWASI  (IM3Module module)
     }
 
     if (!wasi_context) {
-        wasi_context = (m3_wasi_context_t*)malloc(sizeof(m3_wasi_context_t));
-        wasi_context->exit_code = 0;
-        wasi_context->argc = 0;
-        wasi_context->argv = 0;
+        wasi_context = (wasmic_wasi_context_t*)malloc(sizeof(wasmic_wasi_context_t));
+        wasi_context->parent.exit_code = 0;
+        wasi_context->parent.argc = 0;
+        wasi_context->parent.argv = 0;
     }
 
     static const char* namespaces[2] = { "wasi_unstable", "wasi_snapshot_preview1" };

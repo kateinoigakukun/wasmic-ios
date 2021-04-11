@@ -1,0 +1,4 @@
+module CWasmicWASI {
+    header "wasi_api.h"
+    export *
+}
