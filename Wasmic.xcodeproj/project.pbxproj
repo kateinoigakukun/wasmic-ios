@@ -22,9 +22,7 @@
 		F2499EB02620B43100D6829A /* libWasmicWasm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E9D2620B40900D6829A /* libWasmicWasm.a */; };
 		F2499EC72620B50500D6829A /* WatCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499EC62620B50500D6829A /* WatCompiler.swift */; };
 		F2499ED82620B59600D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
-		F2499ED92620B59600D6829A /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; };
 		F2499EEF2620B6C400D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
-		F2499EF02620B6C400D6829A /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; };
 		F2499F062621304B00D6829A /* TextDocumentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F052621304B00D6829A /* TextDocumentEngine.swift */; };
 		F2499F0C262137A600D6829A /* WasmInvocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F0B262137A600D6829A /* WasmInvocationView.swift */; };
 		F2499F1726213A8000D6829A /* InterfaceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2499F1126213A7B00D6829A /* InterfaceParser.swift */; };
@@ -64,7 +62,7 @@
 		F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3D52622FD0900D6829A /* HelpNote.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
-		F2DF8A032623337B00860D0D /* wasm3.xcframework in Headers */ = {isa = PBXBuildFile; fileRef = F2499D90261F466C00D6829A /* wasm3.xcframework */; settings = {ATTRIBUTES = (Private, ); }; };
+		F2DF8BF6262354C200860D0D /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF8BF5262354C200860D0D /* wasm3.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,7 +161,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F2499D90261F466C00D6829A /* wasm3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wasm3.xcframework; path = "third-party/build/wasm3.xcframework"; sourceTree = "<group>"; };
 		F2499D9E261F4BB400D6829A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2499DBE261F4ED400D6829A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F2499DE4261F5B9500D6829A /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +217,7 @@
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F251998A261F26530037DA79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2DF8BF5262354C200860D0D /* wasm3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wasm3.xcframework; path = "third-party/build/wasm3.xcframework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,7 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2499ED82620B59600D6829A /* wabt.xcframework in Frameworks */,
-				F2499ED92620B59600D6829A /* wasm3.xcframework in Frameworks */,
+				F2DF8BF6262354C200860D0D /* wasm3.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +242,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2499EEF2620B6C400D6829A /* wabt.xcframework in Frameworks */,
-				F2499EF02620B6C400D6829A /* wasm3.xcframework in Frameworks */,
 				F2499EB02620B43100D6829A /* libWasmicWasm.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,8 +287,8 @@
 		F2499D8F261F466C00D6829A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2DF8BF5262354C200860D0D /* wasm3.xcframework */,
 				F2499E0426202F9600D6829A /* wabt.xcframework */,
-				F2499D90261F466C00D6829A /* wasm3.xcframework */,
 				F249A0692621C42900D6829A /* Intents.framework */,
 			);
 			name = Frameworks;
@@ -551,7 +548,6 @@
 			files = (
 				F249A39D2622E57300D6829A /* module.modulemap in Headers */,
 				F249A39E2622E57300D6829A /* wasi_api.h in Headers */,
-				F2DF8A032623337B00860D0D /* wasm3.xcframework in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1103,11 +1099,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 2;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/WasmicKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1135,11 +1131,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 2;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/WasmicKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
