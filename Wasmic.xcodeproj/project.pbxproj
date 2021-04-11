@@ -49,6 +49,12 @@
 		F249A19E2621CEB300D6829A /* RunWasmFileIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */; };
 		F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F249A2CB2622969400D6829A /* ShortcutsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2CA2622969400D6829A /* ShortcutsStorage.swift */; };
+		F249A2DD26229C4100D6829A /* ShortcutsNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2DC26229C4100D6829A /* ShortcutsNote.swift */; };
+		F249A2DE26229C4100D6829A /* ShortcutsNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2DC26229C4100D6829A /* ShortcutsNote.swift */; };
+		F249A2EB2622A07A00D6829A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2EA2622A07A00D6829A /* PrimaryButton.swift */; };
+		F249A2EC2622A07A00D6829A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2EA2622A07A00D6829A /* PrimaryButton.swift */; };
+		F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F249A2F72622A6CF00D6829A /* Assets.xcassets */; };
+		F249A2F92622A6CF00D6829A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F249A2F72622A6CF00D6829A /* Assets.xcassets */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -175,6 +181,9 @@
 		F249A1472621CB9900D6829A /* WasmicKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicKit.swift; sourceTree = "<group>"; };
 		F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunWasmFileIntentHandler.swift; sourceTree = "<group>"; };
 		F249A2CA2622969400D6829A /* ShortcutsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsStorage.swift; sourceTree = "<group>"; };
+		F249A2DC26229C4100D6829A /* ShortcutsNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsNote.swift; sourceTree = "<group>"; };
+		F249A2EA2622A07A00D6829A /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		F249A2F72622A6CF00D6829A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +260,7 @@
 		F2499DF62620261100D6829A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F249A2DB26229BFA00D6829A /* Notes */,
 				F249A2B826228F4300D6829A /* Browser */,
 				F2499E5D2620584E00D6829A /* Execution */,
 				F2499DF72620261A00D6829A /* Document */,
@@ -393,6 +403,22 @@
 			path = Browser;
 			sourceTree = "<group>";
 		};
+		F249A2DB26229BFA00D6829A /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				F249A2DC26229C4100D6829A /* ShortcutsNote.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		F249A2E92622A07000D6829A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F249A2EA2622A07A00D6829A /* PrimaryButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F251997A261F26520037DA79 = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +463,8 @@
 				F2499DF62620261100D6829A /* Scenes */,
 				F2499DFB2620291600D6829A /* DocumentTypes */,
 				F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */,
+				F249A2F72622A6CF00D6829A /* Assets.xcassets */,
+				F249A2E92622A07000D6829A /* Components */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -655,6 +683,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F249A2F92622A6CF00D6829A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +693,7 @@
 			files = (
 				F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */,
 				F25199AD261F26530037DA79 /* Assets.xcassets in Resources */,
+				F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */,
 				F2499FC52621A15E00D6829A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,7 +747,9 @@
 			files = (
 				F249A2CB2622969400D6829A /* ShortcutsStorage.swift in Sources */,
 				F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */,
+				F249A2EC2622A07A00D6829A /* PrimaryButton.swift in Sources */,
 				F249A0DF2621C93000D6829A /* Intents.intentdefinition in Sources */,
+				F249A2DE26229C4100D6829A /* ShortcutsNote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +760,8 @@
 				F2499F0C262137A600D6829A /* WasmInvocationView.swift in Sources */,
 				F2499DE5261F5B9500D6829A /* DocumentBrowserViewController.swift in Sources */,
 				F2499D9F261F4BB400D6829A /* AppDelegate.swift in Sources */,
+				F249A2DD26229C4100D6829A /* ShortcutsNote.swift in Sources */,
+				F249A2EB2622A07A00D6829A /* PrimaryButton.swift in Sources */,
 				F2499DEE261FDFBD00D6829A /* TextDocumentViewController.swift in Sources */,
 				F2499F062621304B00D6829A /* TextDocumentEngine.swift in Sources */,
 				F2499E5F2620587500D6829A /* WasmExecutionView.swift in Sources */,

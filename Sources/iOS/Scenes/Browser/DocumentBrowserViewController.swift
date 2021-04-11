@@ -25,6 +25,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
                     let inStorageURL = try self.shortcutsStorage.importDocument(url)
                     self.donateInteraction(documentURL: inStorageURL, export: nil)
                 }
+                let vc = ShortcutsNoteViewController(openShortcutsApp: {
+                    UIApplication.shared.open(URL(string: "shortcuts://")!, options: [:], completionHandler: nil)
+                })
+                self.present(vc, animated: true)
             } catch {
                 self.reportError(title: NSLocalizedString("error.title", comment: ""),
                                  message: error.localizedDescription)
@@ -217,7 +221,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         let intent = RunWasmFileIntent()
         intent.file = INFile(fileURL: documentURL, filename: documentURL.lastPathComponent,
                              typeIdentifier: "dev.katei.wasmic.wasm")
-        intent.functionName = export?.name ?? ""
+        intent.functionName = export?.name ?? "Function Name"
         intent.arguments = [0]
         let interaction = INInteraction(intent: intent, response: nil)
         interaction.donate { error in
