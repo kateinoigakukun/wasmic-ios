@@ -22,15 +22,13 @@ third_party_dir="$(cd "$(dirname "$0")" && pwd)"
 build_wasm3() {
     CMAKE_ARGS=(
         -G Ninja
-        -S "$third_party_dir/wasm3"
+        -S "$third_party_dir/wasm3-build"
         -D CMAKE_TOOLCHAIN_FILE="$third_party_dir/ios-cmake/ios.toolchain.cmake"
-        -D BUILD_NATIVE=OFF
-        -D BUILD_WASI=none
         -D DEPLOYMENT_TARGET="14.0"
         -D ENABLE_BITCODE=ON
         -D CMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"
     )
-    CMAKE_BUILD_ARGS=(--target m3 --config "$CMAKE_BUILD_TYPE")
+    CMAKE_BUILD_ARGS=(--target wasm3.framework --config "$CMAKE_BUILD_TYPE")
 
     cmake "${CMAKE_ARGS[@]}" \
         -B "$third_party_dir/build/wasm3-iphoneos-arm64" \
@@ -42,27 +40,18 @@ build_wasm3() {
         -D PLATFORM=SIMULATOR64
     cmake --build "$third_party_dir/build/wasm3-iphonesimulator-x86_64" "${CMAKE_BUILD_ARGS[@]}"
 
-    headers_dir="$third_party_dir/build/wasm3-headers"
-    mkdir -p "$headers_dir"
-    # shellcheck disable=SC2046
-    cp $(find "$third_party_dir/wasm3/source" -name "*.h" -depth 1) "$headers_dir"
-    mkdir -p "$headers_dir/extra"
-    cp "$third_party_dir/wasm3/source/extra/wasi_core.h" "$headers_dir/extra"
-
-    cat <<EOS > "$headers_dir/module.modulemap"
-module wasm3 {
-    header "wasm3.h"
-    header "m3_api_wasi.h"
-    export *
-}
-EOS
+    rm -rf "$third_party_dir/build/wasm3_impl.xcframework"
+    xcodebuild -create-xcframework \
+        -framework "$third_party_dir/build/wasm3-iphoneos-arm64/wasm3_impl.framework" \
+        -framework "$third_party_dir/build/wasm3-iphonesimulator-x86_64/wasm3_impl.framework" \
+        -output "$third_party_dir/build/wasm3_impl.xcframework"
 
     rm -rf "$third_party_dir/build/wasm3.xcframework"
     xcodebuild -create-xcframework \
-        -library "$third_party_dir/build/wasm3-iphoneos-arm64/source/libm3.a" \
-        -headers "$headers_dir" \
-        -library "$third_party_dir/build/wasm3-iphonesimulator-x86_64/source/libm3.a" \
-        -headers "$headers_dir" \
+        -library "$third_party_dir/build/wasm3-iphoneos-arm64/libwasm3.a" \
+        -headers "$third_party_dir/build/wasm3-iphoneos-arm64/wasm3-headers" \
+        -library "$third_party_dir/build/wasm3-iphonesimulator-x86_64/libwasm3.a" \
+        -headers "$third_party_dir/build/wasm3-iphonesimulator-x86_64/wasm3-headers" \
         -output "$third_party_dir/build/wasm3.xcframework"
 }
 
