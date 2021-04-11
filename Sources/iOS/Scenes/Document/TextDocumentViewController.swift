@@ -5,11 +5,11 @@
 //  Created by kateinoigakukun on 2021/04/09.
 //
 
+import Highlightr
 import SwiftUI
 import UIKit
 import WasmicWasm
 import os.log
-import Highlightr
 
 /// - Tag: TextDocumentViewController
 class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocumentDelegate {
@@ -185,7 +185,6 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         engine.compile(fileName: fileName, watContent: document.text)
     }
 
-
     // MARK: - UITextViewDelegate
 
     private var isHandlingTextViewDelegate = false
@@ -247,7 +246,7 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         }
         animator.startAnimation()
     }
-    
+
     func updateEditorTheme() {
         switch traitCollection.userInterfaceStyle {
         case .light, .unspecified:

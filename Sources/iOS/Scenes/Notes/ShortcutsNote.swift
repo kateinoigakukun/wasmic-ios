@@ -34,35 +34,42 @@ struct ShortcutsNote: View {
                 .scaledToFill()
                 .padding()
 
-                VStack {
-                    Text("""
-                    Wasmic provides Shortcuts actions to run your WebAssembly file.
-                """)
-                        .bold()
-                        .font(.headline)
+            VStack {
+                Text(
+                    """
+                        Wasmic provides Shortcuts actions to run your WebAssembly file.
+                    """
+                )
+                .bold()
+                .font(.headline)
 
-                    Spacer().frame(height: 16)
-                    Text("You can automate things you do regularly on your iPhone and iPad using WebAssembly.")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                    Spacer().frame(height: 16)
+                Spacer().frame(height: 16)
+                Text(
+                    "You can automate things you do regularly on your iPhone and iPad using WebAssembly."
+                )
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                Spacer().frame(height: 16)
 
-                    Text("Note that you need to re-register .wasm file by 'Shortcuts' action when you updated the wasm file")
-                        .font(.footnote)
+                Text(
+                    "Note that you need to re-register .wasm file by 'Shortcuts' action when you updated the wasm file"
+                )
+                .font(.footnote)
+            }
+            .multilineTextAlignment(.center)
+            .padding([.leading, .trailing])
+
+            PrimaryButton(
+                action: openShortcutsApp,
+                label: {
+                    Text("Open Shortcuts")
                 }
-                .multilineTextAlignment(.center)
-                .padding([.leading, .trailing])
-
-
-            PrimaryButton(action: openShortcutsApp, label: {
-                Text("Open Shortcuts")
-            })
+            )
             .padding()
             Spacer()
         }
     }
 }
-
 
 struct ShortcutsNote_Previews: PreviewProvider {
 

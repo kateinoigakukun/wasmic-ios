@@ -31,34 +31,43 @@ struct WelcomeNote: View {
 
     var body: some View {
         ScrollView {
-        VStack {
-            Spacer().frame(minHeight: 0, idealHeight: 54)
-            Text("Welcome to Wasmic")
-                .font(.title)
-                .bold()
-                .padding([.top, .bottom], 24)
+            VStack {
+                Spacer().frame(minHeight: 0, idealHeight: 54)
+                Text("Welcome to Wasmic")
+                    .font(.title)
+                    .bold()
+                    .padding([.top, .bottom], 24)
 
-            Row(icon: Image(systemName: "globe"),
-                title: Text("Run and Learn WebAssembly"),
-                caption: Text("WebAssembly is a portable executable format in a safe way. You can learn how to write it within this app."))
+                Row(
+                    icon: Image(systemName: "globe"),
+                    title: Text("Run and Learn WebAssembly"),
+                    caption: Text(
+                        "WebAssembly is a portable executable format in a safe way. You can learn how to write it within this app."
+                    ))
 
-            Row(icon: Image(systemName: "bolt.fill"),
-                title: Text("Automate things"),
-                caption: Text("Wasmic provides Shortcuts actions to run your WebAssembly file."))
+                Row(
+                    icon: Image(systemName: "bolt.fill"),
+                    title: Text("Automate things"),
+                    caption: Text("Wasmic provides Shortcuts actions to run your WebAssembly file.")
+                )
 
-            Row(icon: Image(systemName: "gearshape.2"),
-                title: Text("WASI Compatible"),
-                caption: Text("You can run WASI application in this app securely."))
+                Row(
+                    icon: Image(systemName: "gearshape.2"),
+                    title: Text("WASI Compatible"),
+                    caption: Text("You can run WASI application in this app securely."))
 
-            PrimaryButton(action: { self.dismiss?() }, label: {
-                Text("Continue")
-            })
-            .padding()
-            Spacer()
-        }
+                PrimaryButton(
+                    action: { self.dismiss?() },
+                    label: {
+                        Text("Continue")
+                    }
+                )
+                .padding()
+                Spacer()
+            }
         }
     }
-    
+
     struct Row: View {
         let icon: Image
         let title: Text
@@ -94,7 +103,6 @@ struct WelcomeNote: View {
     }
 }
 
-
 struct WelcomeNote_Previews: PreviewProvider {
 
     static var previews: some View {
@@ -110,4 +118,3 @@ struct WelcomeNote_Previews: PreviewProvider {
         }
     }
 }
-

@@ -106,9 +106,10 @@ class WasmExecutionViewController: UIViewController {
         self.dismissAction()
     }
     @objc private func showActionSheet() {
-        let activityViewController = UIActivityViewController(activityItems: [
-            executor.output
-        ], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(
+            activityItems: [
+                executor.output
+            ], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
     }
 }

@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UISceneConfiguration(
             name: "MainConfiguration", sessionRole: connectingSceneSession.role)
     }
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(
+        _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+    ) -> Bool {
         return true
     }
 }

@@ -5,11 +5,11 @@
 //  Created by kateinoigakukun on 2021/04/09.
 //
 
-import UIKit
-import os.log
-import WasmicWasm
-import WasmicKit
 import Intents
+import UIKit
+import WasmicKit
+import WasmicWasm
+import os.log
 
 /// - Tag: DocumentBrowserViewController
 class DocumentBrowserViewController: UIDocumentBrowserViewController,
@@ -18,21 +18,25 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
     private var persistentState: PersistentState!
     private let shortcutsStorage = ShortcutsStorage()
     private lazy var useInShortcutsAction: UIDocumentBrowserAction = {
-        let action = UIDocumentBrowserAction(identifier: "dev.katei.wasmic.use-in-shortcuts",
-                                localizedTitle: NSLocalizedString("use-in-shortcuts.title", comment: ""),
-                                availability: [.menu, .navigationBar]) { urls in
+        let action = UIDocumentBrowserAction(
+            identifier: "dev.katei.wasmic.use-in-shortcuts",
+            localizedTitle: NSLocalizedString("use-in-shortcuts.title", comment: ""),
+            availability: [.menu, .navigationBar]
+        ) { urls in
             do {
                 for url in urls {
                     let inStorageURL = try self.shortcutsStorage.importDocument(url)
                     self.donateInteraction(documentURL: inStorageURL, export: nil)
                 }
                 let vc = ShortcutsNoteViewController(openShortcutsApp: {
-                    UIApplication.shared.open(URL(string: "shortcuts://")!, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(
+                        URL(string: "shortcuts://")!, options: [:], completionHandler: nil)
                 })
                 self.present(vc, animated: true)
             } catch {
-                self.reportError(title: NSLocalizedString("error.title", comment: ""),
-                                 message: error.localizedDescription)
+                self.reportError(
+                    title: NSLocalizedString("error.title", comment: ""),
+                    message: error.localizedDescription)
             }
         }
         action.supportsMultipleItems = true
@@ -58,7 +62,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if !persistentState.isWelcomeDone {
             let vc = WelcomeNoteViewController(completion: { [persistentState] in
                 persistentState?.isWelcomeDone = true
@@ -138,8 +142,9 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         } else {
             description = NSLocalizedString("alert.ok.import-error.no-description", comment: "")
         }
-        reportError(title: NSLocalizedString("alert.import-error.title", comment: ""),
-                    message: String(format: "%@ %@", prefixDescription, description))
+        reportError(
+            title: NSLocalizedString("alert.import-error.title", comment: ""),
+            message: String(format: "%@ %@", prefixDescription, description))
     }
 
     // UIDocumentBrowserViewController is telling us to open a selected a document.
@@ -212,12 +217,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
                 let nav = UINavigationController(rootViewController: vc)
                 self.present(nav, animated: true)
             } else {
-                reportError(title: NSLocalizedString("error.title", comment: ""),
-                            message: NSLocalizedString("no-export-error.message", comment: ""))
+                reportError(
+                    title: NSLocalizedString("error.title", comment: ""),
+                    message: NSLocalizedString("no-export-error.message", comment: ""))
             }
         } catch {
-            reportError(title: NSLocalizedString("open-error.title", comment: ""),
-                        message: error.localizedDescription)
+            reportError(
+                title: NSLocalizedString("open-error.title", comment: ""),
+                message: error.localizedDescription)
         }
     }
 
@@ -235,16 +242,18 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
 
     private func donateInteraction(documentURL: URL, export: WebAssembly.Export?) {
         let intent = RunWasmFileIntent()
-        intent.file = INFile(fileURL: documentURL, filename: documentURL.lastPathComponent,
-                             typeIdentifier: "dev.katei.wasmic.wasm")
+        intent.file = INFile(
+            fileURL: documentURL, filename: documentURL.lastPathComponent,
+            typeIdentifier: "dev.katei.wasmic.wasm")
         intent.functionName = export?.name ?? "Function Name"
         intent.arguments = [0]
         let interaction = INInteraction(intent: intent, response: nil)
         interaction.donate { error in
             guard let error = error else { return }
-            os_log("Failed to donate interaction for document at URL %@, error: '%@'",
-                   log: OSLog.default, type: .error,
-                   documentURL as CVarArg, error as CVarArg)
+            os_log(
+                "Failed to donate interaction for document at URL %@, error: '%@'",
+                log: OSLog.default, type: .error,
+                documentURL as CVarArg, error as CVarArg)
         }
     }
 }

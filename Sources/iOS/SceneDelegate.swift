@@ -57,16 +57,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         for urlContext in URLContexts {
             guard urlContext.url.isFileURL else { continue }
-            rootViewController.revealDocument(at: urlContext.url, importIfNeeded: true) { (url, error) in
+            rootViewController.revealDocument(at: urlContext.url, importIfNeeded: true) {
+                (url, error) in
                 if let error = error {
-                    os_log("Failed to reveal document at URL %@, error: '%@'",
-                           log: OSLog.default, type: .error,
-                           urlContext.url as CVarArg, error as CVarArg)
+                    os_log(
+                        "Failed to reveal document at URL %@, error: '%@'",
+                        log: OSLog.default, type: .error,
+                        urlContext.url as CVarArg, error as CVarArg)
                     let alertController = UIAlertController(
                         title: NSLocalizedString("alert.import-error.title", comment: ""),
                         message: NSLocalizedString("alert.reveal-error.message", comment: ""),
                         preferredStyle: .alert)
-                    self.rootViewController.present(alertController, animated: true, completion: nil)
+                    self.rootViewController.present(
+                        alertController, animated: true, completion: nil)
                     return
                 }
             }

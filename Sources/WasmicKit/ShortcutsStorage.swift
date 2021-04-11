@@ -20,7 +20,8 @@ public class ShortcutsStorage {
     public init() {}
     private func prepareDirectory() throws {
         if !fileManager.fileExists(atPath: shortcutsURL.path) {
-            try fileManager.createDirectory(at: shortcutsURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(
+                at: shortcutsURL, withIntermediateDirectories: true, attributes: nil)
         }
     }
     public func importDocument(_ url: URL) throws -> URL {
