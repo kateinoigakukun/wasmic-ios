@@ -10,8 +10,17 @@
 
 public struct WebAssembly {
 
-    enum Error: Swift.Error {
+    enum Error: Swift.Error, CustomStringConvertible {
         case unexpected(String, M3Result?)
+
+        var description: String {
+            switch self {
+            case .unexpected(let message, nil):
+                return message
+            case .unexpected(let message, let result?):
+                return message + " '" + String(cString: result) + "'"
+            }
+        }
     }
 
     public enum Value: Equatable {
