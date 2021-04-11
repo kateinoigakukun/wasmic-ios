@@ -18,7 +18,7 @@ final class TextDocumentEngine {
         case isCompiling(Bool)
         case handleCompilationError([WebAssembly.CompilationError])
         case handleBinaryParsingError(Error)
-        case presentInvocationSelector([UInt8], [WebAssembly.Export], WebAssembly.Export)
+        case presentInvocationSelector([UInt8], [WebAssembly.Export], WebAssembly.Export, isWASI: Bool)
     }
 
     var outputHandler: ((Output) -> Void)?
@@ -38,17 +38,17 @@ final class TextDocumentEngine {
                     switch result {
                     case .success(let bytes):
                         self.outputHandler?(.handleCompilationError([]))
-                        let exports: [WebAssembly.Export]
                         do {
-                            exports = try WebAssembly.getExported(wasmBytes: bytes)
+                            let exports = try WebAssembly.getExported(wasmBytes: bytes)
+                            if let first = exports.functions.first {
+                                self.outputHandler?(
+                                    .presentInvocationSelector(
+                                        bytes, exports.functions, first, isWASI: exports.isWASI))
+                            } else {
+                                // TODO: Report no-exported function error
+                            }
                         } catch {
                             self.outputHandler?(.handleBinaryParsingError(error))
-                            exports = []
-                        }
-                        if let first = exports.first {
-                            self.outputHandler?(.presentInvocationSelector(bytes, exports, first))
-                        } else {
-                            // TODO: Report no-exported function error
                         }
                     case .failure(let errors):
                         self.outputHandler?(.handleCompilationError(errors.errors))

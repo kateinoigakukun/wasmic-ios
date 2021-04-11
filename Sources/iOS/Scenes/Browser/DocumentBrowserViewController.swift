@@ -208,12 +208,12 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
         do {
             let bytes = Array(try Data(contentsOf: documentURL))
             let exports = try WebAssembly.getExported(wasmBytes: bytes)
-            if let first = exports.first {
+            if let first = exports.functions.first {
                 if let inStorageURL = try? self.shortcutsStorage.importDocument(documentURL) {
                     donateInteraction(documentURL: inStorageURL, export: first)
                 }
                 let vc = WasmInvocationViewController(
-                    bytes: bytes, exports: exports, selected: first)
+                    bytes: bytes, exports: exports.functions, selected: first, isWASI: exports.isWASI)
                 let nav = UINavigationController(rootViewController: vc)
                 self.present(nav, animated: true)
             } else {

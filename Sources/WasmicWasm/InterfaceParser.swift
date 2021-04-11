@@ -19,7 +19,8 @@ extension WebAssembly {
     public enum ParsingError: Swift.Error {
         case invalidIndex(Int, String)
     }
-    public static func getExported(wasmBytes: [UInt8]) throws -> [Export] {
+
+    public static func getExported(wasmBytes: [UInt8]) throws -> (functions: [Export], isWASI: Bool) {
         var input = InputByteStream(bytes: wasmBytes)
         var result = [SectionInfo]()
         var typeSection = TypeSection()
@@ -47,6 +48,7 @@ extension WebAssembly {
             }
         }
         var exports: [Export] = []
+        var isWASI: Bool = false
         for export in exportSection.exports {
             guard export.kind == .func else { continue }
             guard export.index < importSection.funcImportCount + functionSection.typeIndices.count else {
@@ -58,7 +60,10 @@ extension WebAssembly {
             }
             let signature = typeSection.signatures[typeIndex]
             exports.append(Export(name: export.name, signature: signature))
+            if export.name == "_start" {
+                isWASI = true
+            }
         }
-        return exports
+        return (exports, isWASI)
     }
 }

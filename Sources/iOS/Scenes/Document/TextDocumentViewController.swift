@@ -115,9 +115,9 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
             case .isCompiling(false):
                 runButton.customView = nil
                 runButton.isEnabled = true
-            case .presentInvocationSelector(let bytes, let exports, let first):
+            case .presentInvocationSelector(let bytes, let exports, let first, let isWASI):
                 let vc = WasmInvocationViewController(
-                    bytes: bytes, exports: exports, selected: first)
+                    bytes: bytes, exports: exports, selected: first, isWASI: isWASI)
                 let nav = UINavigationController(rootViewController: vc)
                 self.present(nav, animated: true)
             case .handleCompilationError(let errors):

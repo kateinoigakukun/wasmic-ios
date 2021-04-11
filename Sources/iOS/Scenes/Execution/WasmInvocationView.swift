@@ -9,8 +9,8 @@ import SwiftUI
 import WasmicWasm
 
 class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
-    init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export) {
-        super.init(rootView: WasmInvocationView(bytes: bytes, exports: exports, selected: selected))
+    init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export, isWASI: Bool) {
+        super.init(rootView: WasmInvocationView(bytes: bytes, exports: exports, selected: selected, isWASI: isWASI))
         self.title = "Invocation"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self,
@@ -30,47 +30,59 @@ struct WasmInvocationView: View {
     @State var selected: WebAssembly.Export
     @State var arguments: [String] = []
     @State var isExecuting: Bool = false
+    @State var runAsWASI: Bool
     @Environment(\.presentationMode) var presentationMode
     let bytes: [UInt8]
+    let isWASI: Bool
 
-    init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export) {
+    init(bytes: [UInt8], exports: [WebAssembly.Export],
+         selected: WebAssembly.Export, isWASI: Bool) {
         self.bytes = bytes
         self._exports = State(initialValue: exports)
         self._selected = State(initialValue: selected)
         self._arguments = State(
             initialValue: Array(repeating: "", count: selected.signature.params.count))
+        self._runAsWASI = State(initialValue: isWASI)
+        self.isWASI = isWASI
     }
 
     var body: some View {
         Form {
             Section {
-                Picker(
-                    selection: Binding(
-                        get: { selected },
-                        set: { newSelection in
-                            self.selected = newSelection
-                            self.arguments = Array(
-                                repeating: "", count: newSelection.signature.params.count)
+                if isWASI {
+                    Toggle(isOn: $runAsWASI) { Text("WASI Application") }
+                }
+                if !runAsWASI {
+                    Picker(
+                        selection: Binding(
+                            get: { selected },
+                            set: { newSelection in
+                                self.selected = newSelection
+                                self.arguments = Array(
+                                    repeating: "", count: newSelection.signature.params.count)
+                            }
+                        ),
+                        label: Text("Function"),
+                        content: {
+                            ForEach(exports, id: \.self) { export in
+                                Text(export.name)
+                            }
                         }
-                    ),
-                    label: Text("Function"),
-                    content: {
-                        ForEach(exports, id: \.self) { export in
-                            Text(export.name)
-                        }
-                    }
-                )
+                    )
+                }
             }
             if selected.signature.params.count == arguments.count {
-                Section {
-                    ForEach(0..<arguments.count, id: \.self) { idx in
-                        let param = selected.signature.params[idx]
-                        HStack {
-                            TextField(
-                                "Argument #\(idx) (\(String(describing: param)))",
-                                text: $arguments[idx]
-                            )
-                            .keyboardType(.numberPad)
+                if !arguments.isEmpty {
+                    Section {
+                        ForEach(0..<arguments.count, id: \.self) { idx in
+                            let param = selected.signature.params[idx]
+                            HStack {
+                                TextField(
+                                    "Argument #\(idx) (\(String(describing: param)))",
+                                    text: $arguments[idx]
+                                )
+                                .keyboardType(.numberPad)
+                            }
                         }
                     }
                 }
@@ -111,6 +123,6 @@ struct WasmInvocationView_Previews: PreviewProvider {
             name: "fizz", signature: FuncSignature(params: [.i64, .i32, .i32], results: [])),
     ]
     static var previews: some View {
-        WasmInvocationView(bytes: fibWasm, exports: exports, selected: exports.first!)
+        WasmInvocationView(bytes: fibWasm, exports: exports, selected: exports.first!, isWASI: false)
     }
 }
