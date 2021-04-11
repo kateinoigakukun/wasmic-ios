@@ -10,6 +10,14 @@ import Intents
 import WasmicKit
 
 final class RunWasmFileIntentHandler: NSObject, RunWasmFileIntentHandling {
+    func provideFileOptionsCollection(for intent: RunWasmFileIntent, with completion: @escaping (INObjectCollection<INFile>?, Error?) -> Void) {
+        let storage = ShortcutsStorage()
+        let files = storage.documents().map { fileURL in
+            INFile(fileURL: fileURL, filename: fileURL.lastPathComponent, typeIdentifier: "dev.katei.wasmic.wasm")
+        }
+        completion(INObjectCollection(items: files), nil)
+    }
+
     func handle(intent: RunWasmFileIntent, completion: @escaping (RunWasmFileIntentResponse) -> Void) {
         guard let file = intent.file,
               let functionName = intent.functionName else {
@@ -23,9 +31,9 @@ final class RunWasmFileIntentHandler: NSObject, RunWasmFileIntentHandling {
                 wasmBytes: Array(file.data),
                 function: functionName,
                 args: arguments.map(\.description))
-            let response = RunWasmFileIntentResponse()
+            let response = RunWasmFileIntentResponse(code: .success, userActivity: nil)
             response.results = results.map { $0.asDouble }
-            completion(.init(code: .success, userActivity: nil))
+            completion(response)
         } catch {
             completion(.init(code: .failure, userActivity: nil))
         }

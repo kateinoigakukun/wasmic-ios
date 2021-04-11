@@ -15,6 +15,24 @@ import Intents
 class DocumentBrowserViewController: UIDocumentBrowserViewController,
     UIDocumentBrowserViewControllerDelegate
 {
+    private let shortcutsStorage = ShortcutsStorage()
+    private lazy var useInShortcutsAction: UIDocumentBrowserAction = {
+        let action = UIDocumentBrowserAction(identifier: "dev.katei.wasmic.use-in-shortcuts",
+                                localizedTitle: NSLocalizedString("use-in-shortcuts.title", comment: ""),
+                                availability: [.menu, .navigationBar]) { urls in
+            do {
+                for url in urls {
+                    try self.shortcutsStorage.importDocument(url)
+                }
+            } catch {
+                self.reportError(title: NSLocalizedString("error.title", comment: ""),
+                                 message: error.localizedDescription)
+            }
+        }
+        action.supportsMultipleItems = true
+        action.supportedContentTypes = ["dev.katei.wasmic.wasm"]
+        return action
+    }()
 
     /// - Tag: viewDidLoad
     override func viewDidLoad() {
@@ -23,6 +41,9 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
 
         allowsDocumentCreation = true
         allowsPickingMultipleItems = false
+        customActions = [
+            useInShortcutsAction
+        ]
     }
 
     // MARK: - UIDocumentBrowserViewControllerDelegate
