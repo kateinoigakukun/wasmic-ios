@@ -25,7 +25,7 @@ build_wasm3() {
         -S "$third_party_dir/wasm3"
         -D CMAKE_TOOLCHAIN_FILE="$third_party_dir/ios-cmake/ios.toolchain.cmake"
         -D BUILD_NATIVE=OFF
-        -D BUILD_WASI=simple
+        -D BUILD_WASI=none
         -D DEPLOYMENT_TARGET="14.0"
         -D ENABLE_BITCODE=ON
         -D CMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"
