@@ -49,6 +49,7 @@ build_wasm3() {
     cat <<EOS > "$headers_dir/module.modulemap"
 module wasm3 {
     header "wasm3.h"
+    header "m3_api_wasi.h"
     export *
 }
 EOS

@@ -21,6 +21,48 @@ public struct WebAssembly {
         case f64(Float64)
     }
 
+    public static func startWasiApp(wasmBytes: [UInt8], args: [String]) throws -> Int {
+        guard let env = m3_NewEnvironment() else {
+            throw Error.unexpected("m3_NewEnvironment failed", nil)
+        }
+        defer { m3_FreeEnvironment(env) }
+        guard let runtime = m3_NewRuntime(env, 1024 * 8, nil) else {
+            throw Error.unexpected("m3_NewRuntime failed", nil)
+        }
+        defer { m3_FreeRuntime(runtime) }
+
+        var module: IM3Module?
+        if let result = m3_ParseModule(env, &module, wasmBytes, UInt32(wasmBytes.count)) {
+            throw Error.unexpected("m3_ParseModule failed", result)
+        }
+
+        if let result = m3_LoadModule(runtime, module) {
+            throw Error.unexpected("m3_LoadModule failed", result)
+        }
+
+        if let result = m3_LinkWASI(module) {
+            throw Error.unexpected("m3_LinkWASI failed", result)
+        }
+        guard let context = m3_GetWasiContext() else {
+            throw Error.unexpected("m3_GetWasiContext failed", nil)
+        }
+
+        var wasmFn: IM3Function?
+        if let result = m3_FindFunction(&wasmFn, runtime, "_start") {
+            throw Error.unexpected("m3_FindFunction failed", result)
+        }
+
+        context.pointee.argc = u32(args.count)
+        let args = args.map { $0.copyCString() }
+        defer { args.forEach { $0.deallocate() } }
+        let argv = args + [nil]
+        argv.withUnsafeBufferPointer { argv in
+            context.pointee.argv = argv.baseAddress!
+            m3_CallArgv(wasmFn, 0, nil)
+        }
+        return Int(context.pointee.exit_code)
+    }
+
     public static func execute(wasmBytes: [UInt8], function: String, args: [String])
         throws -> [Value]
     {
@@ -28,6 +70,7 @@ public struct WebAssembly {
         defer { args.forEach { $0.deallocate() } }
         return try execute(wasmBytes: wasmBytes, function: function, args: args)
     }
+
     public static func execute(wasmBytes: [UInt8], function: String, args: [UnsafePointer<CChar>])
         throws -> [Value]
     {
@@ -139,4 +182,5 @@ extension String {
         _ = cStringCopy.initialize(from: cString)
         return UnsafePointer(cStringCopy.baseAddress!)
     }
+
 }
