@@ -11,9 +11,9 @@ import WasmicWasm
 class WasmInvocationViewController: UIHostingController<WasmInvocationView> {
     init(bytes: [UInt8], exports: [WebAssembly.Export], selected: WebAssembly.Export, isWASI: Bool)
     {
-        super.init(
-            rootView: WasmInvocationView(
-                bytes: bytes, exports: exports, selected: selected, isWASI: isWASI))
+        let rootView = WasmInvocationView(
+            bytes: bytes, exports: exports, selected: selected, isWASI: isWASI)
+        super.init(rootView: rootView)
         self.title = "Invocation"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self,
@@ -79,25 +79,35 @@ struct WasmInvocationView: View {
     }
 
     var body: some View {
-        Form {
-            Section {
-                if isWASI {
-                    Toggle(isOn: $runAsWASI) { Text("WASI Application") }
+        VStack {
+            Form {
+                Section {
+                    if isWASI {
+                        Toggle(isOn: $runAsWASI) { Text("WASI Application") }
+                    }
+                    if !runAsWASI {
+                        functionSelector
+                    }
                 }
-                if !runAsWASI {
-                    functionSelector
+
+                Section.init(header: Text("Arguments")) {
+                    if runAsWASI {
+                        wasiLevelArguments
+                    } else {
+                        wasmLevelArguments
+                    }
                 }
             }
 
-            if runAsWASI {
-                wasiLevelArguments
-            } else {
-                wasmLevelArguments
+            PrimaryButton(action: { isExecuting = true }) {
+                Text("Run")
             }
-            Section {
-                Button("Run") { isExecuting = true }
-                    .disabled(wasmArguments.contains(where: \.isEmpty))
-            }
+            .disabled(
+                runAsWASI
+                    ? wasiArguments.contains(where: \.isEmpty)
+                    : wasmArguments.contains(where: \.isEmpty)
+            )
+            .padding(.bottom)
         }
         .sheet(
             isPresented: $isExecuting,
@@ -135,38 +145,35 @@ struct WasmInvocationView: View {
     @ViewBuilder
     var wasmLevelArguments: some View {
         if selected.signature.params.count == wasmArguments.count, !wasmArguments.isEmpty {
-            Section {
-                ForEach(wasmArguments.indices, id: \.self) { idx in
-                    let param = selected.signature.params[idx]
-                    TextField(
-                        "Argument #\(idx) (\(String(describing: param)))",
-                        text: $wasmArguments[idx]
-                    )
-                    .keyboardType(.numberPad)
-                }
+            ForEach(wasmArguments.indices, id: \.self) { idx in
+                let param = selected.signature.params[idx]
+                _TextField(
+                    titleKey: "Argument #\(idx) (\(String(describing: param)))",
+                    items: $wasmArguments, index: idx
+                )
+                .keyboardType(.numberPad)
             }
         }
     }
 
+    @ViewBuilder
     var wasiLevelArguments: some View {
-        Section {
-            List {
-                ForEach(wasiArguments.indices, id: \.self) { idx in
-                    _TextField(
-                        titleKey: "Argument #\(idx)",
-                        items: $wasiArguments,
-                        index: idx
-                    )
-                }
-                .onDelete(perform: { indexSet in
-                    wasiArguments.remove(atOffsets: indexSet)
-                })
+        List {
+            ForEach(wasiArguments.indices, id: \.self) { idx in
+                _TextField(
+                    titleKey: "Argument #\(idx)",
+                    items: $wasiArguments,
+                    index: idx
+                )
             }
-            Button(action: { wasiArguments.append("") }) {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Add new argument")
-                }
+            .onDelete(perform: { indexSet in
+                wasiArguments.remove(atOffsets: indexSet)
+            })
+        }
+        Button(action: { wasiArguments.append("") }) {
+            HStack {
+                Image(systemName: "plus.circle.fill")
+                Text("Add new argument")
             }
         }
     }
@@ -183,7 +190,7 @@ struct WasmInvocationView_Previews: PreviewProvider {
     ]
     static let exports = [
         WebAssembly.Export(
-            name: "foo", signature: FuncSignature(params: [.i32, .f32], results: [])),
+            name: "fib", signature: FuncSignature(params: [.i32, .f32], results: [])),
         WebAssembly.Export(name: "bar", signature: FuncSignature(params: [.i32], results: [])),
         WebAssembly.Export(
             name: "fizz", signature: FuncSignature(params: [.i64, .i32, .i32], results: [])),

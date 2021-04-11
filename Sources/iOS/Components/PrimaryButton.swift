@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct PrimaryButton<Content: View>: View {
+    @Environment(\.isEnabled) private var isEnabled
     let action: () -> Void
     let createLabel: () -> Content
     let color: Color
@@ -18,7 +19,7 @@ public struct PrimaryButton<Content: View>: View {
         color: Color = .blue
     ) {
         self.action = action
-        createLabel = label
+        self.createLabel = label
         self.color = color
     }
 
@@ -37,6 +38,13 @@ public struct PrimaryButton<Content: View>: View {
 
     var background: some View {
         RoundedRectangle(cornerRadius: 14, style: .circular)
-            .fill(color)
+            .fill(isEnabled ? color : Color.gray)
+    }
+}
+
+struct PrimaryButton_Previews: PreviewProvider {
+    static var previews: some View {
+        PrimaryButton(action: {}, label: { Text("Hello") })
+            .background(Color.black)
     }
 }
