@@ -163,11 +163,9 @@ class WasmExecutor: ObservableObject {
                 self.state = .executing
             }
             do {
-                let args = self.arguments.map { $0.copyCString() }
-                defer { args.forEach { $0.deallocate() } }
                 let result =
                     try WebAssembly.execute(
-                        wasmBytes: self.bytes, function: self.function, args: args)
+                        wasmBytes: self.bytes, function: self.function, args: self.arguments)
                 DispatchQueue.main.async {
                     self.state = .result(result)
                 }
@@ -178,15 +176,5 @@ class WasmExecutor: ObservableObject {
                 }
             }
         }
-    }
-}
-
-extension String {
-    fileprivate func copyCString() -> UnsafePointer<CChar> {
-        let cString = utf8CString
-        let cStringCopy = UnsafeMutableBufferPointer<CChar>
-            .allocate(capacity: cString.count)
-        _ = cStringCopy.initialize(from: cString)
-        return UnsafePointer(cStringCopy.baseAddress!)
     }
 }

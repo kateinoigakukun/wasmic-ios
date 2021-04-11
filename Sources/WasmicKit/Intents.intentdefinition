@@ -25,29 +25,20 @@
 			<string>Run a .wasm file</string>
 			<key>INIntentDescriptionID</key>
 			<string>ciEkwz</string>
+			<key>INIntentInput</key>
+			<string>arguments</string>
 			<key>INIntentKeyParameter</key>
-			<string>fileName</string>
+			<string>functionName</string>
 			<key>INIntentLastParameterTag</key>
-			<integer>8</integer>
+			<integer>23</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
-				<key>fileName</key>
-				<dict>
-					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
-					<true/>
-					<key>INIntentParameterCombinationTitle</key>
-					<string>Run WebAssembly ${fileName}</string>
-					<key>INIntentParameterCombinationTitleID</key>
-					<string>Hj79VU</string>
-					<key>INIntentParameterCombinationUpdatesLinked</key>
-					<true/>
-				</dict>
 				<key>fileName,functionName,arguments</key>
 				<dict>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>Run WebAssembly ${fileName} 's ${functionName} with ${arguments}</string>
+					<string>Run WebAssembly ${functionName} with ${arguments}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>b5AM9P</string>
 					<key>INIntentParameterCombinationUpdatesLinked</key>
@@ -58,17 +49,6 @@
 			<string>RunWasmFile</string>
 			<key>INIntentParameterCombinations</key>
 			<dict>
-				<key>fileName</key>
-				<dict>
-					<key>INIntentParameterCombinationIsLinked</key>
-					<true/>
-					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
-					<true/>
-					<key>INIntentParameterCombinationTitle</key>
-					<string>Run WebAssembly ${fileName}</string>
-					<key>INIntentParameterCombinationTitleID</key>
-					<string>3WiMpY</string>
-				</dict>
 				<key>fileName,functionName,arguments</key>
 				<dict>
 					<key>INIntentParameterCombinationIsLinked</key>
@@ -76,7 +56,7 @@
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>Run WebAssembly ${fileName} 's ${functionName} with ${arguments}</string>
+					<string>Run WebAssembly ${functionName} with ${arguments}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>rRcGLD</string>
 				</dict>
@@ -92,6 +72,18 @@
 					<string>yLAMGc</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
+					<key>INIntentParameterMetadata</key>
+					<dict>
+						<key>INIntentParameterMetadataCustomUTIs</key>
+						<array>
+							<dict>
+								<key>UTI</key>
+								<string>dev.katei.wasmic.wasm</string>
+							</dict>
+						</array>
+						<key>INIntentParameterMetadataType</key>
+						<string>Custom</string>
+					</dict>
 					<key>INIntentParameterName</key>
 					<string>fileName</string>
 					<key>INIntentParameterPromptDialogs</key>
@@ -113,12 +105,10 @@
 							<string>Primary</string>
 						</dict>
 					</array>
-					<key>INIntentParameterSupportsResolution</key>
-					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>8</integer>
+					<integer>22</integer>
 					<key>INIntentParameterType</key>
-					<string>Object</string>
+					<string>File</string>
 				</dict>
 				<dict>
 					<key>INIntentParameterConfigurable</key>
@@ -165,13 +155,9 @@
 					</array>
 					<key>INIntentParameterRelationship</key>
 					<dict>
-						<key>INIntentParameterRelationshipParentName</key>
-						<string>fileName</string>
 						<key>INIntentParameterRelationshipPredicateName</key>
 						<string>HasAnyValue</string>
 					</dict>
-					<key>INIntentParameterSupportsResolution</key>
-					<true/>
 					<key>INIntentParameterTag</key>
 					<integer>3</integer>
 					<key>INIntentParameterType</key>
@@ -189,11 +175,7 @@
 					<key>INIntentParameterMetadata</key>
 					<dict>
 						<key>INIntentParameterMetadataMaximumValue</key>
-						<data>
-						</data>
-						<key>INIntentParameterMetadataMinimumValue</key>
-						<data>
-						</data>
+						<real>1</real>
 						<key>INIntentParameterMetadataType</key>
 						<string>Field</string>
 					</dict>
@@ -220,52 +202,15 @@
 					</array>
 					<key>INIntentParameterRelationship</key>
 					<dict>
-						<key>INIntentParameterRelationshipParentName</key>
-						<string>fileName</string>
 						<key>INIntentParameterRelationshipPredicateName</key>
 						<string>HasAnyValue</string>
 					</dict>
 					<key>INIntentParameterSupportsMultipleValues</key>
 					<true/>
-					<key>INIntentParameterSupportsResolution</key>
-					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>6</integer>
+					<integer>9</integer>
 					<key>INIntentParameterType</key>
-					<string>Integer</string>
-					<key>INIntentParameterUnsupportedReasons</key>
-					<array>
-						<dict>
-							<key>INIntentParameterUnsupportedReasonCode</key>
-							<string>negativeNumbersNotSupported</string>
-							<key>INIntentParameterUnsupportedReasonDefault</key>
-							<true/>
-							<key>INIntentParameterUnsupportedReasonFormatString</key>
-							<string>${displayName} can’t be negative.</string>
-							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
-							<string>4T675j</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterUnsupportedReasonCode</key>
-							<string>greaterThanMaximumValue</string>
-							<key>INIntentParameterUnsupportedReasonDefault</key>
-							<true/>
-							<key>INIntentParameterUnsupportedReasonFormatString</key>
-							<string>${displayName} can’t be higher than ${maximumValue}.</string>
-							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
-							<string>Z4Wgkq</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterUnsupportedReasonCode</key>
-							<string>lessThanMinimumValue</string>
-							<key>INIntentParameterUnsupportedReasonDefault</key>
-							<true/>
-							<key>INIntentParameterUnsupportedReasonFormatString</key>
-							<string>${displayName} can’t be lower than ${minimumValue}.</string>
-							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
-							<string>9C010P</string>
-						</dict>
-					</array>
+					<string>Decimal</string>
 				</dict>
 			</array>
 			<key>INIntentResponse</key>
@@ -273,6 +218,14 @@
 				<key>INIntentResponseCodes</key>
 				<array>
 					<dict>
+						<key>INIntentResponseCodeConciseFormatString</key>
+						<string>The program returns ${results}</string>
+						<key>INIntentResponseCodeConciseFormatStringID</key>
+						<string>Tw6WTG</string>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>The program returns ${results}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>3owNh1</string>
 						<key>INIntentResponseCodeName</key>
 						<string>success</string>
 						<key>INIntentResponseCodeSuccess</key>
@@ -281,6 +234,29 @@
 					<dict>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
+					</dict>
+				</array>
+				<key>INIntentResponseLastParameterTag</key>
+				<integer>3</integer>
+				<key>INIntentResponseOutput</key>
+				<string>results</string>
+				<key>INIntentResponseParameters</key>
+				<array>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Results</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>Hgkx8S</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>results</string>
+						<key>INIntentResponseParameterSupportsMultipleValues</key>
+						<true/>
+						<key>INIntentResponseParameterTag</key>
+						<integer>3</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>Decimal</string>
 					</dict>
 				</array>
 			</dict>

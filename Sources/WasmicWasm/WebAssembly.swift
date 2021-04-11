@@ -21,6 +21,13 @@ public struct WebAssembly {
         case f64(Float64)
     }
 
+    public static func execute(wasmBytes: [UInt8], function: String, args: [String])
+        throws -> [Value]
+    {
+        let args = args.map { $0.copyCString() }
+        defer { args.forEach { $0.deallocate() } }
+        return try execute(wasmBytes: wasmBytes, function: function, args: args)
+    }
     public static func execute(wasmBytes: [UInt8], function: String, args: [UnsafePointer<CChar>])
         throws -> [Value]
     {
@@ -121,5 +128,15 @@ extension WebAssembly.Value: CustomStringConvertible {
         case .f32(let v): return "f32(\(v))"
         case .f64(let v): return "f64(\(v))"
         }
+    }
+}
+
+extension String {
+    fileprivate func copyCString() -> UnsafePointer<CChar> {
+        let cString = utf8CString
+        let cStringCopy = UnsafeMutableBufferPointer<CChar>
+            .allocate(capacity: cString.count)
+        _ = cStringCopy.initialize(from: cString)
+        return UnsafePointer(cStringCopy.baseAddress!)
     }
 }

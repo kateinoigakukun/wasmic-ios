@@ -38,7 +38,6 @@
 		F249A06A2621C42900D6829A /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0692621C42900D6829A /* Intents.framework */; };
 		F249A06D2621C42900D6829A /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A06C2621C42900D6829A /* IntentHandler.swift */; };
 		F249A0712621C42900D6829A /* WasmicIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F249A0682621C42900D6829A /* WasmicIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		F249A0A92621C79B00D6829A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F249A0BD2621C90600D6829A /* WasmicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A0BB2621C90600D6829A /* WasmicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F249A0C02621C90600D6829A /* WasmicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; };
 		F249A0C22621C90600D6829A /* WasmicKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -47,6 +46,8 @@
 		F249A13C2621CB2600D6829A /* WasmicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; };
 		F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A1472621CB9900D6829A /* WasmicKit.swift */; };
 		F249A18D2621CE3500D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
+		F249A19E2621CEB300D6829A /* RunWasmFileIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */; };
+		F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -171,6 +172,7 @@
 		F249A0BB2621C90600D6829A /* WasmicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WasmicKit.h; sourceTree = "<group>"; };
 		F249A0BC2621C90600D6829A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F249A1472621CB9900D6829A /* WasmicKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicKit.swift; sourceTree = "<group>"; };
+		F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunWasmFileIntentHandler.swift; sourceTree = "<group>"; };
 		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				F249A06C2621C42900D6829A /* IntentHandler.swift */,
+				F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */,
 				F249A06E2621C42900D6829A /* Info.plist */,
 			);
 			path = WasmicIntents;
@@ -648,6 +651,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */,
 				F25199AD261F26530037DA79 /* Assets.xcassets in Resources */,
 				F2499FC52621A15E00D6829A /* Localizable.strings in Resources */,
 			);
@@ -691,7 +695,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F249A0A92621C79B00D6829A /* Intents.intentdefinition in Sources */,
+				F249A19E2621CEB300D6829A /* RunWasmFileIntentHandler.swift in Sources */,
 				F249A06D2621C42900D6829A /* IntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,9 +11,9 @@ import WasmicKit
 class IntentHandler: INExtension {
 
     override func handler(for intent: INIntent) -> Any {
-        guard intent is RunWasmFileIntent else {
+        guard intent is WasmicKit.RunWasmFileIntent else {
             fatalError("Unhandled intent type: \(intent)")
         }
-        return 1
+        return RunWasmFileIntentHandler()
     }
 }
