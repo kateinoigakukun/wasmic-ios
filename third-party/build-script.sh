@@ -46,6 +46,9 @@ build_wasm3() {
     mkdir -p "$headers_dir"
     # shellcheck disable=SC2046
     cp $(find "$third_party_dir/wasm3/source" -name "*.h" -depth 1) "$headers_dir"
+    mkdir -p "$headers_dir/extra"
+    cp "$third_party_dir/wasm3/source/extra/wasi_core.h" "$headers_dir/extra"
+
     cat <<EOS > "$headers_dir/module.modulemap"
 module wasm3 {
     header "wasm3.h"
