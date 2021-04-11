@@ -27,21 +27,26 @@ struct HelpNote: View {
     var body: some View {
         List {
             Section(header: Text("WebAssembly")) {
-                Link(destination: URL(string: "https://webassembly.org")!, label: {
-                    Text("WebAssembly Official")
-                })
-                Link(destination: URL(string: "https://webassembly.github.io/spec/core/text/index.html")!, label: {
-                    Text("WebAssembly Specification")
-                })
+                Link(
+                    destination: URL(string: "https://webassembly.org")!,
+                    label: {
+                        Text("WebAssembly Official")
+                    })
+                Link(
+                    destination: URL(
+                        string: "https://webassembly.github.io/spec/core/text/index.html")!,
+                    label: {
+                        Text("WebAssembly Specification")
+                    })
             }
         }
         .listStyle(InsetGroupedListStyle())
     }
-    
+
 }
 
 struct HelpNote_Previews: PreviewProvider {
-    
+
     static var previews: some View {
         Group {
             HelpNote()
@@ -55,4 +60,3 @@ struct HelpNote_Previews: PreviewProvider {
         }
     }
 }
-

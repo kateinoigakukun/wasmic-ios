@@ -14,12 +14,12 @@ class WatDocument: TextDocument {
 
         super.init(fileURL: url)
         text = """
-        (module
-            (export "_start" (func $_start))
-            (func $_start (result i32)
-                (i32.const 0)
+            (module
+                (export "_start" (func $_start))
+                (func $_start (result i32)
+                    (i32.const 0)
+                )
             )
-        )
-        """
+            """
     }
 }
