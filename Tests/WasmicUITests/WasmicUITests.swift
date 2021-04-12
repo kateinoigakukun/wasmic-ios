@@ -31,15 +31,15 @@ class WasmicUITests: XCTestCase {
     }
 
     func testSnapshots() throws {
-        app.tabBars.buttons["Recents"].tap()
-        app.tabBars.buttons["Browse"].tap()
+        app.tabBars.buttons.element(boundBy: 0).tap() // "Recents"
+        app.tabBars.buttons.element(boundBy: 1).tap() // "Browse"
         let navigationBar = app.navigationBars["FullDocumentManagerViewControllerNavigationBar"]
         if app.collectionViews.cells.count > 1 {
             navigationBar.buttons["DOC.itemCollectionMenuButton.Ellipsis"].tap()
-            let selectButton = app.collectionViews.buttons["Select"]
+            let selectButton = app.collectionViews.buttons.element(boundBy: 0) // "Select"
             selectButton.tap()
-            navigationBar.buttons["Select All"].tap()
-            app.toolbars["Toolbar"].buttons["Delete"].tap()
+            navigationBar.buttons.element(boundBy: 0).tap() // "Select All"
+            app.toolbars["Toolbar"].buttons.element(boundBy: 3).tap() // "Delete"
         }
 
         navigationBar
@@ -80,7 +80,8 @@ class WasmicUITests: XCTestCase {
          )
         )
         """)
-        app.navigationBars.buttons["close"].tap()
+        app.navigationBars
+            .buttons[WasmicAccessibilityIdentifier.TextDocument.closeButton.rawValue].tap()
         let mainCell = app.collectionViews.cells
             .element(matching: NSPredicate(format: "label CONTAINS %@", "main"))
         XCTAssertTrue(mainCell.waitForExistence(timeout: 1))
@@ -88,15 +89,14 @@ class WasmicUITests: XCTestCase {
         app.textViews.element.tap()
         snapshot("01CodeEditor")
 
-        app.navigationBars.buttons["Play"].tap()
+        app.navigationBars.buttons[WasmicAccessibilityIdentifier.TextDocument.runButton.rawValue].tap()
         let argument0 = app.tables.textFields["Argument #0 (i32)"]
         argument0.tap()
         argument0.typeText("10")
         snapshot("02Invocation")
 
-        app.buttons["Run"].tap()
+        app.buttons[WasmicAccessibilityIdentifier.WasmInvocation.runButton.rawValue].tap()
         snapshot("03Execution")
-        app.navigationBars["Execution"].buttons["Done"].tap()
     }
 }
 
@@ -105,7 +105,7 @@ extension XCUIElement {
         tap()
         _ = app.wait(for: .unknown, timeout: 1)
         tap()
-        let selectAll = app.menuItems["Select All"]
+        let selectAll = app.menuItems.element(boundBy: 1) // "Select All"
         XCTAssertTrue(selectAll.waitForExistence(timeout: 3))
         selectAll.tap()
         let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: 1)

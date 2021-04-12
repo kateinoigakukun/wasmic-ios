@@ -50,12 +50,14 @@ class TextDocumentViewController: UIViewController, UITextViewDelegate, TextDocu
         let button = UIBarButtonItem(
             barButtonSystemItem: .close,
             target: self, action: #selector(returnToDocuments(_:)))
+        button.accessibilityIdentifier = WasmicAccessibilityIdentifier.TextDocument.closeButton.rawValue
         return button
     }()
     private lazy var runButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             barButtonSystemItem: .play,
             target: self, action: #selector(presentExecution(_:)))
+        button.accessibilityIdentifier = WasmicAccessibilityIdentifier.TextDocument.runButton.rawValue
         return button
     }()
     private lazy var moreButton: UIBarButtonItem = {

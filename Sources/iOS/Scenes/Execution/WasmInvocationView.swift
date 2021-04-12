@@ -102,6 +102,7 @@ struct WasmInvocationView: View {
             PrimaryButton(action: { isExecuting = true }) {
                 Text("invocation.run")
             }
+            .accessibility(identifier: WasmicAccessibilityIdentifier.WasmInvocation.runButton.rawValue)
             .disabled(
                 runAsWASI
                     ? wasiArguments.contains(where: \.isEmpty)
