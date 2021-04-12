@@ -62,6 +62,7 @@
 		F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3D52622FD0900D6829A /* HelpNote.swift */; };
 		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
 		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
+		F2D5D6A32624094300D3CBBC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2D5D6A22624094300D3CBBC /* Settings.bundle */; };
 		F2DF8BF6262354C200860D0D /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF8BF5262354C200860D0D /* wasm3.xcframework */; };
 		F2DF8C4826235A7600860D0D /* WasmicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF8C4726235A7600860D0D /* WasmicUITests.swift */; };
 		F2DF8C6526235AF300860D0D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF8C6426235AF300860D0D /* SnapshotHelper.swift */; };
@@ -226,6 +227,7 @@
 		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F251998A261F26530037DA79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2D5D6A22624094300D3CBBC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F2DF8BF5262354C200860D0D /* wasm3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wasm3.xcframework; path = "third-party/build/wasm3.xcframework"; sourceTree = "<group>"; };
 		F2DF8C4526235A7600860D0D /* WasmicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasmicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DF8C4726235A7600860D0D /* WasmicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicUITests.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 				F2499DFB2620291600D6829A /* DocumentTypes */,
 				F2499DF02620160800D6829A /* KeyboardLayoutObserver.swift */,
 				F249A2F72622A6CF00D6829A /* Assets.xcassets */,
+				F2D5D6A22624094300D3CBBC /* Settings.bundle */,
 				F249A2E92622A07000D6829A /* Components */,
 			);
 			path = iOS;
@@ -843,6 +846,7 @@
 			files = (
 				F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */,
 				F25199AD261F26530037DA79 /* Assets.xcassets in Resources */,
+				F2D5D6A32624094300D3CBBC /* Settings.bundle in Resources */,
 				F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */,
 				F2499FC52621A15E00D6829A /* Localizable.strings in Resources */,
 			);

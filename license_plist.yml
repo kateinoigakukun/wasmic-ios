@@ -1,0 +1,7 @@
+github:
+  - owner: wasm3
+    name: wasm3
+    version: 9f8766b9016aec1278e490cc5348605d2fec5fe4
+  - owner: WebAssembly
+    name: wabt
+    version: 1.0.23

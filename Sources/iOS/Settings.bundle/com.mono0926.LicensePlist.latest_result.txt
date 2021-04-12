@@ -1,0 +1,17 @@
+name: wabt, nameSpecified: , owner: WebAssembly, version: 1.0.23
+
+name: wabt, nameSpecified: , owner: WebAssembly, version: 1.0.23
+
+name: wasm3, nameSpecified: , owner: wasm3, version: 9f8766b9016aec1278e490cc5348605d2fec5fe4
+
+name: wasm3, nameSpecified: , owner: wasm3, version: 9f8766b9016aec1278e490cc5348605d2fec5fe4
+
+name: wasm3, nameSpecified: , owner: wasm3, version: 9f8766b9016aec1278e490cc5348605d2fec5fe4
+
+name: wabt, nameSpecified: , owner: WebAssembly, version: 1.0.23
+
+name: Highlightr, nameSpecified: Highlightr, owner: raspu, version: 
+
+add-version-numbers: false
+
+LicensePlist Version: 3.0.7
