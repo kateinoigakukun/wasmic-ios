@@ -11,7 +11,6 @@ class WasmicUITests: XCTestCase {
     var app: XCUIApplication!
     
     override func setUp() {
-        Springboard.shared.deleteApp()
         app = XCUIApplication()
         app.launchArguments = ["-isWelcomeDone", "true"]
         setupSnapshot(app)
@@ -36,6 +35,9 @@ class WasmicUITests: XCTestCase {
         if UIDevice.current.userInterfaceIdiom == .pad {
             navigationBar.buttons["BackButton"].tap()
             app.cells.element(boundBy: 2).tap() // "DOC.sidebar.item.On My iPad"
+            app.collectionViews.cells
+                .element(matching: NSPredicate(format: "label CONTAINS %@", "Wasmic"))
+                .tap()
             // TODO: Cleanup app documents before starting
         } else {
             app.tabBars.buttons.element(boundBy: 0).tap() // "Recents"
@@ -90,7 +92,7 @@ class WasmicUITests: XCTestCase {
         app.navigationBars
             .buttons[WasmicAccessibilityIdentifier.TextDocument.closeButton.rawValue].tap()
         let mainCell = app.collectionViews.cells
-            .element(matching: NSPredicate(format: "label CONTAINS %@", "main"))
+            .element(matching: NSPredicate(format: "label CONTAINS %@", "main, wat"))
         XCTAssertTrue(mainCell.waitForExistence(timeout: 1))
         mainCell.tap()
         app.textViews.element.tap()
