@@ -11,6 +11,7 @@ class WasmicUITests: XCTestCase {
     var app: XCUIApplication!
     
     override func setUp() {
+        Springboard.shared.deleteApp()
         app = XCUIApplication()
         app.launchArguments = ["-isWelcomeDone", "true"]
         setupSnapshot(app)
@@ -31,15 +32,21 @@ class WasmicUITests: XCTestCase {
     }
 
     func testSnapshots() throws {
-        app.tabBars.buttons.element(boundBy: 0).tap() // "Recents"
-        app.tabBars.buttons.element(boundBy: 1).tap() // "Browse"
         let navigationBar = app.navigationBars["FullDocumentManagerViewControllerNavigationBar"]
-        if app.collectionViews.cells.count > 1 {
-            navigationBar.buttons["DOC.itemCollectionMenuButton.Ellipsis"].tap()
-            let selectButton = app.collectionViews.buttons.element(boundBy: 0) // "Select"
-            selectButton.tap()
-            navigationBar.buttons.element(boundBy: 0).tap() // "Select All"
-            app.toolbars["Toolbar"].buttons.element(boundBy: 3).tap() // "Delete"
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            navigationBar.buttons["BackButton"].tap()
+            app.cells.element(boundBy: 2).tap() // "DOC.sidebar.item.On My iPad"
+            // TODO: Cleanup app documents before starting
+        } else {
+            app.tabBars.buttons.element(boundBy: 0).tap() // "Recents"
+            app.tabBars.buttons.element(boundBy: 1).tap() // "Browse"
+            if app.collectionViews.cells.count > 1 {
+                navigationBar.buttons["DOC.itemCollectionMenuButton.Ellipsis"].tap()
+                let selectButton = app.collectionViews.buttons.element(boundBy: 0) // "Select"
+                selectButton.tap()
+                navigationBar.buttons.element(boundBy: 0).tap() // "Select All"
+                app.toolbars["Toolbar"].buttons.element(boundBy: 3).tap() // "Delete"
+            }
         }
 
         navigationBar
