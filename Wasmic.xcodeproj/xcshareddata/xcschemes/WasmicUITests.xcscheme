@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2519986261F26530037DA79"
-               BuildableName = "Wasmic.app"
-               BlueprintName = "Wasmic"
+               BlueprintIdentifier = "F2DF8C4426235A7600860D0D"
+               BuildableName = "WasmicUITests.xctest"
+               BlueprintName = "WasmicUITests"
                ReferencedContainer = "container:Wasmic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2499E6D2620A58F00D6829A"
-               BuildableName = "WasmicTests.xctest"
-               BlueprintName = "WasmicTests"
-               ReferencedContainer = "container:Wasmic.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -60,16 +50,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2519986261F26530037DA79"
-            BuildableName = "Wasmic.app"
-            BlueprintName = "Wasmic"
-            ReferencedContainer = "container:Wasmic.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -77,16 +57,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2519986261F26530037DA79"
-            BuildableName = "Wasmic.app"
-            BlueprintName = "Wasmic"
+            BlueprintIdentifier = "F2DF8C4426235A7600860D0D"
+            BuildableName = "WasmicUITests.xctest"
+            BlueprintName = "WasmicUITests"
             ReferencedContainer = "container:Wasmic.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
