@@ -39,13 +39,11 @@
 		F249A0BD2621C90600D6829A /* WasmicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A0BB2621C90600D6829A /* WasmicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F249A0C02621C90600D6829A /* WasmicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; };
 		F249A0C22621C90600D6829A /* WasmicKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F249A0DF2621C93000D6829A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F249A10C2621CA3C00D6829A /* libWasmicWasm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E9D2620B40900D6829A /* libWasmicWasm.a */; };
 		F249A13C2621CB2600D6829A /* WasmicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; };
 		F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A1472621CB9900D6829A /* WasmicKit.swift */; };
 		F249A18D2621CE3500D6829A /* wabt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2499E0426202F9600D6829A /* wabt.xcframework */; };
 		F249A19E2621CEB300D6829A /* RunWasmFileIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */; };
-		F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */; };
 		F249A2CB2622969400D6829A /* ShortcutsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2CA2622969400D6829A /* ShortcutsStorage.swift */; };
 		F249A2DD26229C4100D6829A /* ShortcutsNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2DC26229C4100D6829A /* ShortcutsNote.swift */; };
 		F249A2EB2622A07A00D6829A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A2EA2622A07A00D6829A /* PrimaryButton.swift */; };
@@ -65,6 +63,8 @@
 		F2D5D6A32624094300D3CBBC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2D5D6A22624094300D3CBBC /* Settings.bundle */; };
 		F2D5D6BA2624150600D3CBBC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5D6B92624150600D3CBBC /* AccessibilityIdentifier.swift */; };
 		F2D5D6BB2624150600D3CBBC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5D6B92624150600D3CBBC /* AccessibilityIdentifier.swift */; };
+		F2D5D6D126242ADB00D3CBBC /* Intents.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = F2D5D6D426242ADB00D3CBBC /* Intents.intentdefinition */; };
+		F2D5D6D226242ADB00D3CBBC /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F2D5D6D426242ADB00D3CBBC /* Intents.intentdefinition */; };
 		F2DF8BF6262354C200860D0D /* wasm3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF8BF5262354C200860D0D /* wasm3.xcframework */; };
 		F2DF8C4826235A7600860D0D /* WasmicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF8C4726235A7600860D0D /* WasmicUITests.swift */; };
 		F2DF8C6526235AF300860D0D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF8C6426235AF300860D0D /* SnapshotHelper.swift */; };
@@ -202,7 +202,6 @@
 		F2499F5A2621696800D6829A /* WasmicBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicBrand.swift; sourceTree = "<group>"; };
 		F2499FC62621A15E00D6829A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2499FCC2621A17F00D6829A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		F249A05F2621C3B200D6829A /* WasmicDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicDebug.entitlements; sourceTree = "<group>"; };
 		F249A0682621C42900D6829A /* WasmicIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WasmicIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F249A0692621C42900D6829A /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -231,6 +230,8 @@
 		F251998A261F26530037DA79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D5D6A22624094300D3CBBC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F2D5D6B92624150600D3CBBC /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
+		F2D5D6D326242ADB00D3CBBC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		F2D5D6DD26242AEF00D3CBBC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Intents.strings; sourceTree = "<group>"; };
 		F2DF8BF5262354C200860D0D /* wasm3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wasm3.xcframework; path = "third-party/build/wasm3.xcframework"; sourceTree = "<group>"; };
 		F2DF8C4526235A7600860D0D /* WasmicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasmicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DF8C4726235A7600860D0D /* WasmicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicUITests.swift; sourceTree = "<group>"; };
@@ -451,7 +452,7 @@
 		F249A0BA2621C90600D6829A /* WasmicKit */ = {
 			isa = PBXGroup;
 			children = (
-				F2499FEF2621B9CE00D6829A /* Intents.intentdefinition */,
+				F2D5D6D426242ADB00D3CBBC /* Intents.intentdefinition */,
 				F249A1472621CB9900D6829A /* WasmicKit.swift */,
 				F249A2CA2622969400D6829A /* ShortcutsStorage.swift */,
 				F249A0BB2621C90600D6829A /* WasmicKit.h */,
@@ -848,7 +849,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F249A1BE2621D7E800D6829A /* Intents.intentdefinition in Resources */,
+				F2D5D6D126242ADB00D3CBBC /* Intents.intentdefinition in Resources */,
 				F25199AD261F26530037DA79 /* Assets.xcassets in Resources */,
 				F2D5D6A32624094300D3CBBC /* Settings.bundle in Resources */,
 				F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */,
@@ -912,7 +913,7 @@
 			files = (
 				F249A2CB2622969400D6829A /* ShortcutsStorage.swift in Sources */,
 				F249A1482621CB9900D6829A /* WasmicKit.swift in Sources */,
-				F249A0DF2621C93000D6829A /* Intents.intentdefinition in Sources */,
+				F2D5D6D226242ADB00D3CBBC /* Intents.intentdefinition in Sources */,
 				F249A3092622B44500D6829A /* PersistentState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1013,6 +1014,15 @@
 				F2499FCC2621A17F00D6829A /* ja */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F2D5D6D426242ADB00D3CBBC /* Intents.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2D5D6D326242ADB00D3CBBC /* en */,
+				F2D5D6DD26242AEF00D3CBBC /* ja */,
+			);
+			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

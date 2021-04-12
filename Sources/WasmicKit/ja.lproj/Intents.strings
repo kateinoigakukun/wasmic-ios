@@ -1,0 +1,30 @@
+"3owNh1" = "The program returns ${results}";
+
+"7dopZj" = "What arguments would you like to pass?";
+
+"EDoPhD" = "Which file would you like to run?";
+
+"HNFVc6" = "Which function would you like to run?";
+
+"Hgkx8S" = "Results";
+
+"KZRYut" = "Arguments";
+
+"P1TQQ3" = "There are ${count} options matching ‘${file}’.";
+
+"PjdJUG" = "Just to confirm, you wanted ‘${file}’?";
+
+"Tw6WTG" = "The program returns ${results}";
+
+"b5AM9P" = "Run WebAssembly File ${file}'s ${functionName} with ${arguments}";
+
+"ciEkwz" = "Run a .wasm file";
+
+"rRRc3Y" = "Function Name";
+
+"rRcGLD" = "Run WebAssembly File ${file}'s ${functionName} with ${arguments}";
+
+"yLAMGc" = "File";
+
+"zxDuoZ" = "Run Wasm File";
+
