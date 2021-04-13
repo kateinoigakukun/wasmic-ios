@@ -232,6 +232,7 @@
 		F2D5D6B92624150600D3CBBC /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		F2D5D6D326242ADB00D3CBBC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		F2D5D6DD26242AEF00D3CBBC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Intents.strings; sourceTree = "<group>"; };
+		F2D5D70A26258CF200D3CBBC /* third-party */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "third-party"; sourceTree = "<group>"; };
 		F2DF8BF5262354C200860D0D /* wasm3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wasm3.xcframework; path = "third-party/build/wasm3.xcframework"; sourceTree = "<group>"; };
 		F2DF8C4526235A7600860D0D /* WasmicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasmicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DF8C4726235A7600860D0D /* WasmicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicUITests.swift; sourceTree = "<group>"; };
@@ -510,6 +511,7 @@
 			children = (
 				F2499E972620B3AD00D6829A /* Sources */,
 				F2499E982620B3B900D6829A /* Tests */,
+				F2D5D70A26258CF200D3CBBC /* third-party */,
 				F2519988261F26530037DA79 /* Products */,
 				F2499D8F261F466C00D6829A /* Frameworks */,
 			);
