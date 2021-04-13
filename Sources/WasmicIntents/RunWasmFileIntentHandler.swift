@@ -7,6 +7,7 @@
 
 import Intents
 import UIKit
+import os.log
 import WasmicKit
 
 final class RunWasmFileIntentHandler: NSObject, RunWasmFileIntentHandling {
@@ -43,6 +44,10 @@ final class RunWasmFileIntentHandler: NSObject, RunWasmFileIntentHandling {
             response.results = results.map { $0.asDouble }
             completion(response)
         } catch {
+            os_log(
+                "Failed to execute, error: '%@'",
+                log: OSLog.default, type: .error,
+                file as CVarArg, error as CVarArg)
             completion(.init(code: .failure, userActivity: nil))
         }
     }
