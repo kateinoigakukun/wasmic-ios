@@ -4,3 +4,6 @@
 [submodule "third-party/ios-cmake"]
 	path = third-party/ios-cmake
 	url = https://github.com/leetal/ios-cmake.git
+[submodule "fastlane"]
+	path = fastlane
+	url = git@github.com:kateinoigakukun/wasmic-ios-fastlane.git
