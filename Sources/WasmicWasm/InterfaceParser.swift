@@ -57,7 +57,7 @@ extension WebAssembly {
                 throw ParsingError.invalidIndex(export.index, "export")
             }
             let typeIndex = functionSection.typeIndices[
-                importSection.funcImportCount + export.index]
+                export.index - importSection.funcImportCount]
             guard typeIndex < typeSection.signatures.count else {
                 throw ParsingError.invalidIndex(typeIndex, "type")
             }
