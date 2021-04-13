@@ -206,6 +206,12 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
 
     func presentInvocation(for documentURL: URL) {
         do {
+            let didStartAccessing = documentURL.startAccessingSecurityScopedResource()
+            defer {
+                if didStartAccessing {
+                    documentURL.stopAccessingSecurityScopedResource()
+                }
+            }
             let bytes = Array(try Data(contentsOf: documentURL))
             let exports = try WebAssembly.getExported(wasmBytes: bytes)
             if let first = exports.functions.first {
