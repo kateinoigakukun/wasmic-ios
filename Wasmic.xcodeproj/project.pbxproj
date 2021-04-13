@@ -234,7 +234,7 @@
 		F2D5D6DD26242AEF00D3CBBC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Intents.strings; sourceTree = "<group>"; };
 		F2D5D70A26258CF200D3CBBC /* third-party */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "third-party"; sourceTree = "<group>"; };
 		F2DF8BF5262354C200860D0D /* wasm3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = wasm3.xcframework; path = "third-party/build/wasm3.xcframework"; sourceTree = "<group>"; };
-		F2DF8C4526235A7600860D0D /* WasmicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasmicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2DF8C4526235A7600860D0D /* WasmicSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasmicSnapshot.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DF8C4726235A7600860D0D /* WasmicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicUITests.swift; sourceTree = "<group>"; };
 		F2DF8C4926235A7600860D0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2DF8C6426235AF300860D0D /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
@@ -403,7 +403,7 @@
 			children = (
 				F2499EAC2620B43100D6829A /* WasmicWasmTests */,
 				F2499E6F2620A58F00D6829A /* WasmicTests */,
-				F2DF8C4626235A7600860D0D /* WasmicUITests */,
+				F2DF8C4626235A7600860D0D /* WasmicSnapshot */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -536,7 +536,7 @@
 				F249A0682621C42900D6829A /* WasmicIntents.appex */,
 				F249A0B92621C90600D6829A /* WasmicKit.framework */,
 				F249A3312622DC1F00D6829A /* libCWasmicWASI.a */,
-				F2DF8C4526235A7600860D0D /* WasmicUITests.xctest */,
+				F2DF8C4526235A7600860D0D /* WasmicSnapshot.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -562,14 +562,14 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
-		F2DF8C4626235A7600860D0D /* WasmicUITests */ = {
+		F2DF8C4626235A7600860D0D /* WasmicSnapshot */ = {
 			isa = PBXGroup;
 			children = (
 				F2DF8C4726235A7600860D0D /* WasmicUITests.swift */,
 				F2DF8C6426235AF300860D0D /* SnapshotHelper.swift */,
 				F2DF8C4926235A7600860D0D /* Info.plist */,
 			);
-			path = WasmicUITests;
+			path = WasmicSnapshot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -731,9 +731,9 @@
 			productReference = F2519987261F26530037DA79 /* Wasmic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F2DF8C4426235A7600860D0D /* WasmicUITests */ = {
+		F2DF8C4426235A7600860D0D /* WasmicSnapshot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2DF8C4E26235A7600860D0D /* Build configuration list for PBXNativeTarget "WasmicUITests" */;
+			buildConfigurationList = F2DF8C4E26235A7600860D0D /* Build configuration list for PBXNativeTarget "WasmicSnapshot" */;
 			buildPhases = (
 				F2DF8C4126235A7600860D0D /* Sources */,
 				F2DF8C4226235A7600860D0D /* Frameworks */,
@@ -744,9 +744,9 @@
 			dependencies = (
 				F2DF8C4B26235A7600860D0D /* PBXTargetDependency */,
 			);
-			name = WasmicUITests;
+			name = WasmicSnapshot;
 			productName = WasmicUITests;
-			productReference = F2DF8C4526235A7600860D0D /* WasmicUITests.xctest */;
+			productReference = F2DF8C4526235A7600860D0D /* WasmicSnapshot.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -812,7 +812,7 @@
 				F249A0672621C42900D6829A /* WasmicIntents */,
 				F249A0B82621C90600D6829A /* WasmicKit */,
 				F249A3302622DC1F00D6829A /* CWasmicWASI */,
-				F2DF8C4426235A7600860D0D /* WasmicUITests */,
+				F2DF8C4426235A7600860D0D /* WasmicSnapshot */,
 			);
 		};
 /* End PBXProject section */
@@ -1465,7 +1465,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				INFOPLIST_FILE = Tests/WasmicUITests/Info.plist;
+				INFOPLIST_FILE = Tests/WasmicSnapshot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1486,7 +1486,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
-				INFOPLIST_FILE = Tests/WasmicUITests/Info.plist;
+				INFOPLIST_FILE = Tests/WasmicSnapshot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1578,7 +1578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2DF8C4E26235A7600860D0D /* Build configuration list for PBXNativeTarget "WasmicUITests" */ = {
+		F2DF8C4E26235A7600860D0D /* Build configuration list for PBXNativeTarget "WasmicSnapshot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F2DF8C4C26235A7600860D0D /* Debug */,

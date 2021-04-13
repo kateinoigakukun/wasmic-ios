@@ -48,8 +48,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F2DF8C4426235A7600860D0D"
-               BuildableName = "WasmicUITests.xctest"
-               BlueprintName = "WasmicUITests"
+               BuildableName = "WasmicSnapshot.xctest"
+               BlueprintName = "WasmicSnapshot"
                ReferencedContainer = "container:Wasmic.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -67,8 +67,12 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.apple.shortcuts"
+         RemotePath = "/Applications/Xcode-12.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Applications/Shortcuts.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F2519986261F26530037DA79"
@@ -76,7 +80,7 @@
             BlueprintName = "Wasmic"
             ReferencedContainer = "container:Wasmic.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
