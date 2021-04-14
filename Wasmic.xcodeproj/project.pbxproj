@@ -58,8 +58,6 @@
 		F249A39D2622E57300D6829A /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = F249A38E2622E4A700D6829A /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		F249A39E2622E57300D6829A /* wasi_api.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A3442622DC5200D6829A /* wasi_api.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A3D52622FD0900D6829A /* HelpNote.swift */; };
-		F25199AB261F26530037DA79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2519981261F26520037DA79 /* ContentView.swift */; };
-		F25199AD261F26530037DA79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2519982261F26530037DA79 /* Assets.xcassets */; };
 		F2D5D6A32624094300D3CBBC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2D5D6A22624094300D3CBBC /* Settings.bundle */; };
 		F2D5D6BA2624150600D3CBBC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5D6B92624150600D3CBBC /* AccessibilityIdentifier.swift */; };
 		F2D5D6BB2624150600D3CBBC /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5D6B92624150600D3CBBC /* AccessibilityIdentifier.swift */; };
@@ -224,8 +222,6 @@
 		F249A3452622DC5200D6829A /* wasi_api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wasi_api.c; sourceTree = "<group>"; };
 		F249A38E2622E4A700D6829A /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		F249A3D52622FD0900D6829A /* HelpNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpNote.swift; sourceTree = "<group>"; };
-		F2519981261F26520037DA79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		F2519982261F26530037DA79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2519987261F26530037DA79 /* Wasmic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wasmic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F251998A261F26530037DA79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D5D6A22624094300D3CBBC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -390,7 +386,6 @@
 			children = (
 				F249A3322622DC2000D6829A /* CWasmicWASI */,
 				F2499E9E2620B40900D6829A /* WasmicWasm */,
-				F251997F261F26520037DA79 /* Shared */,
 				F249A06B2621C42900D6829A /* WasmicIntents */,
 				F249A0BA2621C90600D6829A /* WasmicKit */,
 				F2519989261F26530037DA79 /* iOS */,
@@ -515,15 +510,6 @@
 				F2519988261F26530037DA79 /* Products */,
 				F2499D8F261F466C00D6829A /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		F251997F261F26520037DA79 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				F2519981261F26520037DA79 /* ContentView.swift */,
-				F2519982261F26530037DA79 /* Assets.xcassets */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		F2519988261F26530037DA79 /* Products */ = {
@@ -852,7 +838,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2D5D6D126242ADB00D3CBBC /* Intents.intentdefinition in Resources */,
-				F25199AD261F26530037DA79 /* Assets.xcassets in Resources */,
 				F2D5D6A32624094300D3CBBC /* Settings.bundle in Resources */,
 				F249A2F82622A6CF00D6829A /* Assets.xcassets in Resources */,
 				F2499FC52621A15E00D6829A /* Localizable.strings in Resources */,
@@ -946,7 +931,6 @@
 				F2499F5B2621696800D6829A /* WasmicBrand.swift in Sources */,
 				F2499DF12620160800D6829A /* KeyboardLayoutObserver.swift in Sources */,
 				F2D5D6BA2624150600D3CBBC /* AccessibilityIdentifier.swift in Sources */,
-				F25199AB261F26530037DA79 /* ContentView.swift in Sources */,
 				F249A3D62622FD0900D6829A /* HelpNote.swift in Sources */,
 				F2499DBF261F4ED400D6829A /* SceneDelegate.swift in Sources */,
 				F2499DFE2620293300D6829A /* WatDocument.swift in Sources */,
@@ -1197,11 +1181,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 16;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 14;
+				DYLIB_CURRENT_VERSION = 16;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/WasmicKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1229,11 +1213,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 16;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 14;
+				DYLIB_CURRENT_VERSION = 16;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/WasmicKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
