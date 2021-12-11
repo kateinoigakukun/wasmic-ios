@@ -34,7 +34,7 @@ target_include_directories(wabt-c-api
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_dependencies(wabt-c-api wabt)
 
-find_program(LLVM_AR NAMES llvm-ar)
+find_program(LLVM_AR NAMES llvm-ar REQUIRED)
 
 set(wabt_mri ${CMAKE_CURRENT_BINARY_DIR}/wabt.mri)
 file(WRITE "${wabt_mri}"
