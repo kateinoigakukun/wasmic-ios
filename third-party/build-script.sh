@@ -42,6 +42,11 @@ build_wasm3() {
         -D PLATFORM=SIMULATOR64
     cmake --build "$third_party_dir/build/wasm3-iphonesimulator-x86_64" "${CMAKE_BUILD_ARGS[@]}"
 
+    cmake "${CMAKE_ARGS[@]}" \
+        -B "$third_party_dir/build/wasm3-maccatalyst-arm64" \
+        -D PLATFORM=MAC_CATALYST_ARM64
+    cmake --build "$third_party_dir/build/wasm3-maccatalyst-arm64" "${CMAKE_BUILD_ARGS[@]}"
+
     headers_dir="$third_party_dir/build/wasm3-headers"
     mkdir -p "$headers_dir"
     # shellcheck disable=SC2046
@@ -62,6 +67,8 @@ EOS
         -library "$third_party_dir/build/wasm3-iphoneos-arm64/source/libm3.a" \
         -headers "$headers_dir" \
         -library "$third_party_dir/build/wasm3-iphonesimulator-x86_64/source/libm3.a" \
+        -headers "$headers_dir" \
+        -library "$third_party_dir/build/wasm3-maccatalyst-arm64/source/libm3.a" \
         -headers "$headers_dir" \
         -output "$third_party_dir/build/wasm3.xcframework"
 }
@@ -87,11 +94,17 @@ build_wabt() {
         -D PLATFORM=SIMULATOR64
     cmake --build "$third_party_dir/build/wabt-c-api-iphonesimulator-x86_64" "${CMAKE_BUILD_ARGS[@]}"
 
+    cmake "${CMAKE_ARGS[@]}" \
+        -B "$third_party_dir/build/wabt-c-api-maccatalyst-arm64" \
+        -D PLATFORM=MAC_CATALYST_ARM64
+    cmake --build "$third_party_dir/build/wabt-c-api-maccatalyst-arm64" "${CMAKE_BUILD_ARGS[@]}"
+
     rm -rf "$third_party_dir/build/wabt.xcframework"
 
     xcodebuild -create-xcframework \
         -framework "$third_party_dir/build/wabt-c-api-iphoneos-arm64/wabt.framework" \
         -framework "$third_party_dir/build/wabt-c-api-iphonesimulator-x86_64/wabt.framework" \
+        -framework "$third_party_dir/build/wabt-c-api-maccatalyst-arm64/wabt.framework" \
         -output "$third_party_dir/build/wabt.xcframework"
 }
 

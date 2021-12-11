@@ -35,7 +35,7 @@
 		F2499FC52621A15E00D6829A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2499FC72621A15E00D6829A /* Localizable.strings */; };
 		F249A06A2621C42900D6829A /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0692621C42900D6829A /* Intents.framework */; };
 		F249A06D2621C42900D6829A /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249A06C2621C42900D6829A /* IntentHandler.swift */; };
-		F249A0712621C42900D6829A /* WasmicIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F249A0682621C42900D6829A /* WasmicIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F249A0712621C42900D6829A /* WasmicIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F249A0682621C42900D6829A /* WasmicIntents.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F249A0BD2621C90600D6829A /* WasmicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F249A0BB2621C90600D6829A /* WasmicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F249A0C02621C90600D6829A /* WasmicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; };
 		F249A0C22621C90600D6829A /* WasmicKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F249A0B92621C90600D6829A /* WasmicKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -200,7 +200,7 @@
 		F2499F5A2621696800D6829A /* WasmicBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasmicBrand.swift; sourceTree = "<group>"; };
 		F2499FC62621A15E00D6829A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F2499FCC2621A17F00D6829A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F249A05F2621C3B200D6829A /* WasmicDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicDebug.entitlements; sourceTree = "<group>"; };
+		F249A05F2621C3B200D6829A /* Wasmic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wasmic.entitlements; sourceTree = "<group>"; };
 		F249A0682621C42900D6829A /* WasmicIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WasmicIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F249A0692621C42900D6829A /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		F249A06C2621C42900D6829A /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		F249A2F72622A6CF00D6829A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F249A2FF2622AE2600D6829A /* WelcomeNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNote.swift; sourceTree = "<group>"; };
 		F249A3072622B44500D6829A /* PersistentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentState.swift; sourceTree = "<group>"; };
-		F249A3102622B7C100D6829A /* WasmicIntentsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicIntentsDebug.entitlements; sourceTree = "<group>"; };
+		F249A3102622B7C100D6829A /* WasmicIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WasmicIntents.entitlements; sourceTree = "<group>"; };
 		F249A3312622DC1F00D6829A /* libCWasmicWASI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCWasmicWASI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F249A3442622DC5200D6829A /* wasi_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wasi_api.h; sourceTree = "<group>"; };
 		F249A3452622DC5200D6829A /* wasi_api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wasi_api.c; sourceTree = "<group>"; };
@@ -440,7 +440,7 @@
 				F249A06C2621C42900D6829A /* IntentHandler.swift */,
 				F249A19D2621CEB300D6829A /* RunWasmFileIntentHandler.swift */,
 				F249A06E2621C42900D6829A /* Info.plist */,
-				F249A3102622B7C100D6829A /* WasmicIntentsDebug.entitlements */,
+				F249A3102622B7C100D6829A /* WasmicIntents.entitlements */,
 			);
 			path = WasmicIntents;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 		F2519989261F26530037DA79 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F249A05F2621C3B200D6829A /* WasmicDebug.entitlements */,
+				F249A05F2621C3B200D6829A /* Wasmic.entitlements */,
 				F251998A261F26530037DA79 /* Info.plist */,
 				F2499D9E261F4BB400D6829A /* AppDelegate.swift */,
 				F2499DBE261F4ED400D6829A /* SceneDelegate.swift */,
@@ -962,6 +962,7 @@
 		};
 		F249A0702621C42900D6829A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = F249A0672621C42900D6829A /* WasmicIntents */;
 			targetProxy = F249A06F2621C42900D6829A /* PBXContainerItemProxy */;
 		};
@@ -1134,7 +1135,7 @@
 		F249A0732621C42900D6829A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Sources/WasmicIntents/WasmicIntentsDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/WasmicIntents/WasmicIntents.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				INFOPLIST_FILE = Sources/WasmicIntents/Info.plist;
@@ -1147,6 +1148,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1155,6 +1157,7 @@
 		F249A0742621C42900D6829A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Sources/WasmicIntents/WasmicIntents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K677BRB35L;
@@ -1169,6 +1172,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore dev.katei.wasmic.WasmicIntents";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1400,7 +1404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Sources/iOS/WasmicDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/iOS/Wasmic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K677BRB35L;
 				ENABLE_PREVIEWS = YES;
@@ -1412,6 +1416,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.katei.wasmic;
 				PRODUCT_NAME = Wasmic;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1425,6 +1430,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sources/iOS/Wasmic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K677BRB35L;
@@ -1438,6 +1444,7 @@
 				PRODUCT_NAME = Wasmic;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore dev.katei.wasmic";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
