@@ -60,8 +60,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
             useInShortcutsAction
         ]
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         if !persistentState.isWelcomeDone {
             let vc = WelcomeNoteViewController(completion: { [persistentState] in
@@ -201,6 +201,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
 
             os_log("==> Document Opened", log: .default, type: .debug)
             self.present(docNavController, animated: true, completion: nil)
+            #if targetEnvironment(macCatalyst)
+            self.view.window?.rootViewController = docNavController
+            #else
+            self.present(docNavController, animated: true)
+            #endif
         })
     }
 
@@ -222,7 +227,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController,
                     bytes: bytes, exports: exports.functions, selected: first,
                     isWASI: exports.isWASI)
                 let nav = UINavigationController(rootViewController: vc)
+                #if targetEnvironment(macCatalyst)
+                self.view.window?.rootViewController = nav
+                #else
                 self.present(nav, animated: true)
+                #endif
             } else {
                 reportError(
                     title: NSLocalizedString("error.title", comment: ""),
